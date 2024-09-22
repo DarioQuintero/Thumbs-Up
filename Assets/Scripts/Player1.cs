@@ -54,9 +54,9 @@ public class Player : MonoBehaviour
                 continue; 
             
             case attackStartup:
-                if(hitbox.contains(Player2.position) && Opponent.stance != "neutral" && Opponent.stance != "backward")
+                if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Stance != "neutral" && Player2.p2Stance != "backward")
                 {   //Values are at the beginning of the function
-                    Opponent.getHit(damage, hitstun, anim);
+                    Player2.getHit(damage, hitstun, anim);
                 }
             case < (attackStartup + attackRecovery):
                 continue;
@@ -90,9 +90,9 @@ public void neutralThrowAttack()
             continue; 
         
         case attackStartup:
-            if(hitbox.contains(Opponent.position) && Opponent.stance != "forward" && Opponent.stance != "backward")
+            if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Hurtbox != "forward" && Player2.p2Stance != "backward")
             {   //Values are at the beginning of the function
-                Opponent.getHit(damage, hitstun, anim);
+                Player2.getHit(damage, hitstun, anim);
             }
         case < (attackStartup + attackRecovery)):
             continue;
