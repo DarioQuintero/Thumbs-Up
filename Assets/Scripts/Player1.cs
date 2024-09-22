@@ -8,17 +8,12 @@ public class Player : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
     public int oldHealth;
-    public bool block; // Deprecate
-    public List<int> p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
     public List<int> p1Hurtbox = new List<int>{2};
     public string p1Stance; // Position. ("backward", "neutral", "forward")
     public List<bool> inputHistory = new List<bool>(); 
-    public int frame = 0; // Deprecate
-    public string p1State = "actionable" // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
     public arrayList<string, int> = ["actionable", 0]
    
     //public GameObject p2;
-    public Player2 player2; // Deprecate
 
     public void getHit(int damage, bool wasBlocked, int stunFrames){
         // Take damage
@@ -50,7 +45,7 @@ public class Player : MonoBehaviour
         int List extendedHurtbox = [2, 3, 4, 5];
 
         //play attack animation
-        switch state[1]{
+        switch (state[1]){
             //state[1] should be how many frames into the action the player is
             case 0:
                 playAttackAnim();
