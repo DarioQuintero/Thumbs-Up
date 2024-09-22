@@ -106,7 +106,7 @@ public void neutralThrowAttack()
     } 
 }
 
-    IEnumerator neutral_high() {
+    public void neutralHighAttack() {
         int damage = 10;
 
         int attackStartup = 10; // Charging frames
