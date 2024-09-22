@@ -80,7 +80,7 @@ public void neutralThrowAttack()
     int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
 
     //play attack animation
-    switch (s)tate[1])
+    switch (state[1])
     {
         //state[1] should be how many frames into the action the player is
         case 0:
