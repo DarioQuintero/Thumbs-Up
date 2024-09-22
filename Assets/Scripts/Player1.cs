@@ -65,8 +65,8 @@ public class Player : MonoBehaviour
         if (frame == startFrame){
             if (hitbox.Contains(pos2)){
                 if (block == false){
-                    // damage = 20;
-                    //p2.changeHealth(20); //add p2 character
+                    int damage = 20;
+                    //p2.changeHealth(damage); //add p2 character
                     //p2.stun(); //add stun function 
                 }
                 else{
