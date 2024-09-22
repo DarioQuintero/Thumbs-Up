@@ -50,15 +50,15 @@ public class Player : MonoBehaviour
             case 0:
                 playAttackAnim();
 
-            case state[1] < (attackStartup - 1):
+            case < (attackStartup - 1):
                 continue; 
             
-            case (attackStartup):
+            case attackStartup:
                 if(hitbox.contains(Player2.position) && Opponent.stance != "neutral" && Opponent.stance != "backward")
                 {   //Values are at the beginning of the function
                     Opponent.getHit(damage, hitstun, anim);
                 }
-            case (state[1] < (attackStartup + attackRecovery)):
+            case < (attackStartup + attackRecovery):
                 continue;
             case (attackStartup + attackRecovery):
                 state = ["actionable", 0];
