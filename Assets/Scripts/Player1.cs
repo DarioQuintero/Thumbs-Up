@@ -11,9 +11,8 @@ public class Player : MonoBehaviour
     public List<int> p1Hurtbox = new List<int>{2};
     public string p1Stance; // Position. ("backward", "neutral", "forward")
     public List<bool> inputHistory = new List<bool>(); 
-    public arrayList<string, int> = ["actionable", 0]
-   
-    //public GameObject p2;
+    public string currentAction = "actionable";
+    public int currentFrameCount = 0;
 
     public void getHit(int damage, bool wasBlocked, int stunFrames){
         // Take damage
