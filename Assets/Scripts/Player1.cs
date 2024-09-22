@@ -42,7 +42,8 @@ public class Player : MonoBehaviour
         int attackRecovery = 45;
         // int attack // Deprecate
         int List hitbox = [4]; //only hits forward position
-        int List extendedHurtbox = [2, 3, 4, 5];
+        int List extendedHurtbox = [3, 4, 5, 6];
+        int List oldHurtbox = [3]; //move can only be thrown in forward state
 
         //play attack animation
         switch (state[1]){
@@ -59,8 +60,12 @@ public class Player : MonoBehaviour
                     Player2.getHit(damage, hitstun, anim);
                 }
             case < (attackStartup + attackRecovery):
+            //Attacking player hurtbox extended during recovery frames
+                p1Hurtbox = extendedHurtbox;
                 continue;
             case (attackStartup + attackRecovery):
+            //Attacking player hurtbox resets to previous hurtbox
+                p1Hurtbox = oldHurtbox;
                 state = ["actionable", 0];
             default:
                 console.log("DEFAULT CASE IS RUNNING IN THROW");
@@ -75,8 +80,8 @@ public class Player : MonoBehaviour
         int attackRecovery = 20;
         int attack
         int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
-        int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
-
+        int List extendedHurtbox = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+        int List oldHurtbox = [2];
         //play attack animation
         switch (state[1])
         {
@@ -92,9 +97,11 @@ public class Player : MonoBehaviour
                 {   //Values are at the beginning of the function
                     Player2.getHit(damage, hitstun, anim);
                 }
-            case < (attackStartup + attackRecovery)):
+            case < (attackStartup + attackRecovery):
+                p1Hurtbox = extendedHurtbox;
                 continue;
             case (attackStartup + attackRecovery):
+                p1Hurtbox = oldHurtbox;
                 state = ["actionable", 0];
             default:
                 console.log("DEFAULT CASE IS RUNNING IN THROW");
