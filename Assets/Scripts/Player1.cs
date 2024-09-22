@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public string p1Stance;
     public List<bool> inputs = new List<bool>();
     public int frame = 0;
+    public string state = "actionable"
 
     public List<int> p1Hurtbox = new List<int>{2};
 
