@@ -17,8 +17,9 @@ public class Player : MonoBehaviour
 
     public List<int> p1Hurtbox = new List<int>{2};
 
+    public string p1Status = "active"; //Player1's status: active, charging, recovered, etc
+   
     //public GameObject p2;
-
     public Player2 player2;
 
     public void changeHealth(int damage){
@@ -37,7 +38,79 @@ public class Player : MonoBehaviour
 
     }
 
+    public void forwardThrowAttack()
+{
+    int attackStartup = 15;
+    int damage = 50;
+    int hitstun = 45; //since it is a +0 move on hit, then this would be same as recovery
+    int anim //TODO: would need to change the type of this
+    int attackRecovery = 45;
+    int attack
+    int List hitbox = [4]; //only hits forward position
+    int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+
+    //play attack animation
+    switch state[1]
+    {
+        //state[1] should be how many frames into the action the player is
+        case 0:
+            playAttackAnim();
+
+        case state[1] < (attackStartup - 1):
+            continue; 
+        
+        case (attackStartup):
+            if(hitbox.contains(Opponent.position) && Opponent.stance != "neutral" && Opponent.stance != "backward")
+            {   //Values are at the beginning of the function
+                Opponent.getHit(damage, hitstun, anim);
+            }
+        case (state[1] < (attackStartup + attackRecovery)):
+            continue;
+        case (attackStartup + attackRecovery):
+            state = ["actionable", 0];
+        default:
+            console.log("DEFAULT CASE IS RUNNING IN THROW");
+    } 
+}
+
+public void neutralThrowAttack() 
+
+{
+    int attackStartup = 15;
+    int damage = 30;
+    int hitstun = 20; //same as recovery, as it is +0 on hit 
+    int anim //TODO: would need to change the type of this
+    int attackRecovery = 20;
+    int attack
+    int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
+    int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+
+    //play attack animation
+    switch state[1]
+    {
+        //state[1] should be how many frames into the action the player is
+        case 0:
+            playAttackAnim();
+
+        case state[1] < (attackStartup - 1):
+            continue; 
+        
+        case (attackStartup):
+            if(hitbox.contains(Opponent.position) && Opponent.stance != "forward" && Opponent.stance != "backward")
+            {   //Values are at the beginning of the function
+                Opponent.getHit(damage, hitstun, anim);
+            }
+        case (state[1] < (attackStartup + attackRecovery)):
+            continue;
+        case (attackStartup + attackRecovery):
+            state = ["actionable", 0];
+        default:
+            console.log("DEFAULT CASE IS RUNNING IN THROW");
+    } 
+}
+
     IEnumerator neutral_high() {
+        p1Status = "charging";
         int attackStartup = 10;
         int attackRecover = 12;
         int damage = 10;
@@ -52,8 +125,12 @@ public class Player : MonoBehaviour
         if (true){
             player2.changeHealth(damage);
         }
-
-
+        p1Status = "recovering";
+        int recovered = frame + attackRecover;
+        while (frame < recovered) {
+            yield return null;
+        }
+        p1Status = "active";
 
     }
 
