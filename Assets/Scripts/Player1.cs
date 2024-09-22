@@ -18,8 +18,9 @@ public class Player : MonoBehaviour
 
     public List<int> p1Hurtbox = new List<int>{2};
 
+    public string p1Status = "active"; //Player1's status: active, charging, recovered, etc
+   
     //public GameObject p2;
-
     public Player2 player2;
 
     public void changeHealth(int damage){
@@ -110,6 +111,7 @@ public void neutralThrowAttack()
 }
 
     IEnumerator neutral_high() {
+        p1Status = "charging";
         int attackStartup = 10;
         int attackRecover = 12;
         int damage = 10;
@@ -124,8 +126,12 @@ public void neutralThrowAttack()
         if (true){
             player2.changeHealth(damage);
         }
-
-
+        p1Status = "recovering";
+        int recovered = frame + attackRecover;
+        while (frame < recovered) {
+            yield return null;
+        }
+        p1Status = "active";
 
     }
 
@@ -137,8 +143,8 @@ public void neutralThrowAttack()
         if (frame == startFrame){
             if (hitbox.Contains(pos2)){
                 if (block == false){
-                    // damage = 20;
-                    //p2.changeHealth(20); //add p2 character
+                    int damage = 20;
+                    //p2.changeHealth(damage); //add p2 character
                     //p2.stun(); //add stun function 
                 }
                 else{
