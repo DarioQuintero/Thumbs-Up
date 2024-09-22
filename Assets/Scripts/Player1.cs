@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
     // Methods and variables need to be in class    
       
-    public int maxHealth;
+    public int maxHealth; // Deprecate
     public int currentHealth;
     public int oldHealth;
     public bool block; // Deprecate
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void forwardThrowAttack() {
+    private void forwardThrowAttack() {
         int attackStartup = 15;
         int damage = 50;
         int hitstun = 45; //since it is a +0 move on hit, then this would be same as recovery
@@ -72,43 +72,41 @@ public class Player : MonoBehaviour
         } 
     }
 
-public void neutralThrowAttack() 
+    public void neutralThrowAttack() {
+        int attackStartup = 15;
+        int damage = 30;
+        int hitstun = 20; //same as recovery, as it is +0 on hit 
+        int anim //TODO: would need to change the type of this
+        int attackRecovery = 20;
+        int attack
+        int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
+        int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
 
-{
-    int attackStartup = 15;
-    int damage = 30;
-    int hitstun = 20; //same as recovery, as it is +0 on hit 
-    int anim //TODO: would need to change the type of this
-    int attackRecovery = 20;
-    int attack
-    int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
-    int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+        //play attack animation
+        switch state[1]
+        {
+            //state[1] should be how many frames into the action the player is
+            case 0:
+                playAttackAnim();
 
-    //play attack animation
-    switch state[1]
-    {
-        //state[1] should be how many frames into the action the player is
-        case 0:
-            playAttackAnim();
+            case state[1] < (attackStartup - 1):
+                continue; 
+            
+            case (attackStartup):
+                if(hitbox.contains(Opponent.position) && Opponent.stance != "forward" && Opponent.stance != "backward")
+                {   //Values are at the beginning of the function
+                    Opponent.getHit(damage, hitstun, anim);
+                }
+            case (state[1] < (attackStartup + attackRecovery)):
+                continue;
+            case (attackStartup + attackRecovery):
+                state = ["actionable", 0];
+            default:
+                console.log("DEFAULT CASE IS RUNNING IN THROW");
+        } 
+    }
 
-        case state[1] < (attackStartup - 1):
-            continue; 
-        
-        case (attackStartup):
-            if(hitbox.contains(Opponent.position) && Opponent.stance != "forward" && Opponent.stance != "backward")
-            {   //Values are at the beginning of the function
-                Opponent.getHit(damage, hitstun, anim);
-            }
-        case (state[1] < (attackStartup + attackRecovery)):
-            continue;
-        case (attackStartup + attackRecovery):
-            state = ["actionable", 0];
-        default:
-            console.log("DEFAULT CASE IS RUNNING IN THROW");
-    } 
-}
-
-    IEnumerator neutral_high() {
+    private void neutralHighAttack() {
         p1Status = "charging"; // deprecate
         int attackStartup = 10;
         int attackRecover = 12;
@@ -133,9 +131,9 @@ public void neutralThrowAttack()
 
     }
     
-    // Forward High
+    // TODO: forwardHighAttack()
 
-    public void neutral_mid(int pos2, bool block){
+    private void neutralMidAttack(int pos2, bool block){
         int current = frame;
         int attackStartup = 10;
         int startFrame = current + attackStartup;
@@ -161,7 +159,7 @@ public void neutralThrowAttack()
         }
     }
 
-    public void forward_mid(int pos2, bool block){
+    private void forwardMidAttack(int pos2, bool block){
         int current = frame;
         int attackStartup = 16;
         int startFrame = current + attackStartup;
@@ -193,6 +191,29 @@ public void neutralThrowAttack()
     {
         maxHealth = 100;
         currentHealth = maxHealth;
+    }
+
+    // Resets player to the start of round position. Called at the start of every round.
+    public void reset() {
+        // Reset properties of player
+        currentHealth = maxHealth;
+        public int oldHealth;
+        public bool block; // Deprecate
+        public List<int> p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
+        public List<int> p1Hurtbox = new List<int>{2};
+        public string p1Stance; // Position. ("backward", "neutral", "forward")
+        public List<bool> inputHistory = new List<bool>(); 
+        public int frame = 0; // Deprecate
+        public string p1State = "actionable" // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
+        public string currentAction = "actionable";
+        public int actionFrameCount = 0;
+    }
+
+    // Do action for that frame. Called by FightScene every frame during a round.
+    public void doAction() {
+        // Take in input and update input history
+
+        // 
     }
 
     // Deprecate
