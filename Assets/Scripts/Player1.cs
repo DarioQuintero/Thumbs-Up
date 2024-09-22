@@ -8,71 +8,69 @@ public class Player : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
     public int oldHealth;
-    public bool block;
-    public List<int> p1Pos = new List<int>{1,2,3,4,5,6};
-    public List<int> p2Pos = new List<int>{4,5,6};
-    public string p1Stance;
-    public List<bool> inputs = new List<bool>();
-    public int frame = 0;
-    public string state = "actionable"
-
+    public bool block; // Deprecate
+    public List<int> p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
     public List<int> p1Hurtbox = new List<int>{2};
-
-    public string p1Status = "active"; //Player1's status: active, charging, recovered, etc
+    public string p1Stance; // Position. ("backward", "neutral", "forward")
+    public List<bool> inputHistory = new List<bool>(); 
+    public int frame = 0; // Deprecate
+    public string p1State = "actionable" // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
+    public arrayList<string, int> = ["actionable", 0]
    
     //public GameObject p2;
-    public Player2 player2;
+    public Player2 player2; // Deprecate
 
-    public void changeHealth(int damage){
+    public void getHit(int damage, bool wasBlocked, int stunFrames){
+        // Take damage
         oldHealth = currentHealth;
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        // Take hitstun/blockstun
+        /*
+        if wasBlocked
+        action = ["blockstun", stunFrames]
+        else
+        action = ["hitstun", stunFrames]
+        */
+
         //run animation for health change (oldHealth to currentHealth)
-    }
-
-    public bool isHit(int attack, int position1, int position2, int block){
-
-        return true;
-    }
-
-    public void stun(){
+        // query fightScene
 
     }
 
-    public void forwardThrowAttack()
-{
-    int attackStartup = 15;
-    int damage = 50;
-    int hitstun = 45; //since it is a +0 move on hit, then this would be same as recovery
-    int anim //TODO: would need to change the type of this
-    int attackRecovery = 45;
-    int attack
-    int List hitbox = [4]; //only hits forward position
-    int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+    public void forwardThrowAttack() {
+        int attackStartup = 15;
+        int damage = 50;
+        int hitstun = 45; //since it is a +0 move on hit, then this would be same as recovery
+        // int anim //TODO: would need to change the type of this
+        int attackRecovery = 45;
+        // int attack // Deprecate
+        int List hitbox = [4]; //only hits forward position
+        int List extendedHurtbox = [2, 3, 4, 5];
 
-    //play attack animation
-    switch state[1]
-    {
-        //state[1] should be how many frames into the action the player is
-        case 0:
-            playAttackAnim();
+        //play attack animation
+        switch state[1]{
+            //state[1] should be how many frames into the action the player is
+            case 0:
+                playAttackAnim();
 
-        case state[1] < (attackStartup - 1):
-            continue; 
-        
-        case (attackStartup):
-            if(hitbox.contains(Opponent.position) && Opponent.stance != "neutral" && Opponent.stance != "backward")
-            {   //Values are at the beginning of the function
-                Opponent.getHit(damage, hitstun, anim);
-            }
-        case (state[1] < (attackStartup + attackRecovery)):
-            continue;
-        case (attackStartup + attackRecovery):
-            state = ["actionable", 0];
-        default:
-            console.log("DEFAULT CASE IS RUNNING IN THROW");
-    } 
-}
+            case state[1] < (attackStartup - 1):
+                continue; 
+            
+            case (attackStartup):
+                if(hitbox.contains(Player2.position) && Opponent.stance != "neutral" && Opponent.stance != "backward")
+                {   //Values are at the beginning of the function
+                    Opponent.getHit(damage, hitstun, anim);
+                }
+            case (state[1] < (attackStartup + attackRecovery)):
+                continue;
+            case (attackStartup + attackRecovery):
+                state = ["actionable", 0];
+            default:
+                console.log("DEFAULT CASE IS RUNNING IN THROW");
+        } 
+    }
 
 public void neutralThrowAttack() 
 
@@ -111,7 +109,7 @@ public void neutralThrowAttack()
 }
 
     IEnumerator neutral_high() {
-        p1Status = "charging";
+        p1Status = "charging"; // deprecate
         int attackStartup = 10;
         int attackRecover = 12;
         int damage = 10;
@@ -134,6 +132,8 @@ public void neutralThrowAttack()
         p1Status = "active";
 
     }
+    
+    // Forward High
 
     public void neutral_mid(int pos2, bool block){
         int current = frame;
@@ -187,6 +187,7 @@ public void neutralThrowAttack()
         }
     }
 
+    // Deprecate
     // Start is called before the first frame update
     void Start()
     {
@@ -194,6 +195,7 @@ public void neutralThrowAttack()
         currentHealth = maxHealth;
     }
 
+    // Deprecate
     // Update is called once per frame
     void Update()
     {

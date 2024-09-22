@@ -8,6 +8,7 @@ public class Player2 : MonoBehaviour
     public int currentHealth = 200;
     public int oldHealth;
     public bool block;
+    public List<int> p2Hurtbox = new List<int>{5};
     public void changeHealth(int damage){
         oldHealth = currentHealth;
         currentHealth -= damage;
