@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
 
     public List<int> p1Hurtbox = new List<int>{2};
 
+    //public GameObject p2;
+
+    public Player2 player2;
+
     public void changeHealth(int damage){
         oldHealth = currentHealth;
         currentHealth -= damage;
@@ -45,7 +49,9 @@ public class Player : MonoBehaviour
             yield return null;
         }
         print("Neutral high executed on " + frame);
-
+        if (true){
+            player2.changeHealth(damage);
+        }
 
 
 
