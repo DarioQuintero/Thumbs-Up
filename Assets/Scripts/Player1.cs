@@ -8,17 +8,12 @@ public class Player : MonoBehaviour
     public int maxHealth; // Deprecate
     public int currentHealth;
     public int oldHealth;
-    public bool block; // Deprecate
-    public List<int> p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
     public List<int> p1Hurtbox = new List<int>{2};
     public string p1Stance; // Position. ("backward", "neutral", "forward")
     public List<bool> inputHistory = new List<bool>(); 
-    public int frame = 0; // Deprecate
-    public string p1State = "actionable" // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
     public arrayList<string, int> = ["actionable", 0]
    
     //public GameObject p2;
-    public Player2 player2; // Deprecate
 
     public void getHit(int damage, bool wasBlocked, int stunFrames){
         // Take damage
@@ -47,32 +42,37 @@ public class Player : MonoBehaviour
         int attackRecovery = 45;
         // int attack // Deprecate
         int List hitbox = [4]; //only hits forward position
-        int List extendedHurtbox = [2, 3, 4, 5];
+        int List extendedHurtbox = [3, 4, 5, 6];
+        int List oldHurtbox = [3]; //move can only be thrown in forward state
 
         //play attack animation
-        switch state[1]{
+        switch (state[1]){
             //state[1] should be how many frames into the action the player is
             case 0:
                 playAttackAnim();
 
-            case state[1] < (attackStartup - 1):
+            case < (attackStartup - 1):
                 continue; 
             
-            case (attackStartup):
-                if(hitbox.contains(Player2.position) && Opponent.stance != "neutral" && Opponent.stance != "backward")
+            case attackStartup:
+                if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Stance != "neutral" && Player2.p2Stance != "backward")
                 {   //Values are at the beginning of the function
-                    Opponent.getHit(damage, hitstun, anim);
+                    Player2.getHit(damage, hitstun, anim);
                 }
-            case (state[1] < (attackStartup + attackRecovery)):
+            case < (attackStartup + attackRecovery):
+            //Attacking player hurtbox extended during recovery frames
+                p1Hurtbox = extendedHurtbox;
                 continue;
             case (attackStartup + attackRecovery):
+            //Attacking player hurtbox resets to previous hurtbox
+                p1Hurtbox = oldHurtbox;
                 state = ["actionable", 0];
             default:
                 console.log("DEFAULT CASE IS RUNNING IN THROW");
         } 
     }
 
-    public void neutralThrowAttack() {
+    public void neutralThrowAttack(){
         int attackStartup = 15;
         int damage = 30;
         int hitstun = 20; //same as recovery, as it is +0 on hit 
@@ -80,26 +80,28 @@ public class Player : MonoBehaviour
         int attackRecovery = 20;
         int attack
         int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
-        int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
-
+        int List extendedHurtbox = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+        int List oldHurtbox = [2];
         //play attack animation
-        switch state[1]
+        switch (state[1])
         {
             //state[1] should be how many frames into the action the player is
             case 0:
                 playAttackAnim();
 
-            case state[1] < (attackStartup - 1):
+            case < (attackStartup - 1):
                 continue; 
             
-            case (attackStartup):
-                if(hitbox.contains(Opponent.position) && Opponent.stance != "forward" && Opponent.stance != "backward")
+            case attackStartup:
+                if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Hurtbox != "forward" && Player2.p2Stance != "backward")
                 {   //Values are at the beginning of the function
-                    Opponent.getHit(damage, hitstun, anim);
+                    Player2.getHit(damage, hitstun, anim);
                 }
-            case (state[1] < (attackStartup + attackRecovery)):
+            case < (attackStartup + attackRecovery):
+                p1Hurtbox = extendedHurtbox;
                 continue;
             case (attackStartup + attackRecovery):
+                p1Hurtbox = oldHurtbox;
                 state = ["actionable", 0];
             default:
                 console.log("DEFAULT CASE IS RUNNING IN THROW");
