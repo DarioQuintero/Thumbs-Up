@@ -67,41 +67,39 @@ public class Player : MonoBehaviour
         } 
     }
 
-public void neutralThrowAttack() 
+    public void neutralThrowAttack(){
+        int attackStartup = 15;
+        int damage = 30;
+        int hitstun = 20; //same as recovery, as it is +0 on hit 
+        int anim //TODO: would need to change the type of this
+        int attackRecovery = 20;
+        int attack
+        int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
+        int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
 
-{
-    int attackStartup = 15;
-    int damage = 30;
-    int hitstun = 20; //same as recovery, as it is +0 on hit 
-    int anim //TODO: would need to change the type of this
-    int attackRecovery = 20;
-    int attack
-    int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
-    int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+        //play attack animation
+        switch (state[1])
+        {
+            //state[1] should be how many frames into the action the player is
+            case 0:
+                playAttackAnim();
 
-    //play attack animation
-    switch (state[1])
-    {
-        //state[1] should be how many frames into the action the player is
-        case 0:
-            playAttackAnim();
-
-        case < (attackStartup - 1):
-            continue; 
-        
-        case attackStartup:
-            if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Hurtbox != "forward" && Player2.p2Stance != "backward")
-            {   //Values are at the beginning of the function
-                Player2.getHit(damage, hitstun, anim);
-            }
-        case < (attackStartup + attackRecovery)):
-            continue;
-        case (attackStartup + attackRecovery):
-            state = ["actionable", 0];
-        default:
-            console.log("DEFAULT CASE IS RUNNING IN THROW");
-    } 
-}
+            case < (attackStartup - 1):
+                continue; 
+            
+            case attackStartup:
+                if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Hurtbox != "forward" && Player2.p2Stance != "backward")
+                {   //Values are at the beginning of the function
+                    Player2.getHit(damage, hitstun, anim);
+                }
+            case < (attackStartup + attackRecovery)):
+                continue;
+            case (attackStartup + attackRecovery):
+                state = ["actionable", 0];
+            default:
+                console.log("DEFAULT CASE IS RUNNING IN THROW");
+        } 
+    }
 
     IEnumerator neutral_high() {
         p1Status = "charging"; // deprecate
