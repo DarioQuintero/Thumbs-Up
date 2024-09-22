@@ -37,6 +37,77 @@ public class Player : MonoBehaviour
 
     }
 
+    public void forwardThrowAttack()
+{
+    int attackStartup = 15;
+    int damage = 50;
+    int hitstun = 45; //since it is a +0 move on hit, then this would be same as recovery
+    int anim //TODO: would need to change the type of this
+    int attackRecovery = 45;
+    int attack
+    int List hitbox = [4]; //only hits forward position
+    int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+
+    //play attack animation
+    switch state[1]
+    {
+        //state[1] should be how many frames into the action the player is
+        case 0:
+            playAttackAnim();
+
+        case state[1] < (attackStartup - 1):
+            continue; 
+        
+        case (attackStartup):
+            if(hitbox.contains(Opponent.position) && Opponent.stance != "neutral" && Opponent.stance != "backward")
+            {   //Values are at the beginning of the function
+                Opponent.getHit(damage, hitstun, anim);
+            }
+        case (state[1] < (attackStartup + attackRecovery)):
+            continue;
+        case (attackStartup + attackRecovery):
+            state = ["actionable", 0];
+        default:
+            console.log("DEFAULT CASE IS RUNNING IN THROW");
+    } 
+}
+
+public void neutralThrowAttack() 
+
+{
+    int attackStartup = 15;
+    int damage = 30;
+    int hitstun = 20; //same as recovery, as it is +0 on hit 
+    int anim //TODO: would need to change the type of this
+    int attackRecovery = 20;
+    int attack
+    int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
+    int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+
+    //play attack animation
+    switch state[1]
+    {
+        //state[1] should be how many frames into the action the player is
+        case 0:
+            playAttackAnim();
+
+        case state[1] < (attackStartup - 1):
+            continue; 
+        
+        case (attackStartup):
+            if(hitbox.contains(Opponent.position) && Opponent.stance != "forward" && Opponent.stance != "backward")
+            {   //Values are at the beginning of the function
+                Opponent.getHit(damage, hitstun, anim);
+            }
+        case (state[1] < (attackStartup + attackRecovery)):
+            continue;
+        case (attackStartup + attackRecovery):
+            state = ["actionable", 0];
+        default:
+            console.log("DEFAULT CASE IS RUNNING IN THROW");
+    } 
+}
+
     IEnumerator neutral_high() {
         int attackStartup = 10;
         int attackRecover = 12;
