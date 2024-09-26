@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class FightScene : MonoBehaviour
 {
+
+    // Defining player 1 and player2 scripts
+    public Player1 player1Script;
+    public Player2 player2Script;
+
+
     // Constants
     private const int player1MaxHealth = 100;
     private const int player2MaxHealth = 100; 
@@ -12,19 +18,21 @@ public class FightScene : MonoBehaviour
     public int roundFrameCounter = 0; // The current number of frames elapsed since the round start
     public int roundTimer = 99; // Timer displayed in game
     private int player1HealthUI = 100;
-    private int 
+    private int player2HealthUI = 100;
 
-    startRound() {
+    void startRound() {
         roundTimer = 99;
-        Player1.reset();
-        Player2.reset();
+        player1Script.reset();
+        player2Script.reset();
 
 
 
     }
 
-    changeHealthBars(bool player, oldHealth, currentHealth)
+    //changeHealthBars(bool player, oldHealth, currentHealth);
+
         // player: false represents player 1, true represents player 2
+        // use ints for clarity?
 
     
     /*
@@ -62,10 +70,19 @@ public class FightScene : MonoBehaviour
     void Update()
     {
         // Call p1 and p2 to take their actions that frame
-        p1TakeTurn(gameFrameCounter)
-        p2TakeTurn(gameFrameCounter)
+        // p1TakeTurn(gameFrameCounter);
+        // p2TakeTurn(gameFrameCounter);
 
-        // 
+        roundFrameCounter++;
+        if (Input.GetKeyDown("t")){
+            player1Script.currentAction = "NHA";
+            player1Script.currentFrameCount = 0;
+
+        }
+        if (player1Script.currentAction == "NHA"){
+            player1Script.neutralHighAttack();
+            player1Script.currentFrameCount++;
+        }
 
 
     }

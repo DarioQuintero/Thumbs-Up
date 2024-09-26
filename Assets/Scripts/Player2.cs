@@ -8,15 +8,30 @@ public class Player2 : MonoBehaviour
     public int currentHealth = 200;
     public int oldHealth;
     public bool block;
+
+    public string p2Stance; // Position. ("backward", "neutral", "forward")
+
     public List<int> p2Hurtbox = new List<int>{5};
-    public void changeHealth(int damage){
+    public void getHit(int damage, bool wasBlocked, int stunFrames){
+        // Take damage
         oldHealth = currentHealth;
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // forces current health between 0 and maxHealth
+
+        // Take hitstun/blockstun
+        /*
+        if wasBlocked
+        action = ["blockstun", stunFrames]
+        else
+        action = ["hitstun", stunFrames]
+        */
+
         //run animation for health change (oldHealth to currentHealth)
+        // query fightScene
+
     }
     // Start is called before the first frame update
-    
+    /*
     public void forwardThrowAttack() {
         int attackStartup = 15;
         int damage = 50;
@@ -83,7 +98,11 @@ public class Player2 : MonoBehaviour
                 console.log("DEFAULT CASE IS RUNNING IN THROW");
         } 
     }
-    
+    */
+
+    public void reset(){
+
+    }
     void Start()
     {
         maxHealth = 200;
