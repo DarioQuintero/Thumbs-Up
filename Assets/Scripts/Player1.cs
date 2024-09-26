@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
         int hitstun = 45; //since it is a +0 move on hit, then this would be same as recovery
         // int anim //TODO: would need to change the type of this
         int attackRecovery = 45;
-        // int attack // Deprecate
         int List hitbox = [4]; //only hits forward position
         int List extendedHurtbox = [3, 4, 5, 6];
         int List oldHurtbox = [3]; //move can only be thrown in forward state
@@ -65,9 +64,10 @@ public class Player : MonoBehaviour
             case (attackStartup + attackRecovery):
             //Attacking player hurtbox resets to previous hurtbox
                 p1Hurtbox = oldHurtbox;
-                state = ["actionable", 0];
+                currentAction = "actionable";
+                currentFrameCount = 0;
             default:
-                console.log("DEFAULT CASE IS RUNNING IN THROW");
+                console.log("DEFAULT CASE IS RUNNING IN FORWARD THROW");
         } 
     }
 
@@ -76,12 +76,11 @@ public void neutralThrowAttack()
     int attackStartup = 15;
     int damage = 30;
     int hitstun = 20; //same as recovery, as it is +0 on hit 
-    int anim //TODO: would need to change the type of this
+    int anim; //TODO: would need to change the type of this
     int attackRecovery = 20;
-    int attack
     int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
     int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
-
+    int List old_hurtbox = [2];
     //play attack animation
     switch (state[1])
     {
@@ -100,9 +99,10 @@ public void neutralThrowAttack()
         case < (attackStartup + attackRecovery)):
             continue;
         case (attackStartup + attackRecovery):
-            state = ["actionable", 0];
+            currentAction = "actionable";
+            currentFrameCount = 0;
         default:
-            console.log("DEFAULT CASE IS RUNNING IN THROW");
+            console.log("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
     } 
 }
 
