@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         int List oldHurtbox = [3]; //move can only be thrown in forward state
 
         //play attack animation
-        switch (state[1]){
+        switch (currentFrameCount){
             //state[1] should be how many frames into the action the player is
             case 0:
                 playAttackAnim();
@@ -82,7 +82,7 @@ public void neutralThrowAttack()
     int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
     int List old_hurtbox = [2];
     //play attack animation
-    switch (state[1])
+    switch (currentFrameCount)
     {
         //state[1] should be how many frames into the action the player is
         case 0:
@@ -96,7 +96,7 @@ public void neutralThrowAttack()
             {   //Values are at the beginning of the function
                 Player2.getHit(damage, hitstun, anim);
             }
-        case < (attackStartup + attackRecovery)):
+        case < (attackStartup + attackRecovery):
             continue;
         case (attackStartup + attackRecovery):
             currentAction = "actionable";
