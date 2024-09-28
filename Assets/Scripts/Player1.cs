@@ -81,48 +81,48 @@ public class Player1 : MonoBehaviour
         } 
     }
 
-public void neutralThrowAttack() 
-{
-    int attackStartup = 15;
-    int damage = 30;
-    int hitstun = 20; //same as recovery, as it is +0 on hit 
-    int anim; //TODO: would need to change the type of this
-    int attackRecovery = 20;
-    int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
-    int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
-    int List old_hurtbox = [2];
-    //play attack animation
-    switch (currentFrameCount)
+    public void neutralThrowAttack() 
     {
-        //state[1] should be how many frames into the action the player is
-        case 0:
-            playAttackAnim();
+        int attackStartup = 15;
+        int damage = 30;
+        int hitstun = 20; //same as recovery, as it is +0 on hit 
+        int anim; //TODO: would need to change the type of this
+        int attackRecovery = 20;
+        int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
+        int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+        int List old_hurtbox = [2];
+        //play attack animation
+        switch (currentFrameCount)
+        {
+            //state[1] should be how many frames into the action the player is
+            case 0:
+                playAttackAnim();
 
-        case < (attackStartup - 1):
-            continue; 
-        
-        case attackStartup:
-            if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Hurtbox != "forward" && Player2.p2Stance != "backward")
-            {   //Values are at the beginning of the function
-                Player2.getHit(damage, hitstun, anim);
-            }
-        case < (attackStartup + attackRecovery):
-            continue;
-        case (attackStartup + attackRecovery):
-            currentAction = "actionable";
-            currentFrameCount = 0;
-        default:
-            console.log("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
-    } 
-}
+            case < (attackStartup - 1):
+                continue; 
+            
+            case attackStartup:
+                if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Hurtbox != "forward" && Player2.p2Stance != "backward")
+                {   //Values are at the beginning of the function
+                    Player2.getHit(damage, hitstun, anim);
+                }
+            case < (attackStartup + attackRecovery):
+                continue;
+            case (attackStartup + attackRecovery):
+                currentAction = "actionable";
+                currentFrameCount = 0;
+            default:
+                console.log("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
+        } 
+    }
 
     public void neutralHighAttack() {
         const int damage = 10;
 
-        const int attackStartup = 100; // Charging frames
+        const int attackStartup = 10; // Charging frames
         const int blockstun = 12; // Frames opponent would be stunned on a blocked hit for -1 diff
         const int hitstun = 16; // Frames opponent would be stunned on a direct hit for +3 diff
-        const int attackRecovery = 120; // You need to recover from attack
+        const int attackRecovery = 12; // You need to recover from attack
 
         List<int> hitbox = new List<int> {3, 4, 5}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {2, 3, 4}; // places where you can take damage after launching attack
@@ -141,12 +141,14 @@ public void neutralThrowAttack()
                     else {
                         player2Script.getHit(damage, true, blockstun);
                     }
+                    p1Hurtbox = extendedHurtbox;
                     print("player 2 hit");
                 }
                 break;
             case (attackStartup + attackRecovery):
                 currentAction = "actionable";
                 currentFrameCount = 0;
+                p1Hurtbox = new List<int> {2};
                 print("end recovery");
                 break;
             default:
@@ -180,6 +182,45 @@ public void neutralThrowAttack()
     
     // TODO: forwardHighAttack()
 
+    public void forwardHighAttack() {
+        const int damage = 10;
+
+        const int attackStartup = 12; // Charging frames
+        const int blockstun = 8; // Frames opponent would be stunned on a blocked hit for -3 diff
+        const int hitstun = 14; // Frames opponent would be stunned on a direct hit for +3 diff
+        const int attackRecovery = 10; // You need to recover from attack
+
+        List<int> hitbox = new List<int> {4, 5, 6}; // places where opponent can take damage
+        List<int> extendedHurtbox = new List<int> {3, 4, 6}; // places where you can take damage after launching attack
+
+        switch (currentFrameCount){
+            case 0:
+                // playAttackAnim();
+                print("start attack");
+                break;
+            case attackStartup:
+                if(has_overlap(hitbox, player2Script.p2Hurtbox))
+                {   //Values are at the beginning of the function
+                    if (player2Script.block == false){
+                        player2Script.getHit(damage, false, hitstun);
+                    }
+                    else {
+                        player2Script.getHit(damage, true, blockstun);
+                    }
+                    print("player 2 hit");
+                    p1Hurtbox = extendedHurtbox;
+                }
+                break;
+            case (attackStartup + attackRecovery):
+                currentAction = "actionable";
+                currentFrameCount = 0;
+                p1Hurtbox = new List<int> {3};
+                print("end recovery");
+                break;
+            default:
+                break;
+        } 
+    }
 
     private void neutralMidAttack(int pos2, bool block){
         int current = frame;
