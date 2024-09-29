@@ -13,6 +13,8 @@ public class FightScene : MonoBehaviour
     // Constants
     private const int player1MaxHealth = 100;
     private const int player2MaxHealth = 100; 
+    private const int PLAYER_1 = 1;
+    private const int PLAYER_2 = 2;
 
     // Changing values
     public int roundFrameCounter = 0; // The current number of frames elapsed since the round start
@@ -32,7 +34,12 @@ public class FightScene : MonoBehaviour
     }
 
     public void changeHealthBars(playerNum, oldHealth, currentHealth){
-        //PLAYER_1 = 1; PLAYER_2 = 2
+        if (playerNum == 1){
+
+        }
+        else{
+            
+        }
 
     }
 
