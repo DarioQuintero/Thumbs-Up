@@ -236,56 +236,74 @@ public class Player1 : MonoBehaviour
         } 
     }
 
-    private void neutralMidAttack(int pos2, bool block){
-        int current = frame;
-        int attackStartup = 10;
-        int startFrame = current + attackStartup;
-        List<int> hitbox = new List<int>{4};
-        if (frame == startFrame){
-            if (hitbox.Contains(pos2)){
-                if (block == false){
-                    int damage = 20;
-                    //p2.changeHealth(damage); //add p2 character
-                    //p2.stun(); //add stun function 
+    public void neutralMidAttack(){
+        const int damage = 20;
+        const int attackStartup = 10;
+        const int blockstun = 8; // Don't know yet
+        const int hitstun = 18;
+        const int attackRecovery = 12;
+
+        List<int> hitbox = new List<int> {3,4}; // places where opponent can take damage
+        List<int> extendedHurtbox = new List<int> {2,3,4};
+
+        switch (currentFrameCount){
+            case 0:
+                // playAttackAnim();
+                //print("start attack");
+                break;
+            case attackStartup:
+                if(has_overlap(hitbox, player2Script.p2Hurtbox))
+                {   
+                    block = player2Script.block
+                    player2Script.getHit(damage, block, hitstun);
+                    //print("player 2 hit");
+                    p1Hurtbox = extendedHurtbox;
                 }
-                else{
-                    //run block frame loss
-                }
-            }
-            else{
-                //run whiff frame loss
-            }
-        }
-        int recovery = frame + 12;
-        while (frame < recovery){
-            continue;
-        }
+                break;
+            case (attackStartup + attackRecovery):
+                currentAction = "actionable";
+                currentFrameCount = 0;
+                p1Hurtbox = new List<int> {3};
+                //print("end recovery");
+                break;
+            default:
+                break;
+        } 
     }
 
-    private void forwardMidAttack(int pos2, bool block){
-        int current = frame;
-        int attackStartup = 16;
-        int startFrame = current + attackStartup;
-        List<int> hitbox = new List<int>{4,5};
-        if (frame == startFrame){
-            if (hitbox.Contains(pos2)){
-                if (block == false){
-                    //damage = 20;
-                    //p2.changeHealth(20); //add p2 character
-                    //p2.stun(); //add stun function 
+    private void forwardMidAttack(){
+        const int damage = 20;
+        const int attackStartup = 16;
+        const int blockstun = 14; // // How does this work?? +3 block
+        const int hitstun = 18;
+        const int attackRecovery = 24;
+
+        List<int> hitbox = new List<int> {3,4,5}; // places where opponent can take damage
+        List<int> extendedHurtbox = new List<int> {2,3,4};
+
+        switch (currentFrameCount){
+            case 0:
+                // playAttackAnim();
+                //print("start attack");
+                break;
+            case attackStartup:
+                if(has_overlap(hitbox, player2Script.p2Hurtbox))
+                {   
+                    block = player2Script.block
+                    player2Script.getHit(damage, block, hitstun);
+                    //print("player 2 hit");
+                    p1Hurtbox = extendedHurtbox;
                 }
-                else{
-                    //run block frame loss
-                }
-            }
-            else{
-                //run whiff frame loss
-            }
-        }
-        int recovery = frame + 24;
-        while (frame < recovery){
-            continue;
-        }
+                break;
+            case (attackStartup + attackRecovery):
+                currentAction = "actionable";
+                currentFrameCount = 0;
+                p1Hurtbox = new List<int> {3};
+                //print("end recovery");
+                break;
+            default:
+                break;
+        } 
     }
 
     // Deprecate
@@ -297,7 +315,7 @@ public class Player1 : MonoBehaviour
         // Reset properties of player
         currentHealth = maxHealth;
         
-        oldHealth = 0;
+        oldHealth = maxHealth;
         //public bool block; // Deprecate
         //public List<int> p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
         //public List<int> p1Hurtbox = new List<int>{2};
