@@ -18,7 +18,9 @@ public class FightScene : MonoBehaviour
     public int roundFrameCounter = 0; // The current number of frames elapsed since the round start
     public int roundTimer = 99; // Timer displayed in game
     private int player1HealthUI = 100;
+    private int player1OldHealthUI = 100;
     private int player2HealthUI = 100;
+    private int player2OldHealthUI = 100;
 
     void startRound() {
         roundTimer = 99;
@@ -30,13 +32,12 @@ public class FightScene : MonoBehaviour
     }
 
     public void changeHealthBars(playerNum, oldHealth, currentHealth){
+        //PLAYER_1 = 1; PLAYER_2 = 2
 
     }
 
     //changeHealthBars(bool player, oldHealth, currentHealth);
 
-        // player: false represents player 1, true represents player 2
-        // use ints for clarity?
 
     
     /*
