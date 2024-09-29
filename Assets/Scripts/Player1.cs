@@ -15,6 +15,26 @@ public class Player1 : MonoBehaviour
     public string currentAction = "actionable"; 
     public int currentFrameCount = 0;
 
+    public List<int> revertHurtbox() {
+        switch (p1Stance) {
+            case "backward":
+                return new List<int> [1];
+            case "neutral":
+                return new List<int> [2];
+            case "forward":
+                return new List<int> [3];
+            default:
+                print("Revert Hurtbox Failed");
+        }
+    }
+
+    public bool isBlocking() {
+        if (currentAction == "acitionable" && p1Stance == "neutral") {
+            return true;
+        }
+        return false;
+    }
+
     //Helper function for when we set the actions and frames to avoid redundant code
     //NOTE: Its possible we need to pass in the currentAction and currentFrameCount
     //      because if the public variables will be set in the helper properly
@@ -25,28 +45,27 @@ public class Player1 : MonoBehaviour
     }
     
     public void getHit(int damage, bool wasBlocked, int stunFrames){
-        // Take damage
-        oldHealth = currentHealth;
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // forces current health between 0 and maxHealth
-
-        //Action was blocked -> blockstun
+        
+        // Action was blocked -> blockstun
         if (wasBlocked){
             setActionAndFrame("blockstun", stunFrames);
         }
         //Action was not blocked -> hitstun
         else{
+            // Take damage
+            oldHealth = currentHealth;
+            currentHealth -= damage;
+            currentHealth = Mathf.Max(currentHealth, 0); // forces current health between 0 and maxHealth
+
+            //run animation for health change (oldHealth to currentHealth)
+            // query fightScene
+            PLAYER_1 = 1;
+            FightScence.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
             setActionAndFrame("hitstun", stunFrames);
         }
-
-        //run animation for health change (oldHealth to currentHealth)
-        // query fightScene
-        PLAYER_1 = 1;
-        FightScence.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
-
     }
 
-    public bool has_overlap(List<int> l1, List<int> l2){
+    public bool hasOverlap(List<int> l1, List<int> l2){
         for (int i = 0; i < l1.Count; i++){
             if (l2.Contains(l1[i])){
                 return true;
@@ -78,7 +97,7 @@ public class Player1 : MonoBehaviour
                 if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Stance != "neutral" && Player2.p2Stance != "backward")
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemeneted
-                    Player2.getHit(damage, hitstun);
+                    Player2.getHit(damage, false, hitstun);
                 }
             case < (attackStartup + attackRecovery):
             //Attacking player hurtbox extended during recovery frames
@@ -86,7 +105,7 @@ public class Player1 : MonoBehaviour
                 continue;
             case (attackStartup + attackRecovery):
             //Attacking player hurtbox resets to previous hurtbox
-                p1Hurtbox = oldHurtbox;
+                p1Hurtbox = revertHurtbox();
                 currentAction = "actionable";
                 currentFrameCount = 0;
             default:
@@ -114,15 +133,15 @@ public class Player1 : MonoBehaviour
             case < (attackStartup - 1):
                 continue; 
             
-            case attackStartup:
-                if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Hurtbox != "forward" && Player2.p2Stance != "backward")
+            case (attackStartup - 1):
+                if(hasOverlap(Player2.p2Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
-                    Player2.getHit(damage, hitstun);
+                    Player2.getHit(damage, hitstun, 0);
                 }
-            case < (attackStartup + attackRecovery):
+            case < (attackStartup + attackRecovery - 1):
                 continue;
-            case (attackStartup + attackRecovery):
+            case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
             default:

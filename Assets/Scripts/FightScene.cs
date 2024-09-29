@@ -87,8 +87,9 @@ public class FightScene : MonoBehaviour
         // p1TakeTurn(gameFrameCounter);
         // p2TakeTurn(gameFrameCounter);
 
-        // Testing functions
         roundFrameCounter++;
+
+        // Testing functions
         if (Input.GetKeyDown("n")){
             player1Script.currentAction = "NHA";
             player1Script.currentFrameCount = 0;
@@ -107,7 +108,6 @@ public class FightScene : MonoBehaviour
             player1Script.forwardHighAttack();
             player1Script.currentFrameCount++;
         }
-
 
     }
 }
