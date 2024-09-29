@@ -29,6 +29,10 @@ public class FightScene : MonoBehaviour
 
     }
 
+    public void changeHealthBars(playerNum, oldHealth, currentHealth){
+
+    }
+
     //changeHealthBars(bool player, oldHealth, currentHealth);
 
         // player: false represents player 1, true represents player 2

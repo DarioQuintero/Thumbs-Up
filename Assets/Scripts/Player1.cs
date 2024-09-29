@@ -18,9 +18,9 @@ public class Player1 : MonoBehaviour
     //Helper function for when we set the actions and frames to avoid redundant code
     //NOTE: Its possible we need to pass in the currentAction and currentFrameCount
     //      because if the public variables will be set in the helper properly
-    public void setActionAndFrame(in_action, in_frame){
-        currentAction = in_action;
-        currentFrameCount = in_frame;
+    public void setActionAndFrame(inAction, inFrame){
+        currentAction = inAction;
+        currentFrameCount = inFrame;
         
     }
     
