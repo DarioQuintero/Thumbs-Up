@@ -85,7 +85,6 @@ public class Player1 : MonoBehaviour
         int attackRecovery = 45;
         int List hitbox = [4]; //only hits forward position
         int List extendedHurtbox = [3, 4, 5, 6];
-        int List oldHurtbox = [3]; //move can only be thrown in forward state
 
         //play attack animation
         switch (currentFrameCount){
@@ -96,13 +95,13 @@ public class Player1 : MonoBehaviour
             case < (attackStartup - 1):
                 continue; 
             
-            case attackStartup:
-                if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Stance != "neutral" && Player2.p2Stance != "backward")
+            case (attackStartup - 1):
+               if(hasOverlap(Player2.p2Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
-                    //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemeneted
-                    Player2.getHit(damage, false, hitstun);
+                    //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
+                    Player2.getHit(damage, hitstun, 0);
                 }
-            case < (attackStartup + attackRecovery):
+            case < (attackStartup + attackRecovery - 1):
             //Attacking player hurtbox extended during recovery frames
                 p1Hurtbox = extendedHurtbox;
                 continue;
@@ -112,7 +111,7 @@ public class Player1 : MonoBehaviour
                 currentAction = "actionable";
                 currentFrameCount = 0;
             default:
-                console.log("DEFAULT CASE IS RUNNING IN FORWARD THROW");
+                print("DEFAULT CASE IS RUNNING IN FORWARD THROW");
         } 
     }
 
@@ -124,8 +123,7 @@ public class Player1 : MonoBehaviour
         //int anim; //TODO: would need to change the type of this
         int attackRecovery = 20;
         int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
-        int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
-        int List old_hurtbox = [2];
+        int List extendedHurtbox = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
         //play attack animation
         switch (currentFrameCount)
         {
@@ -143,12 +141,14 @@ public class Player1 : MonoBehaviour
                     Player2.getHit(damage, hitstun, 0);
                 }
             case < (attackStartup + attackRecovery - 1):
+                p1Hurtbox = extendedHurtbox;
                 continue;
             case (attackStartup + attackRecovery - 1):
+                p1Hurtbox = revertHurtbox();
                 currentAction = "actionable";
                 currentFrameCount = 0;
             default:
-                console.log("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
+                print("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
         } 
     }
 
