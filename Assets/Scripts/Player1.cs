@@ -59,7 +59,7 @@ public class Player1 : MonoBehaviour
 
             //run animation for health change (oldHealth to currentHealth)
             // query fightScene
-            PLAYER_1 = 1;
+            int PLAYER_1 = 1;
             FightScence.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
             setActionAndFrame("hitstun", stunFrames);
             if (currentHealth <= 0) {
@@ -168,10 +168,12 @@ public class Player1 : MonoBehaviour
                 // playAttackAnim();
                 print("start attack");
                 break;
-            case attackStartup:
+            case < (attackStartup - 1):
+                continue; 
+            case (attackStartup -1): // -1 because currentFrameCount starts at 0
                 if(has_overlap(hitbox, player2Script.p2Hurtbox) && player2Script.p2Stance != "forward")
                 {   //Values are at the beginning of the function
-                    if (player2Script.block == false){
+                    if (player2Script.isBlocking() == false){
                         player2Script.getHit(damage, false, hitstun);
                     }
                     else {
@@ -181,14 +183,16 @@ public class Player1 : MonoBehaviour
                     print("player 2 hit");
                 }
                 break;
-            case (attackStartup + attackRecovery):
+            case < (attackStartup + attackRecovery - 1):
+                continue; 
+            case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = new List<int> {2};
+                p1Hurtbox = revertHurtbox();
                 print("end recovery");
                 break;
             default:
-                break;
+                print("DEFAULT CASE IS RUNNING IN NEUTRAL HIGH");
         } 
     }
     
@@ -210,29 +214,35 @@ public class Player1 : MonoBehaviour
                 // playAttackAnim();
                 print("start attack");
                 break;
-            case attackStartup:
+            case < (attackStartup - 1):
+                continue; 
+            case (attackStartup -1): // -1 because currentFrameCount starts at 0
                 if(has_overlap(hitbox, player2Script.p2Hurtbox))
                 {   //Values are at the beginning of the function
-                    if (player2Script.block == false){
+                    if (player2Script.isBlocking() == false){
                         player2Script.getHit(damage, false, hitstun);
                     }
                     else {
                         player2Script.getHit(damage, true, blockstun);
                     }
-                    print("player 2 hit");
                     p1Hurtbox = extendedHurtbox;
+                    print("player 2 hit");
                 }
                 break;
-            case (attackStartup + attackRecovery):
+            case < (attackStartup + attackRecovery - 1):
+                continue; 
+            case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = new List<int> {3};
+                p1Hurtbox = revertHurtbox();
                 print("end recovery");
                 break;
             default:
-                break;
+                print("DEFAULT CASE IS RUNNING IN NEUTRAL HIGH");
         } 
     }
+
+
 
     public void neutralMidAttack(){
         const int damage = 20;
@@ -314,8 +324,22 @@ public class Player1 : MonoBehaviour
 
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction() {
-        // Take in input and update input history
-        // 
+        switch (currentAction){
+            case "Forward Throw":
+                forwardThrowAttack();
+            case "Neutral Throw":
+                neutralThrowAttack();
+            case "Forward High":
+                forwardHighAttack();
+            case "Neutral High":
+                neutralHighAttack();
+            case "Forward Mid":
+                forwardMidAttack();
+            case "Neutral Mid":
+                neutralMidAttack();
+            default:
+                print("Default");
+        }
     }
 
     void Start()
@@ -337,6 +361,12 @@ public class Player1 : MonoBehaviour
         public int actionFrameCount = 0;
     }
 
+<<<<<<< HEAD
+    // Do action for that frame. Called by FightScene every frame during a round.
+    
+
+=======
+>>>>>>> ecb2831c53f6a2f0f2f8e2f11da02dd171397973
     // Deprecate
     // Update is called once per frame
     void Update()
