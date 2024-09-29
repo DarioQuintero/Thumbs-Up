@@ -15,6 +15,7 @@ public class Player1 : MonoBehaviour
     public string currentAction = "actionable"; 
     public int currentFrameCount = 0;
 
+<<<<<<< Updated upstream
     public List<int> revertHurtbox() {
         switch (p1Stance) {
             case "backward":
@@ -26,6 +27,28 @@ public class Player1 : MonoBehaviour
             default:
                 print("Revert Hurtbox Failed");
         }
+=======
+    public void getHit(int damage, bool wasBlocked, int stunFrames){
+        // Take damage
+        oldHealth = currentHealth;
+        currentHealth -= damage;
+        // Unecessary. If current health drops below zero, FightScene will take over.
+        // currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        if (currentHealth <= 0) {
+            FightScene.gameOver(); // TODO
+        }
+        // Take hitstun/blockstun
+        /*
+        if wasBlocked
+        action = ["blockstun", stunFrames]
+        else
+        action = ["hitstun", stunFrames]
+        */
+
+        //run animation for health change (oldHealth to currentHealth)
+        // query fightScene
+
+>>>>>>> Stashed changes
     }
 
     public bool isBlocking() {
@@ -366,7 +389,32 @@ public class Player1 : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+<<<<<<< Updated upstream
     /* Deprecate
+=======
+    // Resets player to the start of round position. Called at the start of every round.
+    public void reset(int maxHealth) {
+        // Reset properties of player
+        currentHealth = maxHealth;
+        public List<int> p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
+        public List<int> p1Hurtbox = new List<int>{2};
+        public string p1Stance; // Position. ("backward", "neutral", "forward")
+        public List<bool> inputHistory = new List<bool>(); 
+        public int frame = 0; // Deprecate
+        public string p1State = "actionable" // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
+        public string currentAction = "actionable";
+        public int actionFrameCount = 0;
+    }
+
+    // Do action for that frame. Called by FightScene every frame during a round.
+    public void doAction() {
+        // Take in input and update input history
+
+        // 
+    }
+
+    // Deprecate
+>>>>>>> Stashed changes
     // Update is called once per frame
     void Update()
     {
