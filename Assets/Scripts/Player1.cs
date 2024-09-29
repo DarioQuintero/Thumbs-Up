@@ -234,6 +234,8 @@ public class Player1 : MonoBehaviour
         } 
     }
 
+
+
     public void neutralMidAttack(){
         const int damage = 20;
         const int attackStartup = 10;
@@ -335,8 +337,22 @@ public class Player1 : MonoBehaviour
 
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction() {
-        // Take in input and update input history
-        // 
+        switch (currentAction){
+            case "Forward Throw":
+                forwardThrowAttack();
+            case "Neutral Throw":
+                neutralThrowAttack();
+            case "Forward High":
+                forwardHighAttack();
+            case "Neutral High":
+                neutralHighAttack();
+            case "Forward Mid":
+                forwardMidAttack();
+            case "Neutral Mid":
+                neutralMidAttack();
+            default:
+                print("Default");
+        }
     }
 
     void Start()
@@ -360,11 +376,7 @@ public class Player1 : MonoBehaviour
     }
 
     // Do action for that frame. Called by FightScene every frame during a round.
-    public void doAction() {
-        // Take in input and update input history
-
-        // 
-    }
+    
 
     // Deprecate
     // Update is called once per frame
