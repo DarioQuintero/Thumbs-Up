@@ -251,7 +251,9 @@ public class Player1 : MonoBehaviour
                 // playAttackAnim();
                 //print("start attack");
                 break;
-            case attackStartup:
+            case < attackStartup - 1:
+                continue;
+            case attackStartup - 1:
                 if(has_overlap(hitbox, player2Script.p2Hurtbox))
                 {   
                     block = player2Script.block
@@ -260,14 +262,16 @@ public class Player1 : MonoBehaviour
                     p1Hurtbox = extendedHurtbox;
                 }
                 break;
-            case (attackStartup + attackRecovery):
+            case < attackStartup + attackRecovery - 1:
+                continue;
+            case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
                 p1Hurtbox = new List<int> {3};
                 //print("end recovery");
                 break;
             default:
-                break;
+                print("Default running");
         } 
     }
 
@@ -286,7 +290,9 @@ public class Player1 : MonoBehaviour
                 // playAttackAnim();
                 //print("start attack");
                 break;
-            case attackStartup:
+            case < attackStartup - 1:
+                continue;
+            case attackStartup - 1:
                 if(has_overlap(hitbox, player2Script.p2Hurtbox))
                 {   
                     block = player2Script.block
@@ -295,14 +301,16 @@ public class Player1 : MonoBehaviour
                     p1Hurtbox = extendedHurtbox;
                 }
                 break;
-            case (attackStartup + attackRecovery):
+            case < attackStartup + attackRecovery - 1:
+                continue;
+            case attackStartup + attackRecovery - 1:
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = new List<int> {3};
+                p1Hurtbox = new List<int> {1,2,3};
                 //print("end recovery");
                 break;
             default:
-                break;
+                print("Default running");
         } 
     }
 
