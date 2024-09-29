@@ -42,6 +42,10 @@ public class Player1 : MonoBehaviour
 
         //run animation for health change (oldHealth to currentHealth)
         // query fightScene
+        PLAYER_1 = 1;
+        FightScence.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
+
+        return
 
     }
 
