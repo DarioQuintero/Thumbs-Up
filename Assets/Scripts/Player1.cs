@@ -65,7 +65,8 @@ public class Player1 : MonoBehaviour
             case attackStartup:
                 if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Stance != "neutral" && Player2.p2Stance != "backward")
                 {   //Values are at the beginning of the function
-                    Player2.getHit(damage, hitstun, anim);
+                    //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemeneted
+                    Player2.getHit(damage, hitstun);
                 }
             case < (attackStartup + attackRecovery):
             //Attacking player hurtbox extended during recovery frames
@@ -86,7 +87,7 @@ public class Player1 : MonoBehaviour
         int attackStartup = 15;
         int damage = 30;
         int hitstun = 20; //same as recovery, as it is +0 on hit 
-        int anim; //TODO: would need to change the type of this
+        //int anim; //TODO: would need to change the type of this
         int attackRecovery = 20;
         int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
         int List hurtbox_extended = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
@@ -104,7 +105,8 @@ public class Player1 : MonoBehaviour
             case attackStartup:
                 if(hitbox.contains(Player2.p2Hurtbox) && Player2.p2Hurtbox != "forward" && Player2.p2Stance != "backward")
                 {   //Values are at the beginning of the function
-                    Player2.getHit(damage, hitstun, anim);
+                    //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
+                    Player2.getHit(damage, hitstun);
                 }
             case < (attackStartup + attackRecovery):
                 continue;
