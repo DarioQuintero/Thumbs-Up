@@ -15,19 +15,30 @@ public class Player1 : MonoBehaviour
     public string currentAction = "actionable"; 
     public int currentFrameCount = 0;
 
+    //Helper function for when we set the actions and frames to avoid redundant code
+    //NOTE: Its possible we need to pass in the currentAction and currentFrameCount
+    //      because if the public variables will be set in the helper properly
+    public void setActionAndFrame(in_action, in_frame){
+        currentAction = in_action;
+        currentFrameCount = in_frame;
+        
+        return
+    }
+    
     public void getHit(int damage, bool wasBlocked, int stunFrames){
         // Take damage
         oldHealth = currentHealth;
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // forces current health between 0 and maxHealth
 
-        // Take hitstun/blockstun
-        /*
-        if wasBlocked
-        action = ["blockstun", stunFrames]
-        else
-        action = ["hitstun", stunFrames]
-        */
+        //Action was blocked -> blockstun
+        if (wasBlocked){
+            setActionAndFrame("blockstun", stunFrames);
+        }
+        //Action was not blocked -> hitstun
+        else{
+            setActionAndFrame("hitstun", stunFrames);
+        }
 
         //run animation for health change (oldHealth to currentHealth)
         // query fightScene
