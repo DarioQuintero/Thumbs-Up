@@ -46,7 +46,7 @@ public class Player1 : MonoBehaviour
     private void forwardThrowAttack() {
         int attackStartup = 15;
         int damage = 50;
-        int hitstun = 45; //since it is a +0 move on hit, then this would be same as recovery
+        int hitstun = 45+1; //since it is a +0 move on hit, then this would be same as recovery + 1
         // int anim //TODO: would need to change the type of this
         int attackRecovery = 45;
         int List hitbox = [4]; //only hits forward position
@@ -86,7 +86,7 @@ public class Player1 : MonoBehaviour
     {
         int attackStartup = 15;
         int damage = 30;
-        int hitstun = 20; //same as recovery, as it is +0 on hit 
+        int hitstun = 20+1; //same as recovery, as it is +0 on hit  + 1
         //int anim; //TODO: would need to change the type of this
         int attackRecovery = 20;
         int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
