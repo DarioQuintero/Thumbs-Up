@@ -15,7 +15,6 @@ public class Player1 : MonoBehaviour
     public string currentAction = "actionable"; 
     public int currentFrameCount = 0;
 
-<<<<<<< Updated upstream
     public List<int> revertHurtbox() {
         switch (p1Stance) {
             case "backward":
@@ -27,28 +26,6 @@ public class Player1 : MonoBehaviour
             default:
                 print("Revert Hurtbox Failed");
         }
-=======
-    public void getHit(int damage, bool wasBlocked, int stunFrames){
-        // Take damage
-        oldHealth = currentHealth;
-        currentHealth -= damage;
-        // Unecessary. If current health drops below zero, FightScene will take over.
-        // currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        if (currentHealth <= 0) {
-            FightScene.gameOver(); // TODO
-        }
-        // Take hitstun/blockstun
-        /*
-        if wasBlocked
-        action = ["blockstun", stunFrames]
-        else
-        action = ["hitstun", stunFrames]
-        */
-
-        //run animation for health change (oldHealth to currentHealth)
-        // query fightScene
-
->>>>>>> Stashed changes
     }
 
     public bool isBlocking() {
@@ -85,6 +62,9 @@ public class Player1 : MonoBehaviour
             PLAYER_1 = 1;
             FightScence.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
             setActionAndFrame("hitstun", stunFrames);
+            if (currentHealth <= 0) {
+                FightScene.gameOver(); // TODO
+            }
         }
     }
 
@@ -389,9 +369,6 @@ public class Player1 : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-<<<<<<< Updated upstream
-    /* Deprecate
-=======
     // Resets player to the start of round position. Called at the start of every round.
     public void reset(int maxHealth) {
         // Reset properties of player
@@ -414,7 +391,6 @@ public class Player1 : MonoBehaviour
     }
 
     // Deprecate
->>>>>>> Stashed changes
     // Update is called once per frame
     void Update()
     {
@@ -436,5 +412,4 @@ public class Player1 : MonoBehaviour
         
 
     } 
-    */
 }
