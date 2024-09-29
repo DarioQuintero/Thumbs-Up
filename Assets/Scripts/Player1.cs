@@ -342,14 +342,14 @@ public class Player1 : MonoBehaviour
     public void reset(int maxHealth) {
         // Reset properties of player
         currentHealth = maxHealth;
-        public List<int> p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
-        public List<int> p1Hurtbox = new List<int>{2};
-        public string p1Stance; // Position. ("backward", "neutral", "forward")
-        public List<bool> inputHistory = new List<bool>(); 
-        public int frame = 0; // Deprecate
-        public string p1State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
-        public string currentAction = "actionable";
-        public int actionFrameCount = 0;
+        p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
+        p1Hurtbox = new List<int>{2};
+        p1Stance; // Position. ("backward", "neutral", "forward")
+        inputHistory = new List<bool>(); 
+        frame = 0; // Deprecate
+        p1State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
+        currentAction = "actionable";
+        actionFrameCount = 0;
     }
     // Resets player to the start of round position. Called at the start of every round.
 
