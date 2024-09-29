@@ -22,7 +22,6 @@ public class Player1 : MonoBehaviour
         currentAction = in_action;
         currentFrameCount = in_frame;
         
-        return
     }
     
     public void getHit(int damage, bool wasBlocked, int stunFrames){
@@ -44,8 +43,6 @@ public class Player1 : MonoBehaviour
         // query fightScene
         PLAYER_1 = 1;
         FightScence.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
-
-        return
 
     }
 
