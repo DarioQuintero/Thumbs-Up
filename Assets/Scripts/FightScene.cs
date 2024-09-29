@@ -26,8 +26,8 @@ public class FightScene : MonoBehaviour
 
     void startRound() {
         roundTimer = 99;
-        player1Script.reset();
-        player2Script.reset();
+        player1Script.reset(player1MaxHealth);
+        // player2Script.reset(player2MaxHealth);
     }
 
     //TODO: create a UI and tie in function

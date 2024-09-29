@@ -30,6 +30,9 @@ public class Player2 : MonoBehaviour
         // query fightScene
 
     }
+        public bool isBlocking() {
+            return false;
+        }
     // Start is called before the first frame update
     /*
     public void forwardThrowAttack() {

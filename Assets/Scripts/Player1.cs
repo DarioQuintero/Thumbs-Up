@@ -5,6 +5,9 @@ public class Player1 : MonoBehaviour
 {
     // Methods and variables need to be in class   
     public Player2 player2Script;
+
+    public FightScene fightSceneScript;
+
  
     public int maxHealth; // Deprecate
     public int currentHealth;
@@ -18,13 +21,18 @@ public class Player1 : MonoBehaviour
     public List<int> revertHurtbox() {
         switch (p1Stance) {
             case "backward":
-                return new List<int> [1];
+                return new List<int> {1};
+                break;
             case "neutral":
-                return new List<int> [2];
+                return new List<int> {2};
+                break;
             case "forward":
-                return new List<int> [3];
+                return new List<int> {3};
+                break;
             default:
                 print("Revert Hurtbox Failed");
+                return new List<int> {};
+                break;
         }
     }
 
@@ -60,10 +68,10 @@ public class Player1 : MonoBehaviour
             //run animation for health change (oldHealth to currentHealth)
             // query fightScene
             int PLAYER_1 = 1;
-            FightScence.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
+            fightSceneScript.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
             setActionAndFrame("hitstun", stunFrames);
             if (currentHealth <= 0) {
-                FightScene.gameOver(); // TODO
+                // fightSceneScript.gameOver(); // TODO
             }
         }
     }
@@ -78,11 +86,11 @@ public class Player1 : MonoBehaviour
     }
     
     private void forwardThrowAttack() {
-        int attackStartup = 15;
-        int damage = 50;
-        int hitstun = 45+1; //since it is a +0 move on hit, then this would be same as recovery + 1
+        const int attackStartup = 15;
+        const int damage = 50;
+        const int hitstun = 45+1; //since it is a +0 move on hit, then this would be same as recovery + 1
         // int anim //TODO: would need to change the type of this
-        int attackRecovery = 45;
+        const int attackRecovery = 45;
         List<int> hitbox = new List<int> {4}; //only hits forward position
         List<int> extendedHurtbox = new List<int> {3, 4, 5, 6};
 
@@ -90,38 +98,41 @@ public class Player1 : MonoBehaviour
         switch (currentFrameCount){
             //state[1] should be how many frames into the action the player is
             case 0:
-                playAttackAnim();
-
+                //playAttackAnim();
+                break;
             case < (attackStartup - 1):
-                continue; 
+                break; 
             
             case (attackStartup - 1):
-               if(hasOverlap(Player2.p2Hurtbox, hitbox))
+               if(hasOverlap(player2Script.p2Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
-                    Player2.getHit(damage, hitstun, 0);
+                    player2Script.getHit(damage, false, hitstun);
                 }
+                break;
             case < (attackStartup + attackRecovery - 1):
             //Attacking player hurtbox extended during recovery frames
                 p1Hurtbox = extendedHurtbox;
-                continue;
+                break;
             case (attackStartup + attackRecovery):
             //Attacking player hurtbox resets to previous hurtbox
                 p1Hurtbox = revertHurtbox();
                 currentAction = "actionable";
                 currentFrameCount = 0;
+                break;
             default:
                 print("DEFAULT CASE IS RUNNING IN FORWARD THROW");
+                break;
         } 
     }
 
     public void neutralThrowAttack() 
     {
-        int attackStartup = 15;
-        int damage = 30;
-        int hitstun = 20+1; //same as recovery, as it is +0 on hit  + 1
+        const int attackStartup = 15;
+        const int damage = 30;
+        const int hitstun = 20+1; //same as recovery, as it is +0 on hit  + 1
         //int anim; //TODO: would need to change the type of this
-        int attackRecovery = 20;
+        const int attackRecovery = 20;
         List<int> hitbox = new List<int>{5}; //only hits neutral position of opponent, would this be 2?
         List<int> extendedHurtbox = new List<int> {2, 3, 4, 5}; //TODO: ask if this is how to do the extension
         //play attack animation
@@ -129,26 +140,29 @@ public class Player1 : MonoBehaviour
         {
             //state[1] should be how many frames into the action the player is
             case 0:
-                playAttackAnim();
-
+                // playAttackAnim();
+                break;
             case < (attackStartup - 1):
-                continue; 
+                break; 
             
             case (attackStartup - 1):
-                if(hasOverlap(Player2.p2Hurtbox, hitbox))
+                if(hasOverlap(player2Script.p2Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
-                    Player2.getHit(damage, hitstun, 0);
+                    player2Script.getHit(damage, false, hitstun);
                 }
+                break;
             case < (attackStartup + attackRecovery - 1):
                 p1Hurtbox = extendedHurtbox;
-                continue;
+                break;
             case (attackStartup + attackRecovery - 1):
                 p1Hurtbox = revertHurtbox();
                 currentAction = "actionable";
                 currentFrameCount = 0;
+                break;
             default:
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
+                break;
         } 
     }
 
@@ -169,7 +183,7 @@ public class Player1 : MonoBehaviour
                 print("start attack");
                 break;
             case < (attackStartup - 1):
-                continue; 
+                break; 
             case (attackStartup -1): // -1 because currentFrameCount starts at 0
                 if(hasOverlap(hitbox, player2Script.p2Hurtbox) && player2Script.p2Stance != "forward")
                 {   //Values are at the beginning of the function
@@ -184,7 +198,7 @@ public class Player1 : MonoBehaviour
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
-                continue; 
+                break; 
             case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
@@ -193,6 +207,7 @@ public class Player1 : MonoBehaviour
                 break;
             default:
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL HIGH");
+                break;
         } 
     }
     
@@ -215,7 +230,7 @@ public class Player1 : MonoBehaviour
                 print("start attack");
                 break;
             case < (attackStartup - 1):
-                continue; 
+                break; 
             case (attackStartup -1): // -1 because currentFrameCount starts at 0
                 if(hasOverlap(hitbox, player2Script.p2Hurtbox))
                 {   //Values are at the beginning of the function
@@ -230,7 +245,7 @@ public class Player1 : MonoBehaviour
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
-                continue; 
+                break; 
             case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
@@ -239,6 +254,7 @@ public class Player1 : MonoBehaviour
                 break;
             default:
                 print("DEFAULT CASE IS RUNNING IN FORWARD HIGH");
+                break;
         } 
     }
 
@@ -260,7 +276,7 @@ public class Player1 : MonoBehaviour
                 //print("start attack");
                 break;
             case < attackStartup - 1:
-                continue;
+                break;
             case attackStartup - 1:
                 if(hasOverlap(hitbox, player2Script.p2Hurtbox))
                 {   
@@ -270,7 +286,7 @@ public class Player1 : MonoBehaviour
                 }
                 break;
             case < attackStartup + attackRecovery - 1:
-                continue;
+                break;
             case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
@@ -279,6 +295,7 @@ public class Player1 : MonoBehaviour
                 break;
             default:
                 print("Default running");
+                break;
         } 
     }
 
@@ -298,7 +315,7 @@ public class Player1 : MonoBehaviour
                 //print("start attack");
                 break;
             case < attackStartup - 1:
-                continue;
+                break;
             case attackStartup - 1:
                 if(hasOverlap(hitbox, player2Script.p2Hurtbox))
                 {   
@@ -308,7 +325,7 @@ public class Player1 : MonoBehaviour
                 }
                 break;
             case < attackStartup + attackRecovery - 1:
-                continue;
+                break;
             case attackStartup + attackRecovery - 1:
                 currentAction = "actionable";
                 currentFrameCount = 0;
@@ -317,6 +334,7 @@ public class Player1 : MonoBehaviour
                 break;
             default:
                 print("Default running");
+                break;
         } 
     }
 
@@ -325,22 +343,31 @@ public class Player1 : MonoBehaviour
         switch (currentAction){
             case "Forward Throw":
                 forwardThrowAttack();
+                break;
             case "Neutral Throw":
                 neutralThrowAttack();
+                break;
             case "Forward High":
                 forwardHighAttack();
+                break;
             case "Neutral High":
                 neutralHighAttack();
+                break;
             case "Forward Mid":
                 forwardMidAttack();
+                break;
             case "Neutral Mid":
                 neutralMidAttack();
+                break;
             default:
                 print("Default");
+                break;
         }
     }
     public void reset(int maxHealth) {
         // Reset properties of player
+        //Fix this
+        /*
         currentHealth = maxHealth;
         p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
         p1Hurtbox = new List<int>{2};
@@ -350,6 +377,7 @@ public class Player1 : MonoBehaviour
         p1State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
         currentAction = "actionable";
         actionFrameCount = 0;
+        */
     }
     // Resets player to the start of round position. Called at the start of every round.
 
