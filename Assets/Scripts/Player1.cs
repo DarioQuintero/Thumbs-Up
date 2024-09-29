@@ -38,7 +38,7 @@ public class Player1 : MonoBehaviour
     //Helper function for when we set the actions and frames to avoid redundant code
     //NOTE: Its possible we need to pass in the currentAction and currentFrameCount
     //      because if the public variables will be set in the helper properly
-    public void setActionAndFrame(inAction, inFrame){
+    public void setActionAndFrame(string inAction, int inFrame){
         currentAction = inAction;
         currentFrameCount = inFrame;
         
@@ -83,8 +83,8 @@ public class Player1 : MonoBehaviour
         int hitstun = 45+1; //since it is a +0 move on hit, then this would be same as recovery + 1
         // int anim //TODO: would need to change the type of this
         int attackRecovery = 45;
-        int List hitbox = [4]; //only hits forward position
-        int List extendedHurtbox = [3, 4, 5, 6];
+        List<int> hitbox = new List<int> {4}; //only hits forward position
+        List<int> extendedHurtbox = new List<int> {3, 4, 5, 6};
 
         //play attack animation
         switch (currentFrameCount){
@@ -122,8 +122,8 @@ public class Player1 : MonoBehaviour
         int hitstun = 20+1; //same as recovery, as it is +0 on hit  + 1
         //int anim; //TODO: would need to change the type of this
         int attackRecovery = 20;
-        int List hitbox = [5]; //only hits neutral position of opponent, would this be 2?
-        int List extendedHurtbox = [2, 3, 4, 5]; //TODO: ask if this is how to do the extension
+        List<int> hitbox = new List<int>{5}; //only hits neutral position of opponent, would this be 2?
+        List<int> extendedHurtbox = new List<int> {2, 3, 4, 5}; //TODO: ask if this is how to do the extension
         //play attack animation
         switch (currentFrameCount)
         {
@@ -171,7 +171,7 @@ public class Player1 : MonoBehaviour
             case < (attackStartup - 1):
                 continue; 
             case (attackStartup -1): // -1 because currentFrameCount starts at 0
-                if(has_overlap(hitbox, player2Script.p2Hurtbox) && player2Script.p2Stance != "forward")
+                if(hasOverlap(hitbox, player2Script.p2Hurtbox) && player2Script.p2Stance != "forward")
                 {   //Values are at the beginning of the function
                     if (player2Script.isBlocking() == false){
                         player2Script.getHit(damage, false, hitstun);
@@ -217,7 +217,7 @@ public class Player1 : MonoBehaviour
             case < (attackStartup - 1):
                 continue; 
             case (attackStartup -1): // -1 because currentFrameCount starts at 0
-                if(has_overlap(hitbox, player2Script.p2Hurtbox))
+                if(hasOverlap(hitbox, player2Script.p2Hurtbox))
                 {   //Values are at the beginning of the function
                     if (player2Script.isBlocking() == false){
                         player2Script.getHit(damage, false, hitstun);
@@ -262,10 +262,9 @@ public class Player1 : MonoBehaviour
             case < attackStartup - 1:
                 continue;
             case attackStartup - 1:
-                if(has_overlap(hitbox, player2Script.p2Hurtbox))
+                if(hasOverlap(hitbox, player2Script.p2Hurtbox))
                 {   
-                    block = isBlocking()
-                    player2Script.getHit(damage, block, hitstun);
+                    player2Script.getHit(damage, player2Script.isBlocking(), hitstun);
                     //print("player 2 hit");
                     p1Hurtbox = extendedHurtbox;
                 }
@@ -301,10 +300,9 @@ public class Player1 : MonoBehaviour
             case < attackStartup - 1:
                 continue;
             case attackStartup - 1:
-                if(has_overlap(hitbox, player2Script.p2Hurtbox))
+                if(hasOverlap(hitbox, player2Script.p2Hurtbox))
                 {   
-                    block = isBlocking()
-                    player2Script.getHit(damage, block, hitstun);
+                    player2Script.getHit(damage, player2Script.isBlocking(), hitstun);
                     //print("player 2 hit");
                     p1Hurtbox = extendedHurtbox;
                 }
@@ -341,13 +339,6 @@ public class Player1 : MonoBehaviour
                 print("Default");
         }
     }
-
-    void Start()
-    {
-        // Nothing
-    }
-
-    // Resets player to the start of round position. Called at the start of every round.
     public void reset(int maxHealth) {
         // Reset properties of player
         currentHealth = maxHealth;
@@ -356,37 +347,17 @@ public class Player1 : MonoBehaviour
         public string p1Stance; // Position. ("backward", "neutral", "forward")
         public List<bool> inputHistory = new List<bool>(); 
         public int frame = 0; // Deprecate
-        public string p1State = "actionable" // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
+        public string p1State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
         public string currentAction = "actionable";
         public int actionFrameCount = 0;
     }
+    // Resets player to the start of round position. Called at the start of every round.
 
-<<<<<<< HEAD
     // Do action for that frame. Called by FightScene every frame during a round.
     
 
-=======
->>>>>>> ecb2831c53f6a2f0f2f8e2f11da02dd171397973
     // Deprecate
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("f")) {
-            print("f pressed on " + frame);
-            StartCoroutine(neutral_high());
-        }
+    
 
-        frame = frame + 1;
-        if (currentHealth == 0){
-            //end game
-        }
-        
-        
-        if (attack && isHit){
-            damage = 9000;
-            changeHealth(damage);
-        }
-        
-
-    } 
 }
