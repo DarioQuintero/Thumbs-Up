@@ -190,30 +190,6 @@ public class Player1 : MonoBehaviour
             default:
                 break;
         } 
-
-        /* Deprecated
-        p1Status = "charging"; // deprecate
-        int attackStartup = 10;
-        int attackRecover = 12;
-        int damage = 10;
-
-        int attackPressed = frame;
-        int startFrame = frame + attackStartup;
-
-        while (frame < startFrame) {
-            yield return null;
-        }
-        print("Neutral high executed on " + frame);
-        if (true){
-            player2.changeHealth(damage);
-        }
-        p1Status = "recovering";
-        int recovered = frame + attackRecover;
-        while (frame < recovered) {
-            yield return null;
-        }
-        p1Status = "active";
-        */
     }
     
     // TODO: forwardHighAttack()
@@ -278,7 +254,7 @@ public class Player1 : MonoBehaviour
             case attackStartup - 1:
                 if(has_overlap(hitbox, player2Script.p2Hurtbox))
                 {   
-                    block = player2Script.block
+                    block = isBlocking()
                     player2Script.getHit(damage, block, hitstun);
                     //print("player 2 hit");
                     p1Hurtbox = extendedHurtbox;
@@ -289,7 +265,7 @@ public class Player1 : MonoBehaviour
             case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = new List<int> {3};
+                p1Hurtbox = revertHurtbox();
                 //print("end recovery");
                 break;
             default:
@@ -317,7 +293,7 @@ public class Player1 : MonoBehaviour
             case attackStartup - 1:
                 if(has_overlap(hitbox, player2Script.p2Hurtbox))
                 {   
-                    block = player2Script.block
+                    block = isBlocking()
                     player2Script.getHit(damage, block, hitstun);
                     //print("player 2 hit");
                     p1Hurtbox = extendedHurtbox;
@@ -328,7 +304,7 @@ public class Player1 : MonoBehaviour
             case attackStartup + attackRecovery - 1:
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = new List<int> {1,2,3};
+                p1Hurtbox = revertHurtbox();
                 //print("end recovery");
                 break;
             default:
