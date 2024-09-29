@@ -33,7 +33,7 @@ public class FightScene : MonoBehaviour
 
     }
 
-    
+    //TODO: create a UI and tie in function
     public void changeHealthBars(playerNum, oldHealth, currentHealth){
         if (playerNum == 1){
             player1HealthUI = currentHealth;
