@@ -312,27 +312,6 @@ public class Player1 : MonoBehaviour
         } 
     }
 
-    // Deprecate
-    // Start is called before the first frame update
-    
-    // Resets player to the start of round position. Called at the start of every round.
-    public void reset()
-    {
-        // Reset properties of player
-        currentHealth = maxHealth;
-        
-        oldHealth = maxHealth;
-        //public bool block; // Deprecate
-        //public List<int> p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
-        //public List<int> p1Hurtbox = new List<int>{2};
-        p1Stance = "neutral"; // Position. ("backward", "neutral", "forward")
-        inputHistory = new List<bool>(); 
-        //public int frame = 0; // Deprecate
-        //public string p1State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
-        currentAction = "actionable";
-        currentFrameCount = 0;
-    }
-
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction() {
         // Take in input and update input history
@@ -341,8 +320,7 @@ public class Player1 : MonoBehaviour
 
     void Start()
     {
-        maxHealth = 100;
-        currentHealth = maxHealth;
+        // Nothing
     }
 
     // Resets player to the start of round position. Called at the start of every round.
@@ -357,13 +335,6 @@ public class Player1 : MonoBehaviour
         public string p1State = "actionable" // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
         public string currentAction = "actionable";
         public int actionFrameCount = 0;
-    }
-
-    // Do action for that frame. Called by FightScene every frame during a round.
-    public void doAction() {
-        // Take in input and update input history
-
-        // 
     }
 
     // Deprecate
