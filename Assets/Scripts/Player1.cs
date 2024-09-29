@@ -238,7 +238,7 @@ public class Player1 : MonoBehaviour
                 print("end recovery");
                 break;
             default:
-                print("DEFAULT CASE IS RUNNING IN NEUTRAL HIGH");
+                print("DEFAULT CASE IS RUNNING IN FORWARD HIGH");
         } 
     }
 
