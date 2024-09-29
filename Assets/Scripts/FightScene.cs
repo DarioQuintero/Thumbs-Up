@@ -33,16 +33,18 @@ public class FightScene : MonoBehaviour
 
     }
 
+    
     public void changeHealthBars(playerNum, oldHealth, currentHealth){
         if (playerNum == 1){
-
+            player1HealthUI = currentHealth;
+            player1OldHealthUI = oldHealth;
         }
         else{
-            
+            player2HealthUI = currentHealth;
+            player2OldHealthUI = oldHealth;
         }
 
     }
-
     //changeHealthBars(bool player, oldHealth, currentHealth);
 
 
