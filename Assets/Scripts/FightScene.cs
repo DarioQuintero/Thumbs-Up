@@ -28,9 +28,6 @@ public class FightScene : MonoBehaviour
         roundTimer = 99;
         player1Script.reset();
         player2Script.reset();
-
-
-
     }
 
     //TODO: create a UI and tie in function
