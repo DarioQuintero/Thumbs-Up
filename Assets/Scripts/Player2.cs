@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player1 : MonoBehaviour
 {
     // Methods and variables need to be in class   
-    public Player2 player2Script;
+    public Player1 player1Script;
 
     public FightScene fightSceneScript;
 
@@ -12,14 +12,14 @@ public class Player1 : MonoBehaviour
     public int maxHealth; // Deprecate
     public int currentHealth;
     public int oldHealth; 
-    public List<int> p1Hurtbox = new List<int>{2};
-    public string p1Stance; // Position. ("backward", "neutral", "forward")
+    public List<int> p2Hurtbox = new List<int>{2};
+    public string p2Stance; // Position. ("backward", "neutral", "forward")
     public List<bool> inputHistory = new List<bool>(); 
     public string currentAction = "actionable"; 
     public int currentFrameCount = 0;
 
     public List<int> revertHurtbox() {
-        switch (p1Stance) {
+        switch (p2Stance) {
             case "backward":
                 return new List<int> {1};
                 break;
@@ -37,7 +37,7 @@ public class Player1 : MonoBehaviour
     }
 
     public bool isBlocking() {
-        if (currentAction == "acitionable" && p1Stance == "neutral") {
+        if (currentAction == "actionable" && p2Stance == "neutral") {
             return true;
         }
         return false;
@@ -67,8 +67,8 @@ public class Player1 : MonoBehaviour
 
             //run animation for health change (oldHealth to currentHealth)
             // query fightScene
-            int PLAYER_1 = 1;
-            fightSceneScript.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
+            int PLAYER_2 = 2;
+            fightSceneScript.changeHealthBars(PLAYER_2, oldHealth, currentHealth);
             setActionAndFrame("hitstun", stunFrames);
             if (currentHealth <= 0) {
                 // fightSceneScript.gameOver(); // TODO
@@ -91,8 +91,8 @@ public class Player1 : MonoBehaviour
         const int hitstun = 45+1; //since it is a +0 move on hit, then this would be same as recovery + 1
         // int anim //TODO: would need to change the type of this
         const int attackRecovery = 45;
-        List<int> hitbox = new List<int> {4}; //only hits forward position
-        List<int> extendedHurtbox = new List<int> {3, 4, 5, 6};
+        List<int> hitbox = new List<int> {3}; //only hits forward position
+        List<int> extendedHurtbox = new List<int> {1, 2, 3, 4};
 
         //play attack animation
         switch (currentFrameCount){
@@ -104,19 +104,19 @@ public class Player1 : MonoBehaviour
                 break; 
             
             case (attackStartup - 1):
-               if(hasOverlap(player2Script.p2Hurtbox, hitbox))
+               if(hasOverlap(player1Script.p1Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
-                    player2Script.getHit(damage, false, hitstun);
+                    player1Script.getHit(damage, false, hitstun);
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
             //Attacking player hurtbox extended during recovery frames
-                p1Hurtbox = extendedHurtbox;
+                p2Hurtbox = extendedHurtbox;
                 break;
             case (attackStartup + attackRecovery):
             //Attacking player hurtbox resets to previous hurtbox
-                p1Hurtbox = revertHurtbox();
+                p2Hurtbox = revertHurtbox();
                 currentAction = "actionable";
                 currentFrameCount = 0;
                 break;
@@ -133,7 +133,7 @@ public class Player1 : MonoBehaviour
         const int hitstun = 20+1; //same as recovery, as it is +0 on hit  + 1
         //int anim; //TODO: would need to change the type of this
         const int attackRecovery = 20;
-        List<int> hitbox = new List<int>{5}; //only hits neutral position of opponent, would this be 2?
+        List<int> hitbox = new List<int>{3}; //only hits neutral position of opponent, would this be 2?
         List<int> extendedHurtbox = new List<int> {2, 3, 4, 5}; //TODO: ask if this is how to do the extension
         //play attack animation
         switch (currentFrameCount)
@@ -146,17 +146,17 @@ public class Player1 : MonoBehaviour
                 break; 
             
             case (attackStartup - 1):
-                if(hasOverlap(player2Script.p2Hurtbox, hitbox))
+                if(hasOverlap(player1Script.p1Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
-                    player2Script.getHit(damage, false, hitstun);
+                    player1Script.getHit(damage, false, hitstun);
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
-                p1Hurtbox = extendedHurtbox;
+                p2Hurtbox = extendedHurtbox;
                 break;
             case (attackStartup + attackRecovery - 1):
-                p1Hurtbox = revertHurtbox();
+                p2Hurtbox = revertHurtbox();
                 currentAction = "actionable";
                 currentFrameCount = 0;
                 break;
