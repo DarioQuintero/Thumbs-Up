@@ -1641,7 +1641,7 @@ MonoBehaviour:
   player2Script: {fileID: 1924032793}
   timerText: {fileID: 1592810435}
   winCounterScript: {fileID: 1206301853}
-  HealthBarScript: {fileID: 0}
+  HealthBarScript: {fileID: 769776456}
   sceneFrameCounter: 0
   sceneFPSOver60: 1
   logicFrameCounter: 0

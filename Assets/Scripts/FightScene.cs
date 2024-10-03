@@ -84,6 +84,7 @@ public class FightScene : MonoBehaviour
     public void changeHealthBars(int playerNum, int oldHealth, int currentHealth){
         if (playerNum == 1){
             player1HealthUI = currentHealth;
+            HealthBarScript.setHealthBar(playerNum, player1HealthUI);
             player1OldHealthUI = oldHealth;
             // If player died, set the flag to end the current round at end of frame
             if (currentHealth <= 0) {
@@ -93,6 +94,7 @@ public class FightScene : MonoBehaviour
         }
         else{
             player2HealthUI = currentHealth;
+            HealthBarScript.setHealthBar(playerNum, player2HealthUI);
             player2OldHealthUI = oldHealth;
             if (currentHealth <= 0) {
                 roundInProgress = false;
