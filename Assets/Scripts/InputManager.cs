@@ -7,10 +7,10 @@ public class InputManager : MonoBehaviour
     public static InputManager instance;
 
     public Keybindings keybindings;
-    /*
+
     void awake() {
         if (instance == null){
-            instance == this;
+            instance = this;
         }
         else if (instance != this) {
             Destroy(this);
@@ -18,13 +18,12 @@ public class InputManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
     public bool KeyDown(string key) {
-        if (Input.GetKeyDown(keybindings.CheckKey(key))) {
+        if (Input.GetKeyDown(keybindings.checkKey(key))) {
             return true;
         }
         else {
             return false;
         }
     }
-    */
     
 }
