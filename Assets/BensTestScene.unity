@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player2Script: {fileID: 1924032793}
+  inputManager: {fileID: 1450093436}
   fightSceneScript: {fileID: 1154210892}
   currentHealth: 0
   oldHealth: 0
@@ -468,7 +469,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Script: {fileID: 472956192}
   player2Script: {fileID: 1924032793}
-  roundFrameCounter: 0
+  sceneFrameCounter: 0
+  sceneFPSOver60: 1
+  logicFrameCounter: 0
   roundTimer: 99
 --- !u!4 &1154210893
 Transform:
