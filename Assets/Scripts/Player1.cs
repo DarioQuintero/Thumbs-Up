@@ -6,6 +6,8 @@ public class Player1 : MonoBehaviour
     // Methods and variables need to be in class   
     public Player2 player2Script;
 
+    public InputManager inputManager;
+
     // Get FightScene's Script
     public FightScene fightSceneScript;
  
@@ -15,7 +17,13 @@ public class Player1 : MonoBehaviour
     public List<int> p1Hurtbox = new List<int>{2};
     public string p1Stance; // Position ("backward", "neutral", "forward")
     public List<bool> inputHistory = new List<bool>(); 
-    public string currentAction = "actionable"; 
+    public Dictionary<string, bool> currentInput = new Dictionary<string, bool>() {
+        {"high", false},
+        {"mid", false},
+        {"left", false},
+        {"right", false}
+    };
+    public string currentAction = "Actionable"; 
     public int currentFrameCount = 0;
 
     public void setPlayerPosition(string position) { // postion: ("backward", "neutral", "forward")
@@ -57,7 +65,7 @@ public class Player1 : MonoBehaviour
     }
 
     public bool isBlocking() {
-        if (currentAction == "actionable" && p1Stance == "neutral") {
+        if (currentAction == "Actionable" && p1Stance == "neutral") {
             return true;
         }
         return false;
@@ -137,7 +145,7 @@ public class Player1 : MonoBehaviour
             case (attackStartup + attackRecovery):
             //Attacking player hurtbox resets to previous hurtbox
                 p1Hurtbox = revertHurtbox();
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 break;
             default:
@@ -177,7 +185,7 @@ public class Player1 : MonoBehaviour
                 break;
             case (attackStartup + attackRecovery - 1):
                 p1Hurtbox = revertHurtbox();
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 break;
             default:
@@ -220,7 +228,7 @@ public class Player1 : MonoBehaviour
             case < (attackStartup + attackRecovery - 1):
                 break; 
             case (attackStartup + attackRecovery - 1):
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 p1Hurtbox = revertHurtbox();
                 print("end recovery");
@@ -230,8 +238,6 @@ public class Player1 : MonoBehaviour
                 break;
         } 
     }
-    
-    // TODO: forwardHighAttack()
 
     public void forwardHighAttack() {
         const int damage = 10;
@@ -267,7 +273,7 @@ public class Player1 : MonoBehaviour
             case < (attackStartup + attackRecovery - 1):
                 break; 
             case (attackStartup + attackRecovery - 1):
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 p1Hurtbox = revertHurtbox();
                 print("end recovery");
@@ -308,7 +314,7 @@ public class Player1 : MonoBehaviour
             case < attackStartup + attackRecovery - 1:
                 break;
             case (attackStartup + attackRecovery - 1):
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 p1Hurtbox = revertHurtbox();
                 //print("end recovery");
@@ -347,7 +353,7 @@ public class Player1 : MonoBehaviour
             case < attackStartup + attackRecovery - 1:
                 break;
             case attackStartup + attackRecovery - 1:
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 p1Hurtbox = revertHurtbox();
                 //print("end recovery");
@@ -358,8 +364,58 @@ public class Player1 : MonoBehaviour
         } 
     }
 
+    void updateInputs() {
+        // TODO: Save old input dict in input history to be read later
+        currentInput = new Dictionary<string, bool>() {
+            {"high", inputManager.KeyDown("p1High")},
+            {"mid", inputManager.KeyDown("p1Mid")},
+            {"left", inputManager.KeyDown("p1Left")},
+            {"right", inputManager.KeyDown("p1Right")}
+        };
+    }
+
+    int boolToInt(bool myBool) {
+        return myBool ? 1 : 0;
+    }
+
+    string inputsToActions() {
+        int inputsAsBinary = boolToInt(currentInput["high"]) * 8 + boolToInt(currentInput["mid"]) * 4
+                           + boolToInt(currentInput["left"]) * 2 + boolToInt(currentInput["right"]) * 1;
+        switch (inputsAsBinary) {
+            case 4:
+                return "Neutral Mid";
+            case 5:
+                return "Forward Mid";
+            case 7:
+                return "Neutral Mid";
+            case 8:
+                return "Neutral High";
+            case 9:
+                return "Forward High";
+            case 11:
+                return "Neutral High";
+            case 12:
+                return "Neutral Throw";
+            case 13:
+                return "Forward Throw";
+            case 15:
+                return "Neutral Throw";
+            default:
+                return "Actionable";
+        }
+    }
+
+    void queueAction() {
+        // TODO: Implement an action queue and pop it
+        if (currentAction == "Actionable") {
+            currentAction = inputsToActions();
+        }
+    }
+
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction() {
+        updateInputs();
+        queueAction();
         switch (currentAction){
             case "Forward Throw":
                 forwardThrowAttack();
@@ -379,8 +435,34 @@ public class Player1 : MonoBehaviour
             case "Neutral Mid":
                 neutralMidAttack();
                 break;
+            case "Hitstun":
+                p1Stance = "neutral"; // Subject to change
+                currentFrameCount -= 1;
+                if (currentFrameCount <= 0) {
+                    currentAction = "Actionable";
+                    currentFrameCount = 0;
+                }
+                break;
+            case "Blockstun":
+                p1Stance = "neutral"; // Subject to change
+                currentFrameCount -= 1;
+                if (currentFrameCount <= 0) {
+                    currentAction = "Actionable";
+                    currentFrameCount = 0;
+                }
+                break;
             default:
-                print("Default");
+                print("Actionable");
+                // TODO: Implement a movement cooldown with adjustable frames relative to a const
+                if (currentInput["left"] && !currentInput["right"]) {
+                    p1Stance = "backward";
+                }
+                else if (currentInput["right"] && !currentInput["left"]) {
+                    p1Stance = "forward";
+                }
+                else {
+                    p1Stance = "neutral";
+                }
                 break;
         }
     }
@@ -393,8 +475,8 @@ public class Player1 : MonoBehaviour
         p1Stance = "neutral"; // Position. ("backward", "neutral", "forward")
         inputHistory = new List<bool>(); 
         // frame = 0; // Deprecate
-        // p1State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
-        currentAction = "actionable";
+        // p1State = "Actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "Actionable")
+        currentAction = "Actionable";
         currentFrameCount = 0;
         
     }

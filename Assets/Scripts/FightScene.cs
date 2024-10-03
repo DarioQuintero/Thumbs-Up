@@ -15,21 +15,58 @@ public class FightScene : MonoBehaviour
     private const int player2MaxHealth = 100; 
     private const int PLAYER_1 = 1;
     private const int PLAYER_2 = 2;
+    private const int roundWinLimit = 2; // How many round wins necessary to win the game 
 
     // Changing values
-    public int roundFrameCounter = 0; // The current number of frames elapsed since the round start
+    public int sceneFrameCounter = 0; // The current number of game fps frames elapsed since round start
+    public int sceneFPSOver60 = 1; // Self explanatory. Used to convert actual frames to logic frames
+    public int logicFrameCounter = 0; // The current number of 60fps frames elapsed since the round start
     public int roundTimer = 99; // Timer displayed in game
-    private int player1HealthUI = 100;
-    private int player1OldHealthUI = 100;
-    private int player2HealthUI = 100;
-    private int player2OldHealthUI = 100;
+    private bool roundInProgress = false; // Used to track whether or not to perform gameplay checks
+    private bool callRoundEnd = false; // Used to check for a round end. Probably could be merged with
+                                       // above but I'm lazy and tired.
+    private int player1RoundWins = 0;
+    private int player2RoundWins = 0;
+    private int player1HealthUI = player1MaxHealth;
+    private int player1OldHealthUI = player1MaxHealth;
+    private int player2HealthUI = player2MaxHealth;
+    private int player2OldHealthUI = player2MaxHealth;
 
     void startRound() {
         roundTimer = 99;
+        sceneFrameCounter = 0;
+        logicFrameCounter = 0;
+        roundInProgress = true;
+        callRoundEnd = false;
+        player1HealthUI = player1MaxHealth;
+        player1OldHealthUI = player1MaxHealth;
+        player2HealthUI = player2MaxHealth;
+        player2OldHealthUI = player2MaxHealth;
         player1Script.reset(player1MaxHealth);
         player2Script.reset(player2MaxHealth);
-
-        // player2Script.reset(player2MaxHealth);
+    }
+    void endRound() {
+        switch (player1HealthUI) {
+            case int i when i <= player2HealthUI:
+                player2RoundWins += 1;
+                break;
+            case int i when i == player2HealthUI:
+                print("draw");
+                break;
+            case int i when i >= player2HealthUI:
+                player1RoundWins += 1;
+                break;
+            default:
+                print("DEFAULT IS RUNNING IN ENDROUND");
+                break;
+        }
+        if (player1RoundWins >= roundWinLimit) {
+            print("player1 wins!");
+        }
+        else if (player2RoundWins >= roundWinLimit) {
+            print("player2 wins!");
+        }
+        startRound();
     }
 
     //TODO: create a UI and tie in function
@@ -37,11 +74,20 @@ public class FightScene : MonoBehaviour
         if (playerNum == 1){
             player1HealthUI = currentHealth;
             player1OldHealthUI = oldHealth;
+            // If player died, set the flag to end the current round at end of frame
+            if (currentHealth <= 0) {
+                roundInProgress = false;
+            }
+            // DONT UPDATE THE HEALTH BARS IF THE END ROUND FLAG IS TRUE!!!!
         }
         else{
             player2HealthUI = currentHealth;
             player2OldHealthUI = oldHealth;
+            if (currentHealth <= 0) {
+                roundInProgress = false;
+            }
         }
+        
 
     }
     //changeHealthBars(bool player, oldHealth, currentHealth);
@@ -73,21 +119,54 @@ public class FightScene : MonoBehaviour
         }
     }
     */
-    // Start is called before the first frame update
-    void Start()
-    {
+
+    void Start() {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+        sceneFPSOver60 = Application.targetFrameRate / 60;
         startRound();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        // Call p1 and p2 to take their actions that frame
-        // p1TakeTurn(gameFrameCounter);
-        // p2TakeTurn(gameFrameCounter);
+        if (roundInProgress) {
+            // Only run these on logical frames (60 fps)
+            if (sceneFrameCounter % sceneFPSOver60 == 0) {
+                // Call p1 and p2 to take their actions that frame
+                player1Script.doAction();
+                player2Script.doAction();
 
-        roundFrameCounter++;
+                // Decrease timer
+                if (logicFrameCounter % 60 == 0) {
+                    if (roundTimer == 0) {
+                        roundInProgress = false;
+                    }
+                    else {
+                        roundTimer -= 1;
+                    }
+                }
 
+                // If a player has died, this flag will be false
+                if (roundInProgress == false) {
+                    callRoundEnd = true;
+                }
+
+                // Increment logic frame counter by 1
+                logicFrameCounter++;
+            }
+
+            // Do these every scene frame (chosen fps)
+            sceneFrameCounter++;
+
+            // End the round if necessary
+            if (callRoundEnd == true) {
+                callRoundEnd = false;
+                endRound();
+            }
+        }
+        
+        /*
         // Testing functions
         if (Input.GetKeyDown("n")){
             player1Script.currentAction = "NHA";
@@ -133,5 +212,6 @@ public class FightScene : MonoBehaviour
                 player2Script.setPlayerPosition("neutral");
             }
         }
+        */
     }
 }
