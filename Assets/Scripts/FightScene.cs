@@ -54,6 +54,8 @@ public class FightScene : MonoBehaviour
         player1Script.reset(player1MaxHealth);
         player2Script.reset(player2MaxHealth);
         winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
+        HealthBarScript.setHealthBar(PLAYER_1, player1HealthUI); //is set to max
+        HealthBarScript.setHealthBar(PLAYER_2, player2HealthUI); //is set to max
     }
     void endRound() {
         switch (player1HealthUI) {

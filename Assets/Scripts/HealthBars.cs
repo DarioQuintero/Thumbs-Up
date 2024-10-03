@@ -14,15 +14,15 @@ public class HealthBars : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+        /* ----- FOR TESTING -----
         int PLAYER_1 = 1;
         int PLAYER_2 = 2;
         if(Input.GetKeyDown(KeyCode.Return)){
-            UpdateHealthBar(PLAYER_1, 10);
+            setHealthBar(PLAYER_1, p1HealthBar.fillAmount*100f - 10);
         }
 
         if(Input.GetKeyDown(KeyCode.Space)){
-            UpdateHealthBar(PLAYER_2, 10);
+            setHealthBar(PLAYER_2, p2HealthBar.fillAmount*100f - 10);
         }
         */
     }
