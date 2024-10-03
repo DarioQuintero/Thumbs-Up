@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Player1 : MonoBehaviour
+public class Player2 : MonoBehaviour
 {
     // Methods and variables need to be in class   
-    public Player2 player2Script;
+    public Player1 player1Script;
 
     public FightScene fightSceneScript;
 
@@ -12,14 +12,14 @@ public class Player1 : MonoBehaviour
     public int maxHealth; // Deprecate
     public int currentHealth;
     public int oldHealth; 
-    public List<int> p1Hurtbox = new List<int>{2};
-    public string p1Stance; // Position. ("backward", "neutral", "forward")
+    public List<int> p2Hurtbox = new List<int>{2};
+    public string p2Stance; // Position. ("backward", "neutral", "forward")
     public List<bool> inputHistory = new List<bool>(); 
     public string currentAction = "actionable"; 
     public int currentFrameCount = 0;
 
     public List<int> revertHurtbox() {
-        switch (p1Stance) {
+        switch (p2Stance) {
             case "backward":
                 return new List<int> {1};
                 break;
@@ -37,7 +37,7 @@ public class Player1 : MonoBehaviour
     }
 
     public bool isBlocking() {
-        if (currentAction == "acitionable" && p1Stance == "neutral") {
+        if (currentAction == "acitionable" && p2Stance == "neutral") {
             return true;
         }
         return false;
@@ -67,8 +67,8 @@ public class Player1 : MonoBehaviour
 
             //run animation for health change (oldHealth to currentHealth)
             // query fightScene
-            int PLAYER_1 = 1;
-            fightSceneScript.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
+            int PLAYER_2 = 2;
+            fightSceneScript.changeHealthBars(PLAYER_2, oldHealth, currentHealth);
             setActionAndFrame("hitstun", stunFrames);
             if (currentHealth <= 0) {
                 // fightSceneScript.gameOver(); // TODO
@@ -104,19 +104,19 @@ public class Player1 : MonoBehaviour
                 break; 
             
             case (attackStartup - 1):
-               if(hasOverlap(player2Script.p2Hurtbox, hitbox))
+               if(hasOverlap(player1Script.p1Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
-                    player2Script.getHit(damage, false, hitstun);
+                    player1Script.getHit(damage, false, hitstun);
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
             //Attacking player hurtbox extended during recovery frames
-                p1Hurtbox = extendedHurtbox;
+                p2Hurtbox = extendedHurtbox;
                 break;
             case (attackStartup + attackRecovery):
             //Attacking player hurtbox resets to previous hurtbox
-                p1Hurtbox = revertHurtbox();
+                p2Hurtbox = revertHurtbox();
                 currentAction = "actionable";
                 currentFrameCount = 0;
                 break;
@@ -146,17 +146,17 @@ public class Player1 : MonoBehaviour
                 break; 
             
             case (attackStartup - 1):
-                if(hasOverlap(player2Script.p2Hurtbox, hitbox))
+                if(hasOverlap(player1Script.p1Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
-                    player2Script.getHit(damage, false, hitstun);
+                    player1Script.getHit(damage, false, hitstun);
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
-                p1Hurtbox = extendedHurtbox;
+                p2Hurtbox = extendedHurtbox;
                 break;
             case (attackStartup + attackRecovery - 1):
-                p1Hurtbox = revertHurtbox();
+                p2Hurtbox = revertHurtbox();
                 currentAction = "actionable";
                 currentFrameCount = 0;
                 break;
@@ -185,15 +185,15 @@ public class Player1 : MonoBehaviour
             case < (attackStartup - 1):
                 break; 
             case (attackStartup -1): // -1 because currentFrameCount starts at 0
-                if(hasOverlap(hitbox, player2Script.p2Hurtbox) && player2Script.p2Stance != "forward")
+                if(hasOverlap(hitbox, player1Script.p1Hurtbox) && player1Script.p1Stance != "forward")
                 {   //Values are at the beginning of the function
-                    if (player2Script.isBlocking() == false){
-                        player2Script.getHit(damage, false, hitstun);
+                    if (player1Script.isBlocking() == false){
+                        player1Script.getHit(damage, false, hitstun);
                     }
                     else {
-                        player2Script.getHit(damage, true, blockstun);
+                        player1Script.getHit(damage, true, blockstun);
                     }
-                    p1Hurtbox = extendedHurtbox;
+                    p2Hurtbox = extendedHurtbox;
                     print("player 2 hit");
                 }
                 break;
@@ -202,7 +202,7 @@ public class Player1 : MonoBehaviour
             case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = revertHurtbox();
+                p2Hurtbox = revertHurtbox();
                 print("end recovery");
                 break;
             default:
@@ -232,15 +232,15 @@ public class Player1 : MonoBehaviour
             case < (attackStartup - 1):
                 break; 
             case (attackStartup -1): // -1 because currentFrameCount starts at 0
-                if(hasOverlap(hitbox, player2Script.p2Hurtbox))
+                if(hasOverlap(hitbox, player1Script.p1Hurtbox))
                 {   //Values are at the beginning of the function
-                    if (player2Script.isBlocking() == false){
-                        player2Script.getHit(damage, false, hitstun);
+                    if (player1Script.isBlocking() == false){
+                        player1Script.getHit(damage, false, hitstun);
                     }
                     else {
-                        player2Script.getHit(damage, true, blockstun);
+                        player1Script.getHit(damage, true, blockstun);
                     }
-                    p1Hurtbox = extendedHurtbox;
+                    p2Hurtbox = extendedHurtbox;
                     print("player 2 hit");
                 }
                 break;
@@ -249,7 +249,7 @@ public class Player1 : MonoBehaviour
             case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = revertHurtbox();
+                p2Hurtbox = revertHurtbox();
                 print("end recovery");
                 break;
             default:
@@ -278,11 +278,11 @@ public class Player1 : MonoBehaviour
             case < attackStartup - 1:
                 break;
             case attackStartup - 1:
-                if(hasOverlap(hitbox, player2Script.p2Hurtbox))
+                if(hasOverlap(hitbox, player1Script.p1Hurtbox))
                 {   
-                    player2Script.getHit(damage, player2Script.isBlocking(), hitstun);
+                    player1Script.getHit(damage, player1Script.isBlocking(), hitstun);
                     //print("player 2 hit");
-                    p1Hurtbox = extendedHurtbox;
+                    p2Hurtbox = extendedHurtbox;
                 }
                 break;
             case < attackStartup + attackRecovery - 1:
@@ -290,7 +290,7 @@ public class Player1 : MonoBehaviour
             case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = revertHurtbox();
+                p2Hurtbox = revertHurtbox();
                 //print("end recovery");
                 break;
             default:
@@ -317,11 +317,11 @@ public class Player1 : MonoBehaviour
             case < attackStartup - 1:
                 break;
             case attackStartup - 1:
-                if(hasOverlap(hitbox, player2Script.p2Hurtbox))
+                if(hasOverlap(hitbox, player1Script.p1Hurtbox))
                 {   
-                    player2Script.getHit(damage, player2Script.isBlocking(), hitstun);
+                    player1Script.getHit(damage, player1Script.isBlocking(), hitstun);
                     //print("player 2 hit");
-                    p1Hurtbox = extendedHurtbox;
+                    p2Hurtbox = extendedHurtbox;
                 }
                 break;
             case < attackStartup + attackRecovery - 1:
@@ -329,7 +329,7 @@ public class Player1 : MonoBehaviour
             case attackStartup + attackRecovery - 1:
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = revertHurtbox();
+                p2Hurtbox = revertHurtbox();
                 //print("end recovery");
                 break;
             default:
@@ -370,7 +370,7 @@ public class Player1 : MonoBehaviour
         /*
         currentHealth = maxHealth;
         p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
-        p1Hurtbox = new List<int>{2};
+        p2Hurtbox = new List<int>{2};
         p1Stance; // Position. ("backward", "neutral", "forward")
         inputHistory = new List<bool>(); 
         frame = 0; // Deprecate

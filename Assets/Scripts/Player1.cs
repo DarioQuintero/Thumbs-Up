@@ -6,6 +6,7 @@ public class Player1 : MonoBehaviour
     // Methods and variables need to be in class   
     public Player2 player2Script;
 
+    // Get FightScene's Script
     public FightScene fightSceneScript;
 
  
