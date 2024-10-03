@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour
     public static InputManager instance;
 
     public Keybindings keybindings;
-    
+    /*
     void awake() {
         if (instance == null){
             instance == this;
@@ -25,5 +25,6 @@ public class InputManager : MonoBehaviour
             return false;
         }
     }
+    */
     
 }
