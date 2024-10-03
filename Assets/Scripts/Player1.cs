@@ -454,14 +454,19 @@ public class Player1 : MonoBehaviour
             default:
                 print("Actionable");
                 // TODO: Implement a movement cooldown with adjustable frames relative to a const
+                // Use setPlayerPosition to also update stance? 
                 if (currentInput["left"] && !currentInput["right"]) {
-                    p1Stance = "backward";
+                    // p1Stance = "backward";
+                    setPlayerPosition("backward");
+                    print("back");
                 }
                 else if (currentInput["right"] && !currentInput["left"]) {
-                    p1Stance = "forward";
+                    // p1Stance = "forward";
+                    setPlayerPosition("forward");
                 }
                 else {
-                    p1Stance = "neutral";
+                    setPlayerPosition("neutral");
+                    // p1Stance = "neutral";
                 }
                 break;
         }

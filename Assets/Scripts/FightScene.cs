@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class FightScene : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class FightScene : MonoBehaviour
     // Defining player 1 and player2 scripts
     public Player1 player1Script;
     public Player2 player2Script;
+
+    public TMP_Text timerText;
 
 
     // Constants
@@ -34,6 +38,7 @@ public class FightScene : MonoBehaviour
 
     void startRound() {
         roundTimer = 99;
+        timerText.text = roundTimer.ToString();
         sceneFrameCounter = 0;
         logicFrameCounter = 0;
         roundInProgress = true;
@@ -158,13 +163,17 @@ public class FightScene : MonoBehaviour
 
             // Do these every scene frame (chosen fps)
             sceneFrameCounter++;
+            
+            timerText.text = Mathf.Max(0, roundTimer).ToString();
 
             // End the round if necessary
             if (callRoundEnd == true) {
                 callRoundEnd = false;
                 endRound();
             }
+
         }
+        
         
         /*
         // Testing functions
