@@ -15,6 +15,8 @@ public class FightScene : MonoBehaviour
 
     public WinCounters winCounterScript;
 
+    public HealthBars HealthBarScript;
+
 
     // Constants
     private const int player1MaxHealth = 100;
