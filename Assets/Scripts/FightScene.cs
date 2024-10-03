@@ -27,6 +27,8 @@ public class FightScene : MonoBehaviour
     void startRound() {
         roundTimer = 99;
         player1Script.reset(player1MaxHealth);
+        player2Script.reset(player2MaxHealth);
+
         // player2Script.reset(player2MaxHealth);
     }
 
@@ -74,7 +76,7 @@ public class FightScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        startRound();
     }
 
     // Update is called once per frame
@@ -90,21 +92,46 @@ public class FightScene : MonoBehaviour
         if (Input.GetKeyDown("n")){
             player1Script.currentAction = "NHA";
             player1Script.currentFrameCount = 0;
-
         }
         if (player1Script.currentAction == "NHA"){
             player1Script.neutralHighAttack();
-            player1Script.currentFrameCount++;
+            if (player1Script.currentAction == "NHA"){
+                player1Script.currentFrameCount++;
+            }
         }
         if (Input.GetKeyDown("f")){
             player1Script.currentAction = "FHA";
             player1Script.currentFrameCount = 0;
-
         }
         if (player1Script.currentAction == "FHA"){
             player1Script.forwardHighAttack();
-            player1Script.currentFrameCount++;
+            if (player1Script.currentAction == "FHA"){
+                player1Script.currentFrameCount++;
+            }
         }
 
+        if (player1Script.currentAction == "actionable"){
+            if (Input.GetKey("a")) {
+                player1Script.setPlayerPosition("backward");
+            }
+            else if (Input.GetKey("d")) {
+                player1Script.setPlayerPosition("forward");
+            }
+            else {
+                player1Script.setPlayerPosition("neutral");
+            }
+        }
+
+        if (player2Script.currentAction == "actionable"){
+            if (Input.GetKey("right")) {
+                player2Script.setPlayerPosition("backward");
+            }
+            else if (Input.GetKey("left")) {
+                player2Script.setPlayerPosition("forward");
+            }
+            else {
+                player2Script.setPlayerPosition("neutral");
+            }
+        }
     }
 }

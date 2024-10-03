@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Player1 : MonoBehaviour
+public class Player2 : MonoBehaviour
 {
     // Methods and variables need to be in class   
     public Player1 player1Script;
@@ -13,21 +13,41 @@ public class Player1 : MonoBehaviour
     public int currentHealth;
     public int oldHealth; 
     public List<int> p2Hurtbox = new List<int>{2};
-    public string p2Stance; // Position. ("backward", "neutral", "forward")
+    public string p2Stance; // Position ("backward", "neutral", "forward")
     public List<bool> inputHistory = new List<bool>(); 
     public string currentAction = "actionable"; 
     public int currentFrameCount = 0;
 
+    public void setPlayerPosition(string position) { // postion: ("backward", "neutral", "forward")
+        switch (position) {
+            case "backward":
+                p2Stance = "backward";
+                p2Hurtbox = new List<int>{6};
+                break;
+            case "neutral":
+                p2Stance = "neutral";
+                p2Hurtbox = new List<int>{5};
+                break;
+            case "forward":
+                p2Stance = "forward";
+                p2Hurtbox = new List<int>{4};
+                break;
+            default:
+                print("bad input for setPlayerPosition");
+                break;
+        }
+    }
+
     public List<int> revertHurtbox() {
         switch (p2Stance) {
             case "backward":
-                return new List<int> {1};
+                return new List<int> {6};
                 break;
             case "neutral":
-                return new List<int> {2};
+                return new List<int> {5};
                 break;
             case "forward":
-                return new List<int> {3};
+                return new List<int> {4};
                 break;
             default:
                 print("Revert Hurtbox Failed");
@@ -174,8 +194,8 @@ public class Player1 : MonoBehaviour
         const int hitstun = 16; // Frames opponent would be stunned on a direct hit for +3 diff
         const int attackRecovery = 12; // You need to recover from attack
 
-        List<int> hitbox = new List<int> {3, 4, 5}; // places where opponent can take damage
-        List<int> extendedHurtbox = new List<int> {2, 3, 4}; // places where you can take damage after launching attack
+        List<int> hitbox = new List<int> {2, 3, 4}; // places where opponent can take damage
+        List<int> extendedHurtbox = new List<int> {3, 4, 5}; // places where you can take damage after launching attack
 
         switch (currentFrameCount){
             case 0:
@@ -185,16 +205,16 @@ public class Player1 : MonoBehaviour
             case < (attackStartup - 1):
                 break; 
             case (attackStartup -1): // -1 because currentFrameCount starts at 0
-                if(hasOverlap(hitbox, player2Script.p2Hurtbox) && player2Script.p2Stance != "forward")
+                if(hasOverlap(hitbox, player1Script.p1Hurtbox) && player1Script.p1Stance != "forward")
                 {   //Values are at the beginning of the function
-                    if (player2Script.isBlocking() == false){
-                        player2Script.getHit(damage, false, hitstun);
+                    if (player1Script.isBlocking() == false){
+                        player1Script.getHit(damage, false, hitstun);
                     }
                     else {
-                        player2Script.getHit(damage, true, blockstun);
+                        player1Script.getHit(damage, true, blockstun);
                     }
-                    p1Hurtbox = extendedHurtbox;
-                    print("player 2 hit");
+                    p2Hurtbox = extendedHurtbox;
+                    print("player 1 hit with neutral high attack");
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
@@ -202,10 +222,10 @@ public class Player1 : MonoBehaviour
             case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = revertHurtbox();
+                p2Hurtbox = revertHurtbox();
                 print("end recovery");
                 break;
-            default:
+            default: 
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL HIGH");
                 break;
         } 
@@ -221,8 +241,8 @@ public class Player1 : MonoBehaviour
         const int hitstun = 14; // Frames opponent would be stunned on a direct hit for +3 diff
         const int attackRecovery = 10; // You need to recover from attack
 
-        List<int> hitbox = new List<int> {4, 5, 6}; // places where opponent can take damage
-        List<int> extendedHurtbox = new List<int> {3, 4, 6}; // places where you can take damage after launching attack
+        List<int> hitbox = new List<int> {1, 2, 3}; // places where opponent can take damage
+        List<int> extendedHurtbox = new List<int> {2, 3, 4}; // places where you can take damage after launching attack
 
         switch (currentFrameCount){
             case 0:
@@ -232,16 +252,16 @@ public class Player1 : MonoBehaviour
             case < (attackStartup - 1):
                 break; 
             case (attackStartup -1): // -1 because currentFrameCount starts at 0
-                if(hasOverlap(hitbox, player2Script.p2Hurtbox))
+                if(hasOverlap(hitbox, player1Script.p1Hurtbox))
                 {   //Values are at the beginning of the function
-                    if (player2Script.isBlocking() == false){
-                        player2Script.getHit(damage, false, hitstun);
+                    if (player1Script.isBlocking() == false){
+                        player1Script.getHit(damage, false, hitstun);
                     }
                     else {
-                        player2Script.getHit(damage, true, blockstun);
+                        player1Script.getHit(damage, true, blockstun);
                     }
-                    p1Hurtbox = extendedHurtbox;
-                    print("player 2 hit");
+                    p2Hurtbox = extendedHurtbox;
+                    print("player 1 hit with forward high attack");
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
@@ -249,7 +269,7 @@ public class Player1 : MonoBehaviour
             case (attackStartup + attackRecovery - 1):
                 currentAction = "actionable";
                 currentFrameCount = 0;
-                p1Hurtbox = revertHurtbox();
+                p2Hurtbox = revertHurtbox();
                 print("end recovery");
                 break;
             default:
@@ -258,7 +278,7 @@ public class Player1 : MonoBehaviour
         } 
     }
 
-
+    /*
 
     public void neutralMidAttack(){
         const int damage = 20;
@@ -337,7 +357,7 @@ public class Player1 : MonoBehaviour
                 break;
         } 
     }
-
+    */
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction() {
         switch (currentAction){
@@ -354,10 +374,10 @@ public class Player1 : MonoBehaviour
                 neutralHighAttack();
                 break;
             case "Forward Mid":
-                forwardMidAttack();
+                // forwardMidAttack();
                 break;
             case "Neutral Mid":
-                neutralMidAttack();
+                // neutralMidAttack();
                 break;
             default:
                 print("Default");
@@ -366,18 +386,17 @@ public class Player1 : MonoBehaviour
     }
     public void reset(int maxHealth) {
         // Reset properties of player
-        //Fix this
-        /*
+
         currentHealth = maxHealth;
-        p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
-        p1Hurtbox = new List<int>{2};
-        p1Stance; // Position. ("backward", "neutral", "forward")
+        // p2Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
+        p2Hurtbox = new List<int>{5};
+        p2Stance = "neutral"; // Position. ("backward", "neutral", "forward")
         inputHistory = new List<bool>(); 
-        frame = 0; // Deprecate
-        p1State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
+        // frame = 0; // Deprecate
+        // p2State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
         currentAction = "actionable";
-        actionFrameCount = 0;
-        */
+        currentFrameCount = 0;
+        
     }
     // Resets player to the start of round position. Called at the start of every round.
 

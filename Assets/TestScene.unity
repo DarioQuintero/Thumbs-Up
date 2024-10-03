@@ -242,12 +242,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5590b1792d5df4448a3e6bd7e0a732b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1Script: {fileID: 1384609264}
+  fightSceneScript: {fileID: 1820107986}
   maxHealth: 0
   currentHealth: 0
   oldHealth: 0
-  block: 0
-  p2Stance: 
   p2Hurtbox: 05000000
+  p2Stance: 
+  inputHistory: 
+  currentAction: actionable
+  currentFrameCount: 0
 --- !u!1 &1384609263
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player2Script: {fileID: 949801727}
-  maxHealth: 0
+  fightSceneScript: {fileID: 1820107986}
   currentHealth: 0
   oldHealth: 0
   p1Hurtbox: 02000000

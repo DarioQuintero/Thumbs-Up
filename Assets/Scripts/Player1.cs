@@ -7,16 +7,35 @@ public class Player1 : MonoBehaviour
     public Player2 player2Script;
 
     public FightScene fightSceneScript;
-
  
-    public int maxHealth; // Deprecate
+    // public int maxHealth; // Deprecate
     public int currentHealth;
     public int oldHealth; 
     public List<int> p1Hurtbox = new List<int>{2};
-    public string p1Stance; // Position. ("backward", "neutral", "forward")
+    public string p1Stance; // Position ("backward", "neutral", "forward")
     public List<bool> inputHistory = new List<bool>(); 
     public string currentAction = "actionable"; 
     public int currentFrameCount = 0;
+
+    public void setPlayerPosition(string position) { // postion: ("backward", "neutral", "forward")
+        switch (position) {
+            case "backward":
+                p1Stance = "backward";
+                p1Hurtbox = new List<int>{1};
+                break;
+            case "neutral":
+                p1Stance = "neutral";
+                p1Hurtbox = new List<int>{2};
+                break;
+            case "forward":
+                p1Stance = "forward";
+                p1Hurtbox = new List<int>{3};
+                break;
+            default:
+                print("bad input for setPlayerPosition");
+                break;
+        }
+    }
 
     public List<int> revertHurtbox() {
         switch (p1Stance) {
@@ -37,7 +56,7 @@ public class Player1 : MonoBehaviour
     }
 
     public bool isBlocking() {
-        if (currentAction == "acitionable" && p1Stance == "neutral") {
+        if (currentAction == "actionable" && p1Stance == "neutral") {
             return true;
         }
         return false;
@@ -194,7 +213,7 @@ public class Player1 : MonoBehaviour
                         player2Script.getHit(damage, true, blockstun);
                     }
                     p1Hurtbox = extendedHurtbox;
-                    print("player 2 hit");
+                    print("player 2 hit with neutral high attack");
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
@@ -222,7 +241,7 @@ public class Player1 : MonoBehaviour
         const int attackRecovery = 10; // You need to recover from attack
 
         List<int> hitbox = new List<int> {4, 5, 6}; // places where opponent can take damage
-        List<int> extendedHurtbox = new List<int> {3, 4, 6}; // places where you can take damage after launching attack
+        List<int> extendedHurtbox = new List<int> {3, 4, 5}; // places where you can take damage after launching attack
 
         switch (currentFrameCount){
             case 0:
@@ -241,7 +260,7 @@ public class Player1 : MonoBehaviour
                         player2Script.getHit(damage, true, blockstun);
                     }
                     p1Hurtbox = extendedHurtbox;
-                    print("player 2 hit");
+                    print("player 2 hit with forward high attack");
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
@@ -366,18 +385,17 @@ public class Player1 : MonoBehaviour
     }
     public void reset(int maxHealth) {
         // Reset properties of player
-        //Fix this
-        /*
+
         currentHealth = maxHealth;
-        p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
+        // p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
         p1Hurtbox = new List<int>{2};
-        p1Stance; // Position. ("backward", "neutral", "forward")
+        p1Stance = "neutral"; // Position. ("backward", "neutral", "forward")
         inputHistory = new List<bool>(); 
-        frame = 0; // Deprecate
-        p1State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
+        // frame = 0; // Deprecate
+        // p1State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
         currentAction = "actionable";
-        actionFrameCount = 0;
-        */
+        currentFrameCount = 0;
+        
     }
     // Resets player to the start of round position. Called at the start of every round.
 
