@@ -13,6 +13,8 @@ public class FightScene : MonoBehaviour
 
     public TMP_Text timerText;
 
+    public WinCounters winCounterScript;
+
 
     // Constants
     private const int player1MaxHealth = 100;
@@ -49,6 +51,7 @@ public class FightScene : MonoBehaviour
         player2OldHealthUI = player2MaxHealth;
         player1Script.reset(player1MaxHealth);
         player2Script.reset(player2MaxHealth);
+        winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
     }
     void endRound() {
         switch (player1HealthUI) {
@@ -71,6 +74,7 @@ public class FightScene : MonoBehaviour
         else if (player2RoundWins >= roundWinLimit) {
             print("player2 wins!");
         }
+        winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
         startRound();
     }
 
