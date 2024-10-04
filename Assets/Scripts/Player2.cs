@@ -105,6 +105,7 @@ public class Player2 : MonoBehaviour
             // query fightScene
             int PLAYER_2 = 2;
             fightSceneScript.changeHealthBars(PLAYER_2, oldHealth, currentHealth);
+            anim.SetBool("Hit",true); //Dario
             setActionAndFrame("Hitstun", stunFrames);
             if (currentHealth <= 0) {
                 // fightSceneScript.gameOver(); // TODO
@@ -508,6 +509,7 @@ public class Player2 : MonoBehaviour
                 if (currentFrameCount <= 0) {
                     currentAction = "Actionable";
                     currentFrameCount = 0;
+                    anim.SetBool("Hit",false); //Dario
                 }
                 break;
             default:
