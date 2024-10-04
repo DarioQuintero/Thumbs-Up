@@ -501,6 +501,7 @@ public class Player2 : MonoBehaviour
                 if (currentFrameCount <= 0) {
                     currentAction = "Actionable";
                     currentFrameCount = 0;
+                    anim.SetBool("Hit",false); //Dario
                 }
                 break;
             case "Blockstun":
@@ -509,7 +510,6 @@ public class Player2 : MonoBehaviour
                 if (currentFrameCount <= 0) {
                     currentAction = "Actionable";
                     currentFrameCount = 0;
-                    anim.SetBool("Hit",false); //Dario
                 }
                 break;
             default:
