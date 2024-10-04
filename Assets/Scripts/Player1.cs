@@ -11,6 +11,7 @@ public class Player1 : MonoBehaviour
     // Get FightScene's Script
     public FightScene fightSceneScript;
  
+    public P1Animations p1AnimationsScript;
     // public int maxHealth; // Deprecate
     public int currentHealth;
     public int oldHealth; 
@@ -114,6 +115,7 @@ public class Player1 : MonoBehaviour
     }
     
     private void forwardThrowAttack() {
+        print("IN FORWARD THROW");
         const int attackStartup = 15;
         const int damage = 50;
         const int hitstun = 45+1; //since it is a +0 move on hit, then this would be same as recovery + 1
@@ -151,11 +153,13 @@ public class Player1 : MonoBehaviour
             default:
                 print("DEFAULT CASE IS RUNNING IN FORWARD THROW");
                 break;
-        } 
+        }
+        currentFrameCount = currentFrameCount + 1;
     }
 
     public void neutralThrowAttack() 
     {
+        print("IN NEUTRAL THROW");
         const int attackStartup = 15;
         const int damage = 30;
         const int hitstun = 20+1; //same as recovery, as it is +0 on hit  + 1
@@ -170,10 +174,14 @@ public class Player1 : MonoBehaviour
             case 0:
                 // playAttackAnim();
                 break;
+                print("CASE 0");
             case < (attackStartup - 1):
                 break; 
-            
+
+                print("CASE 1");
             case (attackStartup - 1):
+
+                print("CASE 2");
                 if(hasOverlap(player2Script.p2Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
@@ -181,9 +189,11 @@ public class Player1 : MonoBehaviour
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
+                print("CASE 3");
                 p1Hurtbox = extendedHurtbox;
                 break;
             case (attackStartup + attackRecovery - 1):
+                print("CASE 4");
                 p1Hurtbox = revertHurtbox();
                 currentAction = "Actionable";
                 currentFrameCount = 0;
@@ -191,10 +201,13 @@ public class Player1 : MonoBehaviour
             default:
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
                 break;
-        } 
+        }
+        currentFrameCount = currentFrameCount + 1;
+   
     }
 
     public void neutralHighAttack() {
+        print("IN NEUTRAL HIGH");
         const int damage = 10;
 
         const int attackStartup = 10; // Charging frames
@@ -236,10 +249,12 @@ public class Player1 : MonoBehaviour
             default:
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL HIGH");
                 break;
-        } 
+        }
+        currentFrameCount = currentFrameCount + 1;
     }
 
     public void forwardHighAttack() {
+        print("IN FORWARD HIGH");
         const int damage = 10;
 
         const int attackStartup = 12; // Charging frames
@@ -281,12 +296,14 @@ public class Player1 : MonoBehaviour
             default:
                 print("DEFAULT CASE IS RUNNING IN FORWARD HIGH");
                 break;
-        } 
+        }
+        currentFrameCount = currentFrameCount + 1;
     }
 
 
 
     public void neutralMidAttack(){
+        print("IN NEUTRAL MID");
         const int damage = 20;
         const int attackStartup = 10;
         const int blockstun = 8; // Don't know yet
@@ -298,12 +315,15 @@ public class Player1 : MonoBehaviour
 
         switch (currentFrameCount){
             case 0:
+                print("CASE 0");
                 // playAttackAnim();
                 //print("start attack");
                 break;
             case < attackStartup - 1:
+                print("CASE 1");
                 break;
             case attackStartup - 1:
+                print("CASE 2");
                 if(hasOverlap(hitbox, player2Script.p2Hurtbox))
                 {   
                     player2Script.getHit(damage, player2Script.isBlocking(), hitstun);
@@ -312,8 +332,10 @@ public class Player1 : MonoBehaviour
                 }
                 break;
             case < attackStartup + attackRecovery - 1:
+                print("CASE 3");
                 break;
             case (attackStartup + attackRecovery - 1):
+                print("CASE 4");
                 currentAction = "Actionable";
                 currentFrameCount = 0;
                 p1Hurtbox = revertHurtbox();
@@ -323,9 +345,12 @@ public class Player1 : MonoBehaviour
                 print("Default running");
                 break;
         } 
+        print("UPDATING FRAME COUNT ----------UUUUUUU------");
+        currentFrameCount = currentFrameCount + 1;
     }
 
     private void forwardMidAttack(){
+        print("IN FORWARD MID");
         const int damage = 20;
         const int attackStartup = 16;
         const int blockstun = 14; // // How does this work?? +3 block
@@ -361,10 +386,12 @@ public class Player1 : MonoBehaviour
             default:
                 print("Default running");
                 break;
-        } 
+        }
+        currentFrameCount = currentFrameCount + 1;
     }
 
     void updateInputs() {
+        print("IN UPDATE INPUTS--------------");
         // TODO: Save old input dict in input history to be read later
         currentInput = new Dictionary<string, bool>() {
             {"high", inputManager.KeyDown("p1High")},
@@ -379,6 +406,7 @@ public class Player1 : MonoBehaviour
     }
 
     string inputsToActions() {
+        print("IN INPUTSTOACTION ----IIIIII-------");
         int inputsAsBinary = boolToInt(currentInput["high"]) * 8 + boolToInt(currentInput["mid"]) * 4
                            + boolToInt(currentInput["left"]) * 2 + boolToInt(currentInput["right"]) * 1;
         switch (inputsAsBinary) {
@@ -406,14 +434,17 @@ public class Player1 : MonoBehaviour
     }
 
     void queueAction() {
+        print("IN QUEUE ACTION ----QQQQQQQ-------");
         // TODO: Implement an action queue and pop it
         if (currentAction == "Actionable") {
+            print("WE ARE ACTIONABLE------AAAAAAA-------");
             currentAction = inputsToActions();
         }
     }
 
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction() {
+        print("IN DO ACTION_________________");
         updateInputs();
         queueAction();
         switch (currentAction){

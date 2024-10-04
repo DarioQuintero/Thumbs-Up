@@ -8,6 +8,7 @@ public class Player2 : MonoBehaviour
 
     public FightScene fightSceneScript;
 
+    public P2Animations p2AnimationsScript;
  
     public int maxHealth; // Deprecate
     public int currentHealth;
@@ -143,7 +144,8 @@ public class Player2 : MonoBehaviour
             default:
                 print("DEFAULT CASE IS RUNNING IN FORWARD THROW");
                 break;
-        } 
+        }
+        currentFrameCount = currentFrameCount + 1;
     }
 
     public void neutralThrowAttack() 
@@ -183,7 +185,8 @@ public class Player2 : MonoBehaviour
             default:
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
                 break;
-        } 
+        }
+        currentFrameCount = currentFrameCount + 1;
     }
 
     public void neutralHighAttack() {
@@ -228,7 +231,8 @@ public class Player2 : MonoBehaviour
             default: 
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL HIGH");
                 break;
-        } 
+        }
+        currentFrameCount = currentFrameCount + 1;
     }
     
     // TODO: forwardHighAttack()
@@ -275,7 +279,8 @@ public class Player2 : MonoBehaviour
             default:
                 print("DEFAULT CASE IS RUNNING IN FORWARD HIGH");
                 break;
-        } 
+        }
+        currentFrameCount = currentFrameCount + 1;
     }
 
     /*
