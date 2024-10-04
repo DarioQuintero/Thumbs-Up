@@ -21,8 +21,8 @@ public class Player1 : MonoBehaviour
     public Dictionary<string, bool> currentInput = new Dictionary<string, bool>() {
         {"high", false},
         {"mid", false},
-        {"left", false},
-        {"right", false}
+        {"forward", false},
+        {"backward", false}
     };
     public string currentAction = "Actionable"; 
     public int currentFrameCount = 0;
@@ -395,8 +395,8 @@ public class Player1 : MonoBehaviour
         currentInput = new Dictionary<string, bool>() {
             {"high", inputManager.KeyDown("p1High")},
             {"mid", inputManager.KeyDown("p1Mid")},
-            {"left", inputManager.KeyDown("p1Left")},
-            {"right", inputManager.KeyDown("p1Right")}
+            {"forward", inputManager.KeyDown("p1Forward")},
+            {"backward", inputManager.KeyDown("p1Backward")}
         };
     }
 
@@ -407,7 +407,7 @@ public class Player1 : MonoBehaviour
     string inputsToActions() {
         //print("IN INPUTSTOACTION ----IIIIII-------");
         int inputsAsBinary = boolToInt(currentInput["high"]) * 8 + boolToInt(currentInput["mid"]) * 4
-                           + boolToInt(currentInput["left"]) * 2 + boolToInt(currentInput["right"]) * 1;
+                           + boolToInt(currentInput["backward"]) * 2 + boolToInt(currentInput["forward"]) * 1;
         switch (inputsAsBinary) {
             case 4:
                 return "Neutral Mid";
@@ -486,11 +486,11 @@ public class Player1 : MonoBehaviour
                 print("Actionable");
                 // TODO: Implement a movement cooldown with adjustable frames relative to a const
                 // Use setPlayerPosition to also update stance? 
-                if (currentInput["left"] && !currentInput["right"]) {
+                if (currentInput["backward"] && !currentInput["forward"]) {
                     // p1Stance = "backward";
                     setPlayerPosition("backward");
                 }
-                else if (currentInput["right"] && !currentInput["left"]) {
+                else if (currentInput["forward"] && !currentInput["backward"]) {
                     // p1Stance = "forward";
                     setPlayerPosition("forward");
                 }

@@ -21,8 +21,8 @@ public class Player2 : MonoBehaviour
     public Dictionary<string, bool> currentInput = new Dictionary<string, bool>() {
         {"high", false},
         {"mid", false},
-        {"left", false},
-        {"right", false}
+        {"forward", false},
+        {"backward", false}
     };
     public string currentAction = "Actionable"; 
     public int currentFrameCount = 0;
@@ -165,7 +165,7 @@ public class Player2 : MonoBehaviour
         const int hitstun = 20+1; //same as recovery, as it is +0 on hit  + 1
         //int anim; //TODO: would need to change the type of this
         const int attackRecovery = 20;
-        List<int> hitbox = new List<int>{3}; //only hits neutral position of opponent, would this be 2?
+        List<int> hitbox = new List<int>{2}; //only hits neutral position of opponent - yes this is 2
         List<int> extendedHurtbox = new List<int> {2, 3, 4, 5}; //TODO: ask if this is how to do the extension
         //play attack animation
         switch (currentFrameCount)
@@ -387,8 +387,8 @@ public class Player2 : MonoBehaviour
         currentInput = new Dictionary<string, bool>() {
             {"high", inputManager.KeyDown("p2High")},
             {"mid", inputManager.KeyDown("p2Mid")},
-            {"left", inputManager.KeyDown("p2Left")},
-            {"right", inputManager.KeyDown("p2Right")}
+            {"forward", inputManager.KeyDown("p2Forward")},
+            {"backward", inputManager.KeyDown("p2Backward")}
         };
     }
 
@@ -399,7 +399,7 @@ public class Player2 : MonoBehaviour
     string inputsToActions() {
         //print("IN INPUTSTOACTION ----IIIIII-------");
         int inputsAsBinary = boolToInt(currentInput["high"]) * 8 + boolToInt(currentInput["mid"]) * 4
-                           + boolToInt(currentInput["left"]) * 2 + boolToInt(currentInput["right"]) * 1;
+                           + boolToInt(currentInput["backward"]) * 2 + boolToInt(currentInput["forward"]) * 1;
         switch (inputsAsBinary) {
             case 4:
                 return "Neutral Mid";
@@ -478,11 +478,11 @@ public class Player2 : MonoBehaviour
                 print("Actionable");
                 // TODO: Implement a movement cooldown with adjustable frames relative to a const
                 // Use setPlayerPosition to also update stance? 
-                if (currentInput["left"] && !currentInput["right"]) {
+                if (currentInput["forward"] && !currentInput["backward"]) {
                     // p2Stance = "forward";
                     setPlayerPosition("forward");
                 }
-                else if (currentInput["right"] && !currentInput["left"]) {
+                else if (currentInput["backward"] && !currentInput["forward"]) {
                     // p2Stance = "backward";
                     setPlayerPosition("backward");
                 }
