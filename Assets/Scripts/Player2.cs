@@ -107,6 +107,7 @@ public class Player2 : MonoBehaviour
     }
     
     private void forwardThrowAttack() {
+        print("P2 IN FORWARD THROW");
         const int attackStartup = 15;
         const int damage = 50;
         const int hitstun = 45+1; //since it is a +0 move on hit, then this would be same as recovery + 1
@@ -150,6 +151,7 @@ public class Player2 : MonoBehaviour
 
     public void neutralThrowAttack() 
     {
+        print("P2 IN NEUTRAL THROW");
         const int attackStartup = 15;
         const int damage = 30;
         const int hitstun = 20+1; //same as recovery, as it is +0 on hit  + 1
@@ -190,6 +192,7 @@ public class Player2 : MonoBehaviour
     }
 
     public void neutralHighAttack() {
+        print("P2 IN NEUTRAL HIGH");
         const int damage = 10;
 
         const int attackStartup = 10; // Charging frames
@@ -238,6 +241,7 @@ public class Player2 : MonoBehaviour
     // TODO: forwardHighAttack()
 
     public void forwardHighAttack() {
+        print("P2 IN FORWARD HIGH");
         const int damage = 10;
 
         const int attackStartup = 12; // Charging frames
@@ -365,6 +369,7 @@ public class Player2 : MonoBehaviour
     */
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction() {
+        print("-----------P2-"+p2Stance+"--------------");
         switch (currentAction){
             case "Forward Throw":
                 forwardThrowAttack();
