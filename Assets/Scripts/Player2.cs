@@ -6,17 +6,25 @@ public class Player2 : MonoBehaviour
     // Methods and variables need to be in class   
     public Player1 player1Script;
 
+    public InputManager inputManager;
+
+
     public FightScene fightSceneScript;
 
     public P2Animations p2AnimationsScript;
  
-    public int maxHealth; // Deprecate
     public int currentHealth;
     public int oldHealth; 
     public List<int> p2Hurtbox = new List<int>{2};
     public string p2Stance; // Position. ("backward", "neutral", "forward")
     public List<bool> inputHistory = new List<bool>(); 
-    public string currentAction = "actionable"; 
+    public Dictionary<string, bool> currentInput = new Dictionary<string, bool>() {
+        {"high", false},
+        {"mid", false},
+        {"left", false},
+        {"right", false}
+    };
+    public string currentAction = "Actionable"; 
     public int currentFrameCount = 0;
     
     public void setPlayerPosition(string position) { // postion: ("backward", "neutral", "forward")
@@ -58,7 +66,7 @@ public class Player2 : MonoBehaviour
     }
 
     public bool isBlocking() {
-        if (currentAction == "actionable" && p2Stance == "neutral") {
+        if (currentAction == "Actionable" && p2Stance == "neutral") {
             return true;
         }
         return false;
@@ -77,7 +85,7 @@ public class Player2 : MonoBehaviour
         
         // Action was blocked -> blockstun
         if (wasBlocked){
-            setActionAndFrame("blockstun", stunFrames);
+            setActionAndFrame("Blockstun", stunFrames);
         }
         //Action was not blocked -> hitstun
         else{
@@ -90,7 +98,7 @@ public class Player2 : MonoBehaviour
             // query fightScene
             int PLAYER_2 = 2;
             fightSceneScript.changeHealthBars(PLAYER_2, oldHealth, currentHealth);
-            setActionAndFrame("hitstun", stunFrames);
+            setActionAndFrame("Hitstun", stunFrames);
             if (currentHealth <= 0) {
                 // fightSceneScript.gameOver(); // TODO
             }
@@ -139,7 +147,7 @@ public class Player2 : MonoBehaviour
             case (attackStartup + attackRecovery):
             //Attacking player hurtbox resets to previous hurtbox
                 p2Hurtbox = revertHurtbox();
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 break;
             default:
@@ -181,7 +189,7 @@ public class Player2 : MonoBehaviour
                 break;
             case (attackStartup + attackRecovery - 1):
                 p2Hurtbox = revertHurtbox();
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 break;
             default:
@@ -226,7 +234,7 @@ public class Player2 : MonoBehaviour
             case < (attackStartup + attackRecovery - 1):
                 break; 
             case (attackStartup + attackRecovery - 1):
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 p2Hurtbox = revertHurtbox();
                 print("end recovery");
@@ -275,7 +283,7 @@ public class Player2 : MonoBehaviour
             case < (attackStartup + attackRecovery - 1):
                 break; 
             case (attackStartup + attackRecovery - 1):
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 p2Hurtbox = revertHurtbox();
                 print("end recovery");
@@ -287,9 +295,8 @@ public class Player2 : MonoBehaviour
         currentFrameCount = currentFrameCount + 1;
     }
 
-    /*
-
     public void neutralMidAttack(){
+        print("P2 IN NEUTRAL MID");
         const int damage = 20;
         const int attackStartup = 10;
         const int blockstun = 8; // Don't know yet
@@ -297,16 +304,19 @@ public class Player2 : MonoBehaviour
         const int attackRecovery = 12;
 
         List<int> hitbox = new List<int> {3,4}; // places where opponent can take damage
-        List<int> extendedHurtbox = new List<int> {2,3,4};
+        List<int> extendedHurtbox = new List<int> {4,5};
 
         switch (currentFrameCount){
             case 0:
+                print("CASE 0");
                 // playAttackAnim();
                 //print("start attack");
                 break;
             case < attackStartup - 1:
+                print("CASE 1");
                 break;
             case attackStartup - 1:
+                print("CASE 2");
                 if(hasOverlap(hitbox, player1Script.p1Hurtbox))
                 {   
                     player1Script.getHit(damage, player1Script.isBlocking(), hitstun);
@@ -315,9 +325,11 @@ public class Player2 : MonoBehaviour
                 }
                 break;
             case < attackStartup + attackRecovery - 1:
+                print("CASE 3");
                 break;
             case (attackStartup + attackRecovery - 1):
-                currentAction = "actionable";
+                print("CASE 4");
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 p2Hurtbox = revertHurtbox();
                 //print("end recovery");
@@ -326,17 +338,19 @@ public class Player2 : MonoBehaviour
                 print("Default running");
                 break;
         } 
+        currentFrameCount = currentFrameCount + 1;
     }
 
     private void forwardMidAttack(){
+        print("P1 IN FORWARD MID");
         const int damage = 20;
         const int attackStartup = 16;
         const int blockstun = 14; // // How does this work?? +3 block
         const int hitstun = 18;
         const int attackRecovery = 24;
 
-        List<int> hitbox = new List<int> {3,4,5}; // places where opponent can take damage
-        List<int> extendedHurtbox = new List<int> {2,3,4};
+        List<int> hitbox = new List<int> {2,3}; // places where opponent can take damage
+        List<int> extendedHurtbox = new List<int> {3,4};
 
         switch (currentFrameCount){
             case 0:
@@ -349,14 +363,14 @@ public class Player2 : MonoBehaviour
                 if(hasOverlap(hitbox, player1Script.p1Hurtbox))
                 {   
                     player1Script.getHit(damage, player1Script.isBlocking(), hitstun);
-                    //print("player 2 hit");
+                    //print("player 1 hit");
                     p2Hurtbox = extendedHurtbox;
                 }
                 break;
             case < attackStartup + attackRecovery - 1:
                 break;
             case attackStartup + attackRecovery - 1:
-                currentAction = "actionable";
+                currentAction = "Actionable";
                 currentFrameCount = 0;
                 p2Hurtbox = revertHurtbox();
                 //print("end recovery");
@@ -364,12 +378,67 @@ public class Player2 : MonoBehaviour
             default:
                 print("Default running");
                 break;
-        } 
+        }
+        currentFrameCount = currentFrameCount + 1;
     }
-    */
+   void updateInputs() {
+        //print("IN UPDATE INPUTS--------------");
+        // TODO: Save old input dict in input history to be read later
+        currentInput = new Dictionary<string, bool>() {
+            {"high", inputManager.KeyDown("p2High")},
+            {"mid", inputManager.KeyDown("p2Mid")},
+            {"left", inputManager.KeyDown("p2Left")},
+            {"right", inputManager.KeyDown("p2Right")}
+        };
+    }
+
+    int boolToInt(bool myBool) {
+        return myBool ? 1 : 0;
+    }
+
+    string inputsToActions() {
+        //print("IN INPUTSTOACTION ----IIIIII-------");
+        int inputsAsBinary = boolToInt(currentInput["high"]) * 8 + boolToInt(currentInput["mid"]) * 4
+                           + boolToInt(currentInput["left"]) * 2 + boolToInt(currentInput["right"]) * 1;
+        switch (inputsAsBinary) {
+            case 4:
+                return "Neutral Mid";
+            case 5:
+                return "Forward Mid";
+            case 7:
+                return "Neutral Mid";
+            case 8:
+                return "Neutral High";
+            case 9:
+                return "Forward High";
+            case 11:
+                return "Neutral High";
+            case 12:
+                return "Neutral Throw";
+            case 13:
+                return "Forward Throw";
+            case 15:
+                return "Neutral Throw";
+            default:
+                return "Actionable";
+        }
+    }
+
+    void queueAction() {
+        //print("IN QUEUE ACTION ----QQQQQQQ-------");
+        // TODO: Implement an action queue and pop it
+        if (currentAction == "Actionable") {
+            //print("WE ARE ACTIONABLE------AAAAAAA-------");
+            currentAction = inputsToActions();
+        }
+    }
+
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction() {
+        //print("IN DO ACTION_________________");
         print("-----------P2-"+p2Stance+"--------------");
+        updateInputs();
+        queueAction();
         switch (currentAction){
             case "Forward Throw":
                 forwardThrowAttack();
@@ -384,13 +453,43 @@ public class Player2 : MonoBehaviour
                 neutralHighAttack();
                 break;
             case "Forward Mid":
-                // forwardMidAttack();
+                forwardMidAttack();
                 break;
             case "Neutral Mid":
-                // neutralMidAttack();
+                neutralMidAttack();
+                break;
+            case "Hitstun":
+                p2Stance = "neutral"; // Subject to change
+                currentFrameCount -= 1;
+                if (currentFrameCount <= 0) {
+                    currentAction = "Actionable";
+                    currentFrameCount = 0;
+                }
+                break;
+            case "Blockstun":
+                p2Stance = "neutral"; // Subject to change
+                currentFrameCount -= 1;
+                if (currentFrameCount <= 0) {
+                    currentAction = "Actionable";
+                    currentFrameCount = 0;
+                }
                 break;
             default:
-                print("Default");
+                print("Actionable");
+                // TODO: Implement a movement cooldown with adjustable frames relative to a const
+                // Use setPlayerPosition to also update stance? 
+                if (currentInput["left"] && !currentInput["right"]) {
+                    // p2Stance = "forward";
+                    setPlayerPosition("forward");
+                }
+                else if (currentInput["right"] && !currentInput["left"]) {
+                    // p2Stance = "backward";
+                    setPlayerPosition("backward");
+                }
+                else {
+                    setPlayerPosition("neutral");
+                    // p2Stance = "neutral";
+                }
                 break;
         }
     }
@@ -398,23 +497,16 @@ public class Player2 : MonoBehaviour
         // Reset properties of player
 
         currentHealth = maxHealth;
-        // p2Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
+        // p1Pos = new List<int>{1,2,3,4,5,6}; // Deprecate
         p2Hurtbox = new List<int>{5};
         p2Stance = "neutral"; // Position. ("backward", "neutral", "forward")
         inputHistory = new List<bool>(); 
         // frame = 0; // Deprecate
-        // p2State = "actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "actionable")
-        currentAction = "actionable";
+        // p1State = "Actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "Actionable")
+        currentAction = "Actionable";
         currentFrameCount = 0;
         
     }
-    // Resets player to the start of round position. Called at the start of every round.
-
-    // Do action for that frame. Called by FightScene every frame during a round.
-    
-
-    // Deprecate
-    // Update is called once per frame
     
 
 }

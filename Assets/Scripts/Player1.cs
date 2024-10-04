@@ -85,7 +85,7 @@ public class Player1 : MonoBehaviour
         
         // Action was blocked -> blockstun
         if (wasBlocked){
-            setActionAndFrame("blockstun", stunFrames);
+            setActionAndFrame("Blockstun", stunFrames);
         }
         //Action was not blocked -> hitstun
         else{
@@ -98,7 +98,7 @@ public class Player1 : MonoBehaviour
             // query fightScene
             int PLAYER_1 = 1;
             fightSceneScript.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
-            setActionAndFrame("hitstun", stunFrames);
+            setActionAndFrame("Hitstun", stunFrames);
             if (currentHealth <= 0) {
                 // fightSceneScript.gameOver(); // TODO
             }
@@ -311,7 +311,7 @@ public class Player1 : MonoBehaviour
         const int attackRecovery = 12;
 
         List<int> hitbox = new List<int> {3,4}; // places where opponent can take damage
-        List<int> extendedHurtbox = new List<int> {2,3,4};
+        List<int> extendedHurtbox = new List<int> {2,3};
 
         switch (currentFrameCount){
             case 0:
@@ -356,8 +356,8 @@ public class Player1 : MonoBehaviour
         const int hitstun = 18;
         const int attackRecovery = 24;
 
-        List<int> hitbox = new List<int> {3,4,5}; // places where opponent can take damage
-        List<int> extendedHurtbox = new List<int> {2,3,4};
+        List<int> hitbox = new List<int> {4,5}; // places where opponent can take damage
+        List<int> extendedHurtbox = new List<int> {3,4};
 
         switch (currentFrameCount){
             case 0:
@@ -489,7 +489,6 @@ public class Player1 : MonoBehaviour
                 if (currentInput["left"] && !currentInput["right"]) {
                     // p1Stance = "backward";
                     setPlayerPosition("backward");
-                    print("back");
                 }
                 else if (currentInput["right"] && !currentInput["left"]) {
                     // p1Stance = "forward";
