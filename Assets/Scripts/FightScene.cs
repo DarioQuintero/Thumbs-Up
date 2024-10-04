@@ -23,7 +23,7 @@ public class FightScene : MonoBehaviour
     private const int player2MaxHealth = 100; 
     private const int PLAYER_1 = 1;
     private const int PLAYER_2 = 2;
-    private const int roundWinLimit = 2; // How many round wins necessary to win the game 
+    private const int roundWinLimit = 3; // How many round wins necessary to win the game 
 
     // Changing values
     public int sceneFrameCounter = 0; // The current number of game fps frames elapsed since round start
@@ -74,9 +74,13 @@ public class FightScene : MonoBehaviour
         }
         if (player1RoundWins >= roundWinLimit) {
             print("player1 wins!");
+            player1RoundWins = 0;
+            player2RoundWins = 0;
         }
         else if (player2RoundWins >= roundWinLimit) {
             print("player2 wins!");
+            player1RoundWins = 0;
+            player2RoundWins = 0;
         }
         winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
         startRound();
