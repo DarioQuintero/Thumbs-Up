@@ -12,6 +12,7 @@ public class FightScene : MonoBehaviour
     public Player2 player2Script;
 
     public TMP_Text timerText;
+    public TMP_Text fullscreenText;
 
     public WinCounters winCounterScript;
 
@@ -42,6 +43,7 @@ public class FightScene : MonoBehaviour
 
     void startRound() {
         roundTimer = 99;
+        fullscreenText.text = "";
         timerText.text = roundTimer.ToString();
         sceneFrameCounter = 0;
         logicFrameCounter = 0;
@@ -74,11 +76,15 @@ public class FightScene : MonoBehaviour
         }
         if (player1RoundWins >= roundWinLimit) {
             print("player1 wins!");
+            fullscreenText.text = "Player 1 Wins!";
+            //waitTime(2);
             player1RoundWins = 0;
             player2RoundWins = 0;
         }
         else if (player2RoundWins >= roundWinLimit) {
             print("player2 wins!");
+            fullscreenText.text = "Player 2 Wins!";
+            //waitTime(2);
             player1RoundWins = 0;
             player2RoundWins = 0;
         }

@@ -108,6 +108,7 @@ public class Player2 : MonoBehaviour
             setActionAndFrame("Hitstun", stunFrames);
             if (currentHealth <= 0) {
                 // fightSceneScript.gameOver(); // TODO
+                anim.SetBool("Hit", false);
             }
         }
     }
