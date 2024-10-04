@@ -131,7 +131,8 @@ public class Player2 : MonoBehaviour
         List<int> hitbox = new List<int> {3}; //only hits forward position
         List<int> extendedHurtbox = new List<int> {1, 2, 3, 4};
 
-        //play attack animation
+        //play attack animation 
+
         switch (currentFrameCount){
             //state[1] should be how many frames into the action the player is
             case 0:
@@ -156,7 +157,7 @@ public class Player2 : MonoBehaviour
             //Attacking player hurtbox resets to previous hurtbox
                 p2Hurtbox = revertHurtbox();
                 currentAction = "Actionable";
-                currentFrameCount = 0;
+                currentFrameCount = 0;;
                 break;
             default:
                 print("DEFAULT CASE IS RUNNING IN FORWARD THROW");
@@ -179,8 +180,8 @@ public class Player2 : MonoBehaviour
         List<int> hitbox = new List<int>{2}; //only hits neutral position of opponent - yes this is 2
         List<int> extendedHurtbox = new List<int> {2, 3, 4, 5}; //TODO: ask if this is how to do the extension
         //play attack animation
-        switch (currentFrameCount)
-        {
+
+        switch (currentFrameCount){
             //state[1] should be how many frames into the action the player is
             case 0:
                 anim.SetTrigger("Throw"); //Dario
@@ -202,7 +203,7 @@ public class Player2 : MonoBehaviour
             case (attackStartup + attackRecovery - 1):
                 p2Hurtbox = revertHurtbox();
                 currentAction = "Actionable";
-                currentFrameCount = 0;
+                currentFrameCount = 0;;
                 break;
             default:
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
@@ -225,6 +226,7 @@ public class Player2 : MonoBehaviour
 
         List<int> hitbox = new List<int> {2, 3, 4}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {3, 4, 5}; // places where you can take damage after launching attack
+
 
         switch (currentFrameCount){
             case 0:
@@ -251,7 +253,7 @@ public class Player2 : MonoBehaviour
                 break; 
             case (attackStartup + attackRecovery - 1):
                 currentAction = "Actionable";
-                currentFrameCount = 0;
+                currentFrameCount = 0;;
                 p2Hurtbox = revertHurtbox();
                 print("end recovery");
                 break;
@@ -279,6 +281,7 @@ public class Player2 : MonoBehaviour
         List<int> hitbox = new List<int> {1, 2, 3}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {2, 3, 4}; // places where you can take damage after launching attack
 
+
         switch (currentFrameCount){
             case 0:
                 anim.SetTrigger("High"); //Dario
@@ -304,7 +307,7 @@ public class Player2 : MonoBehaviour
                 break; 
             case (attackStartup + attackRecovery - 1):
                 currentAction = "Actionable";
-                currentFrameCount = 0;
+                currentFrameCount = 0;;
                 p2Hurtbox = revertHurtbox();
                 print("end recovery");
                 break;
@@ -328,6 +331,7 @@ public class Player2 : MonoBehaviour
 
         List<int> hitbox = new List<int> {3,4}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {4,5};
+
 
         switch (currentFrameCount){
             case 0:
@@ -354,7 +358,7 @@ public class Player2 : MonoBehaviour
             case (attackStartup + attackRecovery - 1):
                 print("CASE 4");
                 currentAction = "Actionable";
-                currentFrameCount = 0;
+                currentFrameCount = 0;;
                 p2Hurtbox = revertHurtbox();
                 //print("end recovery");
                 break;
@@ -379,6 +383,7 @@ public class Player2 : MonoBehaviour
         List<int> hitbox = new List<int> {2,3}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {3,4};
 
+
         switch (currentFrameCount){
             case 0:
                 anim.SetTrigger("Mid"); //Dario
@@ -399,7 +404,7 @@ public class Player2 : MonoBehaviour
                 break;
             case attackStartup + attackRecovery - 1:
                 currentAction = "Actionable";
-                currentFrameCount = 0;
+                currentFrameCount = 0;;
                 p2Hurtbox = revertHurtbox();
                 //print("end recovery");
                 break;

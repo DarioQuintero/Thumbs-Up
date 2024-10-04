@@ -129,7 +129,6 @@ public class Player1 : MonoBehaviour
         const int attackRecovery = 45;
         List<int> hitbox = new List<int> {4}; //only hits forward position
         List<int> extendedHurtbox = new List<int> {3, 4, 5, 6};
-
         //play attack animation
         switch (currentFrameCount){
             //state[1] should be how many frames into the action the player is
@@ -177,7 +176,7 @@ public class Player1 : MonoBehaviour
         const int attackRecovery = 20;
         List<int> hitbox = new List<int>{5}; //only hits neutral position of opponent, would this be 2?
         List<int> extendedHurtbox = new List<int> {2, 3, 4, 5}; //TODO: ask if this is how to do the extension
-        //play attack animation
+
         switch (currentFrameCount)
         {
             //state[1] should be how many frames into the action the player is
@@ -283,6 +282,7 @@ public class Player1 : MonoBehaviour
         List<int> hitbox = new List<int> {4, 5, 6}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {3, 4, 5}; // places where you can take damage after launching attack
 
+
         switch (currentFrameCount){
             case 0:
                 anim.SetTrigger("High"); //Dario
@@ -335,6 +335,7 @@ public class Player1 : MonoBehaviour
         List<int> hitbox = new List<int> {3,4}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {2,3};
 
+
         switch (currentFrameCount){
             case 0:
                 print("CASE 0");
@@ -385,6 +386,7 @@ public class Player1 : MonoBehaviour
         List<int> hitbox = new List<int> {4,5}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {3,4};
 
+
         switch (currentFrameCount){
             case 0:
                 anim.SetTrigger("Mid"); //Dario
@@ -407,7 +409,7 @@ public class Player1 : MonoBehaviour
                 break;
             case attackStartup + attackRecovery - 1:
                 currentAction = "Actionable";
-                currentFrameCount = 0;
+                currentFrameCount = 0; 
                 p1Hurtbox = revertHurtbox();
                 //print("end recovery");
                 break;
