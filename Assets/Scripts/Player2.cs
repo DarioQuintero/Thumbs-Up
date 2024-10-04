@@ -136,6 +136,7 @@ public class Player2 : MonoBehaviour
             //state[1] should be how many frames into the action the player is
             case 0:
                 anim.SetTrigger("Throw"); //Dario
+                currentFrameCount++; // Delete this after changing current frame count to index from 1
                 break;
             case < (attackStartup - 1):
                 break; 
@@ -161,7 +162,10 @@ public class Player2 : MonoBehaviour
                 print("DEFAULT CASE IS RUNNING IN FORWARD THROW");
                 break;
         }
-        currentFrameCount = currentFrameCount + 1;
+        //Delete this after changing current frame count to index from 1
+        if (currentFrameCount != 0) {
+            currentFrameCount = currentFrameCount + 1;
+        }
     }
 
     public void neutralThrowAttack() 
@@ -180,6 +184,7 @@ public class Player2 : MonoBehaviour
             //state[1] should be how many frames into the action the player is
             case 0:
                 anim.SetTrigger("Throw"); //Dario
+                currentFrameCount++; // Delete this after changing current frame count to index from 1
                 break;
             case < (attackStartup - 1):
                 break; 
@@ -203,7 +208,10 @@ public class Player2 : MonoBehaviour
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
                 break;
         }
-        currentFrameCount = currentFrameCount + 1;
+        //Delete this after changing current frame count to index from 1
+        if (currentFrameCount != 0) {
+            currentFrameCount = currentFrameCount + 1;
+        }
     }
 
     public void neutralHighAttack() {
@@ -221,6 +229,7 @@ public class Player2 : MonoBehaviour
         switch (currentFrameCount){
             case 0:
                 anim.SetTrigger("High"); //Dario
+                currentFrameCount++; // Delete this after changing current frame count to index from 1
                 print("start attack");
                 break;
             case < (attackStartup - 1):
@@ -250,7 +259,10 @@ public class Player2 : MonoBehaviour
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL HIGH");
                 break;
         }
-        currentFrameCount = currentFrameCount + 1;
+        //Delete this after changing current frame count to index from 1
+        if (currentFrameCount != 0) {
+            currentFrameCount = currentFrameCount + 1;
+        }
     }
     
     // TODO: forwardHighAttack()
@@ -270,6 +282,7 @@ public class Player2 : MonoBehaviour
         switch (currentFrameCount){
             case 0:
                 anim.SetTrigger("High"); //Dario
+                currentFrameCount++; // Delete this after changing current frame count to index from 1
                 print("start attack");
                 break;
             case < (attackStartup - 1):
@@ -299,7 +312,10 @@ public class Player2 : MonoBehaviour
                 print("DEFAULT CASE IS RUNNING IN FORWARD HIGH");
                 break;
         }
-        currentFrameCount = currentFrameCount + 1;
+        //Delete this after changing current frame count to index from 1
+        if (currentFrameCount != 0) {
+            currentFrameCount = currentFrameCount + 1;
+        }
     }
 
     public void neutralMidAttack(){
@@ -317,6 +333,7 @@ public class Player2 : MonoBehaviour
             case 0:
                 print("CASE 0");
                 anim.SetTrigger("Mid"); //Dario
+                currentFrameCount++; // Delete this after changing current frame count to index from 1
                 //print("start attack");
                 break;
             case < attackStartup - 1:
@@ -345,7 +362,10 @@ public class Player2 : MonoBehaviour
                 print("Default running");
                 break;
         } 
-        currentFrameCount = currentFrameCount + 1;
+        //Delete this after changing current frame count to index from 1
+        if (currentFrameCount != 0) {
+            currentFrameCount = currentFrameCount + 1;
+        }
     }
 
     private void forwardMidAttack(){
@@ -362,6 +382,7 @@ public class Player2 : MonoBehaviour
         switch (currentFrameCount){
             case 0:
                 anim.SetTrigger("Mid"); //Dario
+                currentFrameCount++; // Delete this after changing current frame count to index from 1
                 //print("start attack");
                 break;
             case < attackStartup - 1:
@@ -386,7 +407,10 @@ public class Player2 : MonoBehaviour
                 print("Default running");
                 break;
         }
-        currentFrameCount = currentFrameCount + 1;
+        //Delete this after changing current frame count to index from 1
+        if (currentFrameCount != 0) {
+            currentFrameCount = currentFrameCount + 1;
+        }
     }
    void updateInputs() {
         //print("IN UPDATE INPUTS--------------");
