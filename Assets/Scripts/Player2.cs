@@ -26,6 +26,13 @@ public class Player2 : MonoBehaviour
     };
     public string currentAction = "Actionable"; 
     public int currentFrameCount = 0;
+
+    private Animator anim;
+
+    void Start(){
+        anim = GetComponent<Animator>();
+    }
+
     
     public void setPlayerPosition(string position) { // postion: ("backward", "neutral", "forward")
         switch (position) {
@@ -128,7 +135,7 @@ public class Player2 : MonoBehaviour
         switch (currentFrameCount){
             //state[1] should be how many frames into the action the player is
             case 0:
-                //playAttackAnim();
+                anim.SetTrigger("Throw"); //Dario
                 break;
             case < (attackStartup - 1):
                 break; 
@@ -172,7 +179,7 @@ public class Player2 : MonoBehaviour
         {
             //state[1] should be how many frames into the action the player is
             case 0:
-                // playAttackAnim();
+                anim.SetTrigger("Throw"); //Dario
                 break;
             case < (attackStartup - 1):
                 break; 
@@ -213,7 +220,7 @@ public class Player2 : MonoBehaviour
 
         switch (currentFrameCount){
             case 0:
-                // playAttackAnim();
+                anim.SetTrigger("High"); //Dario
                 print("start attack");
                 break;
             case < (attackStartup - 1):
@@ -262,7 +269,7 @@ public class Player2 : MonoBehaviour
 
         switch (currentFrameCount){
             case 0:
-                // playAttackAnim();
+                anim.SetTrigger("High"); //Dario
                 print("start attack");
                 break;
             case < (attackStartup - 1):
@@ -309,7 +316,7 @@ public class Player2 : MonoBehaviour
         switch (currentFrameCount){
             case 0:
                 print("CASE 0");
-                // playAttackAnim();
+                anim.SetTrigger("Mid"); //Dario
                 //print("start attack");
                 break;
             case < attackStartup - 1:
@@ -354,7 +361,7 @@ public class Player2 : MonoBehaviour
 
         switch (currentFrameCount){
             case 0:
-                // playAttackAnim();
+                anim.SetTrigger("Mid"); //Dario
                 //print("start attack");
                 break;
             case < attackStartup - 1:
@@ -480,13 +487,16 @@ public class Player2 : MonoBehaviour
                 // Use setPlayerPosition to also update stance? 
                 if (currentInput["forward"] && !currentInput["backward"]) {
                     // p2Stance = "forward";
+                    anim.SetInteger("Position",1); //Dario
                     setPlayerPosition("forward");
                 }
                 else if (currentInput["backward"] && !currentInput["forward"]) {
                     // p2Stance = "backward";
+                    anim.SetInteger("Position",-1); //Dario
                     setPlayerPosition("backward");
                 }
                 else {
+                    anim.SetInteger("Position",0); //Dario
                     setPlayerPosition("neutral");
                     // p2Stance = "neutral";
                 }
