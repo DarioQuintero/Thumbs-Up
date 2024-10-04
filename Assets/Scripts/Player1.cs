@@ -129,7 +129,7 @@ public class Player1 : MonoBehaviour
         const int attackRecovery = 45;
         List<int> hitbox = new List<int> {4}; //only hits forward position
         List<int> extendedHurtbox = new List<int> {3, 4, 5, 6};
-
+        bool isResetFrame = false; 
         //play attack animation
         switch (currentFrameCount){
             //state[1] should be how many frames into the action the player is
@@ -154,13 +154,16 @@ public class Player1 : MonoBehaviour
             //Attacking player hurtbox resets to previous hurtbox
                 p1Hurtbox = revertHurtbox();
                 currentAction = "Actionable";
+                isResetFrame = true;
                 currentFrameCount = 0;
                 break;
             default:
                 print("DEFAULT CASE IS RUNNING IN FORWARD THROW");
                 break;
         }
-        currentFrameCount = currentFrameCount + 1;
+        if (!isResetFrame) {
+            currentFrameCount++;
+        }
     }
 
     public void neutralThrowAttack() 
@@ -174,6 +177,8 @@ public class Player1 : MonoBehaviour
         List<int> hitbox = new List<int>{5}; //only hits neutral position of opponent, would this be 2?
         List<int> extendedHurtbox = new List<int> {2, 3, 4, 5}; //TODO: ask if this is how to do the extension
         //play attack animation
+        bool isResetFrame = false; 
+
         switch (currentFrameCount)
         {
             //state[1] should be how many frames into the action the player is
@@ -202,13 +207,16 @@ public class Player1 : MonoBehaviour
                 print("CASE 4");
                 p1Hurtbox = revertHurtbox();
                 currentAction = "Actionable";
+                isResetFrame = true;
                 currentFrameCount = 0;
                 break;
             default:
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL THROW");
                 break;
         }
-        currentFrameCount = currentFrameCount + 1;
+        if (!isResetFrame) {
+            currentFrameCount++;
+        }
    
     }
 
@@ -223,6 +231,8 @@ public class Player1 : MonoBehaviour
 
         List<int> hitbox = new List<int> {3, 4, 5}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {2, 3, 4}; // places where you can take damage after launching attack
+
+        bool isResetFrame = false; 
 
         switch (currentFrameCount){
             case 0:
@@ -248,6 +258,7 @@ public class Player1 : MonoBehaviour
                 break; 
             case (attackStartup + attackRecovery - 1):
                 currentAction = "Actionable";
+                isResetFrame = true;
                 currentFrameCount = 0;
                 p1Hurtbox = revertHurtbox();
                 print("end recovery");
@@ -256,7 +267,9 @@ public class Player1 : MonoBehaviour
                 print("DEFAULT CASE IS RUNNING IN NEUTRAL HIGH");
                 break;
         }
-        currentFrameCount = currentFrameCount + 1;
+        if (!isResetFrame) {
+            currentFrameCount++;
+        }
     }
 
     public void forwardHighAttack() {
@@ -270,6 +283,8 @@ public class Player1 : MonoBehaviour
 
         List<int> hitbox = new List<int> {4, 5, 6}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {3, 4, 5}; // places where you can take damage after launching attack
+
+        bool isResetFrame = false; 
 
         switch (currentFrameCount){
             case 0:
@@ -296,6 +311,7 @@ public class Player1 : MonoBehaviour
                 break; 
             case (attackStartup + attackRecovery - 1):
                 currentAction = "Actionable";
+                isResetFrame = true;
                 currentFrameCount = 0;
                 p1Hurtbox = revertHurtbox();
                 print("end recovery");
@@ -304,7 +320,9 @@ public class Player1 : MonoBehaviour
                 print("DEFAULT CASE IS RUNNING IN FORWARD HIGH");
                 break;
         }
-        currentFrameCount = currentFrameCount + 1;
+        if (!isResetFrame) {
+            currentFrameCount++;
+        }
     }
 
 
@@ -319,6 +337,8 @@ public class Player1 : MonoBehaviour
 
         List<int> hitbox = new List<int> {3,4}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {2,3};
+
+        bool isResetFrame = false; 
 
         switch (currentFrameCount){
             case 0:
@@ -344,6 +364,7 @@ public class Player1 : MonoBehaviour
             case (attackStartup + attackRecovery - 1):
                 print("CASE 4");
                 currentAction = "Actionable";
+                isResetFrame = true;
                 currentFrameCount = 0;
                 p1Hurtbox = revertHurtbox();
                 //print("end recovery");
@@ -352,7 +373,9 @@ public class Player1 : MonoBehaviour
                 print("Default running");
                 break;
         } 
-        currentFrameCount = currentFrameCount + 1;
+        if (!isResetFrame) {
+            currentFrameCount++;
+        }
     }
 
     private void forwardMidAttack(){
@@ -365,6 +388,8 @@ public class Player1 : MonoBehaviour
 
         List<int> hitbox = new List<int> {4,5}; // places where opponent can take damage
         List<int> extendedHurtbox = new List<int> {3,4};
+
+        bool isResetFrame = false; 
 
         switch (currentFrameCount){
             case 0:
@@ -386,7 +411,8 @@ public class Player1 : MonoBehaviour
                 break;
             case attackStartup + attackRecovery - 1:
                 currentAction = "Actionable";
-                currentFrameCount = 0;
+                isResetFrame = true;
+                currentFrameCount = 0; 
                 p1Hurtbox = revertHurtbox();
                 //print("end recovery");
                 break;
@@ -394,7 +420,9 @@ public class Player1 : MonoBehaviour
                 print("Default running");
                 break;
         }
-        currentFrameCount = currentFrameCount + 1;
+        if (!isResetFrame) {
+            currentFrameCount++;
+        }
     }
 
     void updateInputs() {
