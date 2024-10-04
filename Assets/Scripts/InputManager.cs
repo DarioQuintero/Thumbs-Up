@@ -18,7 +18,7 @@ public class InputManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
     public bool KeyDown(string key) {
-        if (Input.GetKeyDown(keybindings.checkKey(key))) {
+        if (Input.GetKey(keybindings.checkKey(key))) {
             return true;
         }
         else {

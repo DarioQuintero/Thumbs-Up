@@ -495,6 +495,7 @@ MonoBehaviour:
   player2Script: {fileID: 1924032793}
   inputManager: {fileID: 1450093436}
   fightSceneScript: {fileID: 1154210892}
+  p1AnimationsScript: {fileID: 0}
   currentHealth: 0
   oldHealth: 0
   p1Hurtbox: 02000000
@@ -769,7 +770,7 @@ PrefabInstance:
     - target: {fileID: 6760057195665277615, guid: f732031ea59934b35908732f2099cc4c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6760057195665277615, guid: f732031ea59934b35908732f2099cc4c,
         type: 3}
@@ -2747,6 +2748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Script: {fileID: 472956192}
   fightSceneScript: {fileID: 1154210892}
+  p2AnimationsScript: {fileID: 0}
   maxHealth: 0
   currentHealth: 0
   oldHealth: 0
@@ -3069,7 +3071,7 @@ PrefabInstance:
     - target: {fileID: 6760057195665277615, guid: f732031ea59934b35908732f2099cc4c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6760057195665277615, guid: f732031ea59934b35908732f2099cc4c,
         type: 3}
