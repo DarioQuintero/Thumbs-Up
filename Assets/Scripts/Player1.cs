@@ -104,11 +104,13 @@ public class Player1 : MonoBehaviour
             // query fightScene
             int PLAYER_1 = 1;
             fightSceneScript.changeHealthBars(PLAYER_1, oldHealth, currentHealth);
+            anim.SetBool("Hit",true); //Dario
             setActionAndFrame("Hitstun", stunFrames);
             if (currentHealth <= 0) {
                 // fightSceneScript.gameOver(); // TODO
                 anim.SetBool("Hit", false);
             }
+
         }
     }
 
@@ -507,6 +509,7 @@ public class Player1 : MonoBehaviour
                 if (currentFrameCount <= 0) {
                     currentAction = "Actionable";
                     currentFrameCount = 0;
+                    anim.SetBool("Hit",false); //Dario
                 }
                 break;
             case "Blockstun":
