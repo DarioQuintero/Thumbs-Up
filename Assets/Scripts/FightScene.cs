@@ -82,7 +82,7 @@ public class FightScene : MonoBehaviour
         startRound();
     }
 
-    //TODO: create a UI and tie in function
+    //create a UI and tie in function
     public void changeHealthBars(int playerNum, int oldHealth, int currentHealth){
         if (playerNum == 1){
             player1HealthUI = currentHealth;
