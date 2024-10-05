@@ -93,6 +93,7 @@ public class Player2 : MonoBehaviour
         // Action was blocked -> blockstun
         if (wasBlocked){
             setActionAndFrame("Blockstun", stunFrames);
+            anim.SetBool("Block",true);
         }
         //Action was not blocked -> hitstun
         else{
@@ -109,7 +110,6 @@ public class Player2 : MonoBehaviour
             setActionAndFrame("Hitstun", stunFrames);
             if (currentHealth <= 0) {
                 // fightSceneScript.gameOver(); // TODO
-                anim.SetBool("Hit", false);
             }
         }
     }
@@ -511,6 +511,7 @@ public class Player2 : MonoBehaviour
                 if (currentFrameCount <= 0) {
                     currentAction = "Actionable";
                     currentFrameCount = 0;
+                    anim.SetBool("Block",false);
                 }
                 break;
             default:
