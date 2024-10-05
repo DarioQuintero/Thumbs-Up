@@ -133,12 +133,14 @@ public class Player1 : MonoBehaviour
         const int attackRecovery = 45;
         List<int> hitbox = new List<int> {4}; //only hits forward position
         List<int> extendedHurtbox = new List<int> {3, 4, 5, 6};
+        List<int> invincibleHurtbox = new List<int> {};
         //play attack animation
         switch (currentFrameCount){
             //state[1] should be how many frames into the action the player is
             case 0:
                 anim.SetTrigger("Throw"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
+                p1Hurtbox = invincibleHurtbox;
                 break;
             case < (attackStartup - 1):
                 break; 
@@ -280,7 +282,7 @@ public class Player1 : MonoBehaviour
 
         const int attackStartup = 12; // Charging frames
         const int blockstun = 8; // Frames opponent would be stunned on a blocked hit for -3 diff
-        const int hitstun = 14; // Frames opponent would be stunned on a direct hit for +3 diff
+        const int hitstun = 10; // Frames opponent would be stunned on a direct hit for -1 diff
         const int attackRecovery = 10; // You need to recover from attack
 
         List<int> hitbox = new List<int> {4, 5, 6}; // places where opponent can take damage
@@ -332,7 +334,7 @@ public class Player1 : MonoBehaviour
         print("P1 IN NEUTRAL MID");
         const int damage = 20;
         const int attackStartup = 10;
-        const int blockstun = 8; // Don't know yet
+        const int blockstun = 18; // Shouldnt be able to be blocked
         const int hitstun = 18;
         const int attackRecovery = 12;
 
@@ -383,8 +385,8 @@ public class Player1 : MonoBehaviour
         print("P1 IN FORWARD MID");
         const int damage = 20;
         const int attackStartup = 16;
-        const int blockstun = 14; // // How does this work?? +3 block
-        const int hitstun = 18;
+        const int blockstun = 28; // // How does this work?? +3 block
+        const int hitstun = 30;
         const int attackRecovery = 24;
 
         List<int> hitbox = new List<int> {4,5}; // places where opponent can take damage

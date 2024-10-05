@@ -132,6 +132,7 @@ public class Player2 : MonoBehaviour
         const int attackRecovery = 45;
         List<int> hitbox = new List<int> {3}; //only hits forward position
         List<int> extendedHurtbox = new List<int> {1, 2, 3, 4};
+        List<int> invincibleHurtbox = new List<int> {};
 
         //play attack animation 
 
@@ -140,6 +141,7 @@ public class Player2 : MonoBehaviour
             case 0:
                 anim.SetTrigger("Throw"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
+                p2Hurtbox = invincibleHurtbox;
                 break;
             case < (attackStartup - 1):
                 break; 
@@ -277,7 +279,7 @@ public class Player2 : MonoBehaviour
 
         const int attackStartup = 12; // Charging frames
         const int blockstun = 8; // Frames opponent would be stunned on a blocked hit for -3 diff
-        const int hitstun = 14; // Frames opponent would be stunned on a direct hit for +3 diff
+        const int hitstun = 10; // Frames opponent would be stunned on a direct hit for -1 diff
         const int attackRecovery = 10; // You need to recover from attack
 
         List<int> hitbox = new List<int> {1, 2, 3}; // places where opponent can take damage
@@ -327,7 +329,7 @@ public class Player2 : MonoBehaviour
         print("P2 IN NEUTRAL MID");
         const int damage = 20;
         const int attackStartup = 10;
-        const int blockstun = 8; // Don't know yet
+        const int blockstun = 18; // Don't know yet
         const int hitstun = 18;
         const int attackRecovery = 12;
 
@@ -378,8 +380,8 @@ public class Player2 : MonoBehaviour
         print("P1 IN FORWARD MID");
         const int damage = 20;
         const int attackStartup = 16;
-        const int blockstun = 14; // // How does this work?? +3 block
-        const int hitstun = 18;
+        const int blockstun = 28; // // How does this work?? +3 block
+        const int hitstun = 30;
         const int attackRecovery = 24;
 
         List<int> hitbox = new List<int> {2,3}; // places where opponent can take damage
