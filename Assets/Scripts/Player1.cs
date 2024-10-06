@@ -27,7 +27,7 @@ public class Player1 : MonoBehaviour
     public string currentAction = "Actionable"; 
     public int currentFrameCount = 0;
 
-    private Animator anim;
+    public Animator anim;
 
     void Start(){
         anim = GetComponent<Animator>();
