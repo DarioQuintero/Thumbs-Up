@@ -77,19 +77,20 @@ public class FightScene : MonoBehaviour
         if (player1RoundWins >= roundWinLimit) {
             print("player1 wins!");
             fullscreenText.text = "Player 1 Wins!";
-            //waitTime(2);
+            StartCoroutine (RoundDelay()); //2 sec delay
             player1RoundWins = 0;
             player2RoundWins = 0;
         }
         else if (player2RoundWins >= roundWinLimit) {
             print("player2 wins!");
             fullscreenText.text = "Player 2 Wins!";
-            //waitTime(2);
+            StartCoroutine (RoundDelay()); //2 sec delay
             player1RoundWins = 0;
             player2RoundWins = 0;
         }
         winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
-        startRound();
+        StartCoroutine (RoundDelay());
+        //startRound();
     }
 
     //create a UI and tie in function
@@ -114,6 +115,17 @@ public class FightScene : MonoBehaviour
         }
         
 
+    }
+
+    public IEnumerator RoundDelay(){
+        player1Script.anim.SetInteger("Position", 0);
+        player1Script.anim.SetBool("Hit", false);
+        player1Script.anim.SetBool("Block", false);
+        player2Script.anim.SetInteger("Position", 0);
+        player2Script.anim.SetBool("Hit", false);
+        player2Script.anim.SetBool("Block", false);
+        yield return new WaitForSeconds(3);
+        startRound();
     }
     //changeHealthBars(bool player, oldHealth, currentHealth);
 
