@@ -12,9 +12,10 @@ public class HealthBars : MonoBehaviour
     public float p2HealthAmount = 100f;
 
     // Update is called once per frame
+    /*
     void Update()
     {
-        /* ----- FOR TESTING -----
+         ----- FOR TESTING -----
         int PLAYER_1 = 1;
         int PLAYER_2 = 2;
         if(Input.GetKeyDown(KeyCode.Return)){
@@ -24,8 +25,9 @@ public class HealthBars : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
             setHealthBar(PLAYER_2, p2HealthBar.fillAmount*100f - 10);
         }
-        */
+        
     }
+    */
 
     public void setHealthBar(int player, float currentHealth){
         
