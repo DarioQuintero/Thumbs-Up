@@ -9,7 +9,7 @@ public class RematchMenuToggle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CanvasObject = GetComponent<Canvas> ();
+        // CanvasObject = GetComponent<Canvas> ();
     }
 
     // Update is called once per frame

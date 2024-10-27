@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinCounters : MonoBehaviour
+public class RoundWinCounters : MonoBehaviour
 {
     public GameObject p1Counter1;
     public GameObject p1Counter2;
