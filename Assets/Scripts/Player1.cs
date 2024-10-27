@@ -27,6 +27,8 @@ public class Player1 : MonoBehaviour
     public string currentAction = "Actionable"; 
     public int currentFrameCount = 0;
 
+    const int BUFFERLENGTH = 3;
+
     public Animator anim;
 
     void Start(){
@@ -479,6 +481,23 @@ public class Player1 : MonoBehaviour
             //print("WE ARE ACTIONABLE------AAAAAAA-------");
             currentAction = inputsToActions();
         }
+        else if ((currentAction == "Neutral High" ||
+              currentAction == "Neutral Mid") && 
+              currentFrameCount <= BUFFERLENGTH) {
+                if (inputsToActions() == "Neutral Throw") {
+                    currentAction = "Neutral Throw";
+                    currentFrameCount = 0;
+                }
+            }
+        else if ((currentAction == "Forward High" ||
+              currentAction == "Forward Mid") &&
+              currentFrameCount <= BUFFERLENGTH) {
+                if (inputsToActions() == "Forward Throw") {
+                    currentAction = "Forward Throw";
+                    currentFrameCount = 0;
+                }
+            }
+ 
     }
 
     // Do action for that frame. Called by FightScene every frame during a round.
