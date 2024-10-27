@@ -25,7 +25,13 @@ public class FightScene : MonoBehaviour
     private const int PLAYER_1 = 1;
     private const int PLAYER_2 = 2;
     private const int roundWinLimit = 3; // How many round wins necessary to win the game
-    private const int roundIntermissionTime = 60; // Number of frames paused in between rounds 
+    private const int roundIntermissionTime = 360; // Number of frames paused in between rounds 
+
+    private int roundIntermissionCounter = 0;
+
+    private string lastWinner;
+
+    public int roundNumber = 1;
 
     // Changing values
     public int sceneFrameCounter = 0; // The current number of game fps frames elapsed since round start
@@ -64,15 +70,18 @@ public class FightScene : MonoBehaviour
         HealthBarScript.setHealthBar(PLAYER_2, player2HealthUI); //is set to max
     }
     void endRound() {
+        roundInProgress = false;
         switch (player1HealthUI) {
-            case int i when i <= player2HealthUI:
+            case int i when i < player2HealthUI:
                 player2RoundWins += 1;
+                lastWinner = "Player 2";
                 break;
             case int i when i == player2HealthUI:
                 print("draw");
                 break;
-            case int i when i >= player2HealthUI:
+            case int i when i > player2HealthUI:
                 player1RoundWins += 1;
+                lastWinner = "Player 1";
                 break;
             default:
                 print("DEFAULT IS RUNNING IN ENDROUND");
@@ -107,7 +116,12 @@ public class FightScene : MonoBehaviour
             logicFrameCounter = 0;
             gamePauseReason = "Game Over";
         }
-        winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
+        else { // In between rounds
+            winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
+            roundIntermissionCounter = roundIntermissionTime;
+            gamePauseReason = "Round Intermission";
+
+        }
         // StartCoroutine (RoundDelay());
         // startRound();
     }
@@ -118,24 +132,19 @@ public class FightScene : MonoBehaviour
             player1HealthUI = currentHealth;
             HealthBarScript.setHealthBar(playerNum, player1HealthUI);
             player1OldHealthUI = oldHealth;
-            // If player died, set the flag to end the current round at end of frame
-            if (currentHealth <= 0) {
-                roundInProgress = false;
-            }
+
             // DONT UPDATE THE HEALTH BARS IF THE END ROUND FLAG IS TRUE!!!!
         }
         else{
             player2HealthUI = currentHealth;
             HealthBarScript.setHealthBar(playerNum, player2HealthUI);
             player2OldHealthUI = oldHealth;
-            if (currentHealth <= 0) {
-                roundInProgress = false;
-            }
+
         }
         
-
     }
 
+    // Depracate 
     public IEnumerator RoundDelay(){
         player1Script.anim.SetInteger("Position", 0);
         player1Script.anim.SetBool("Hit", false);
@@ -192,20 +201,22 @@ public class FightScene : MonoBehaviour
                 player1Script.doAction();
                 player2Script.doAction();
 
+                // If player died, set the flag to end the current round at end of frame
+
                 // Decrease timer
                 if (logicFrameCounter % 60 == 0) {
-                    if (roundTimer == 0) {
-                        roundInProgress = false;
-                    }
-                    else {
+                    if (roundTimer > 0) {
                         roundTimer -= 1;
                     }
                 }
 
-                // If a player has died, this flag will be false
-                if (roundInProgress == false) {
-                    callRoundStartOrEnd = true;
+                if (player1HealthUI <= 0 || player2HealthUI <= 0 || roundTimer <= 0) {
+                    endRound();
                 }
+                // If a player has died, this flag will be false
+                // if (roundInProgress == false) {
+                //     callRoundStartOrEnd = true;
+                // }
 
                 // Increment logic frame counter by 1
                 logicFrameCounter++;
@@ -217,10 +228,10 @@ public class FightScene : MonoBehaviour
             timerText.text = Mathf.Max(0, roundTimer).ToString();
 
             // End the round if necessary
-            if (callRoundStartOrEnd == true) {
-                callRoundStartOrEnd = false;
-                endRound();
-            }
+            // if (callRoundStartOrEnd == true) {
+            //     callRoundStartOrEnd = false;
+            //     endRound();
+            // }
 
         }
         else {
@@ -229,19 +240,35 @@ public class FightScene : MonoBehaviour
             if (sceneFrameCounter % sceneFPSOver60 == 0) {
                 switch (gamePauseReason) {
                     case "Round Intermission":
-                        if (logicFrameCounter >= roundIntermissionTime) {
-                            callRoundStartOrEnd = true;
+                        roundIntermissionCounter--;
+
+                        if (180 < roundIntermissionCounter && roundIntermissionCounter <= 270) {
+                            fullscreenText.text = lastWinner + " Wins Round"; 
                         }
+                        if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180) {
+                            fullscreenText.text = "3"; 
+                        }
+                        if (60 < roundIntermissionCounter && roundIntermissionCounter <= 120) {
+                            fullscreenText.text = "2"; 
+                        }
+                        if (0 < roundIntermissionCounter && roundIntermissionCounter <= 60) {
+                            fullscreenText.text = "1"; 
+                        }
+                        if (roundIntermissionCounter <= 0) {
+                            callRoundStartOrEnd = true;
+                            roundNumber++;
+                            fullscreenText.text = "";
+                        }
+
                         break;
                     case "Game Over":
                         // Put code here for the rematch menu after the game has ended
                         // Remember to reset round win scores and remove the fullscreen text
                         break;
                     default:
-                        print("ERROR: GAME PAUSED FOR UNKOWN REASON");
+                        print("ERROR: GAME PAUSED FOR UNKNOWN REASON");
                         break;
                 }
-                logicFrameCounter++;
             }
             sceneFrameCounter++;
             // Start the round if necessary
