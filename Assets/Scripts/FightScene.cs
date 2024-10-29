@@ -18,6 +18,8 @@ public class FightScene : MonoBehaviour
 
     public HealthBars HealthBarScript;
 
+    public GameObject RematchMenu;
+
 
     // Constants
     private const int player1MaxHealth = 100;
@@ -25,7 +27,7 @@ public class FightScene : MonoBehaviour
     private const int PLAYER_1 = 1;
     private const int PLAYER_2 = 2;
     private const int roundWinLimit = 3; // How many round wins necessary to win the game
-    private const int roundIntermissionTime = 360; // Number of frames paused in between rounds 
+    private const int roundIntermissionTime = 300; // Number of frames paused in between rounds 
 
     private int roundIntermissionCounter = 0;
 
@@ -101,6 +103,7 @@ public class FightScene : MonoBehaviour
             sceneFrameCounter = 0;
             logicFrameCounter = 0;
             gamePauseReason = "Game Over";
+            RematchMenu.SetActive(true);
         }
         else if (player2RoundWins >= roundWinLimit) {
             print("player2 wins!");
@@ -115,6 +118,7 @@ public class FightScene : MonoBehaviour
             sceneFrameCounter = 0;
             logicFrameCounter = 0;
             gamePauseReason = "Game Over";
+            RematchMenu.SetActive(true);
         }
         else { // In between rounds
             winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
@@ -124,6 +128,13 @@ public class FightScene : MonoBehaviour
         }
         // StartCoroutine (RoundDelay());
         // startRound();
+    }
+
+    public void reset(){
+        player1RoundWins = 0;
+        player2RoundWins = 0;
+        RematchMenu.SetActive(false);
+        startRound();
     }
 
     //create a UI and tie in function
@@ -243,7 +254,7 @@ public class FightScene : MonoBehaviour
                         roundIntermissionCounter--;
 
                         if (180 < roundIntermissionCounter && roundIntermissionCounter <= 270) {
-                            fullscreenText.text = lastWinner + " Wins Round"; 
+                            fullscreenText.text = lastWinner + " Wins Round";
                         }
                         if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180) {
                             fullscreenText.text = "3"; 
