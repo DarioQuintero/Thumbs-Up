@@ -28,6 +28,17 @@ public class Player1 : MonoBehaviour
     public int currentFrameCount = 0;
 
     const int BUFFERLENGTH = 3;
+    const int INPUTLENIENCY = 3;
+    struct ActionInput {
+        public string action;
+        public int count;
+        public ActionInput(string a, int c) {
+            this.action = a;
+            this.count = c;
+        }
+    }
+    ActionInput actionBuffer = new ActionInput("Actionable", 0);
+
 
     public Animator anim;
 
@@ -495,33 +506,54 @@ public class Player1 : MonoBehaviour
     void queueAction() {
         //print("IN QUEUE ACTION ----QQQQQQQ-------");
         // TODO: Implement an action queue and pop it
+        string thisFrameAction = inputsToActions();
+        if (currentAction != "Actionable" && thisFrameAction != "Actionable") {
+           // Store action in buffer
+            actionBuffer.action = thisFrameAction;
+            actionBuffer.count = 0;
+            print(actionBuffer.action);
+            print(actionBuffer.count);
+        }
+        else {
+            actionBuffer.count += 1;
+            if (actionBuffer.count <= BUFFERLENGTH && actionBuffer.action != "Actionable") {
+                print(actionBuffer.action + "is still buffered");
+                print(actionBuffer.count);
+            }
+        }
         if (currentAction == "Actionable") {
             //print("WE ARE ACTIONABLE------AAAAAAA-------");
-            currentAction = inputsToActions();
+            if (actionBuffer.action != "Actionable" && actionBuffer.count <= BUFFERLENGTH) {
+                currentAction = actionBuffer.action;
+                print("using buffered action");
+            }
+            else {
+                currentAction = inputsToActions();
+            }
+            actionBuffer = new ActionInput("Actionable", 0);
         }
         else if ((currentAction == "Neutral High" ||
               currentAction == "Neutral Mid") && 
-              currentFrameCount <= BUFFERLENGTH) {
-                if (inputsToActions() == "Neutral Throw") {
-                    currentAction = "Neutral Throw";
-                    currentFrameCount = 0;
-                }
+              currentFrameCount <= INPUTLENIENCY) {
+            if (inputsToActions() == "Neutral Throw") {
+                currentAction = "Neutral Throw";
+                currentFrameCount = 0;
             }
+        }
         else if ((currentAction == "Forward High" ||
               currentAction == "Forward Mid") &&
-              currentFrameCount <= BUFFERLENGTH) {
-                if (inputsToActions() == "Forward Throw") {
-                    currentAction = "Forward Throw";
-                    currentFrameCount = 0;
-                }
+              currentFrameCount <= INPUTLENIENCY) {
+            if (inputsToActions() == "Forward Throw") {
+                currentAction = "Forward Throw";
+                currentFrameCount = 0;
             }
- 
+        }
     }
 
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction() {
         //print("IN DO ACTION_________________");
-        print("-----------P1-"+p1Stance+"--------------");
+        //print("-----------P1-"+p1Stance+"--------------");
         updateInputs();
         queueAction();
         switch (currentAction){
@@ -562,7 +594,7 @@ public class Player1 : MonoBehaviour
                 }
                 break;
             default:
-                print("Actionable");
+                //print("Actionable");
                 // TODO: Implement a movement cooldown with adjustable frames relative to a const
                 // Use setPlayerPosition to also update stance? 
                 if (currentInput["backward"] && !currentInput["forward"]) {
