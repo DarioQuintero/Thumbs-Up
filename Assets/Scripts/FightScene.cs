@@ -15,6 +15,13 @@ public class FightScene : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text fullscreenText;
 
+    public GameObject roundSign;
+    public TMP_Text roundText;
+
+    public GameObject countdownSign;
+    public TMP_Text countdownText;
+
+
     public RoundWinCounters winCounterScript;
 
     public HealthBars HealthBarScript;
@@ -303,17 +310,28 @@ public class FightScene : MonoBehaviour
                         roundIntermissionCounter--;
 
                         if (180 < roundIntermissionCounter && roundIntermissionCounter <= 270) {
-                            fullscreenText.text = lastWinner + " Wins Round";
+                            roundSign.SetActive(true);
+                            roundText.text = lastWinner + " Wins Round";
                         }
-                        if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180) {
-                            fullscreenText.text = "3"; 
+                        else {
+                            roundSign.SetActive(false);
                         }
-                        if (60 < roundIntermissionCounter && roundIntermissionCounter <= 120) {
-                            fullscreenText.text = "2"; 
+                        if (0 < roundIntermissionCounter && roundIntermissionCounter <= 180) {    
+                            countdownSign.SetActive(true);
+                            if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180) {
+                                countdownText.text = "3"; 
+                            }
+                            if (60 < roundIntermissionCounter && roundIntermissionCounter <= 120) {
+                                countdownText.text = "2"; 
+                            }
+                            if (0 < roundIntermissionCounter && roundIntermissionCounter <= 60) {
+                                countdownText.text = "1"; 
+                            }
                         }
-                        if (0 < roundIntermissionCounter && roundIntermissionCounter <= 60) {
-                            fullscreenText.text = "1"; 
+                        else {
+                            countdownSign.SetActive(false);
                         }
+
                         if (roundIntermissionCounter <= 0) {
                             callRoundStartOrEnd = true;
                             roundNumber++;
