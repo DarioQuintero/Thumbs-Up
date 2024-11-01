@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -89,6 +90,8 @@ public class FightScene : MonoBehaviour
                 print("DEFAULT IS RUNNING IN ENDROUND");
                 break;
         }
+        winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
+
         if (player1RoundWins >= roundWinLimit) {
             print("player1 wins!");
             fullscreenText.text = "Player 1 Wins!";
@@ -121,7 +124,6 @@ public class FightScene : MonoBehaviour
             RematchMenu.SetActive(true);
         }
         else { // In between rounds
-            winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
             roundIntermissionCounter = roundIntermissionTime;
             gamePauseReason = "Round Intermission";
 
@@ -135,6 +137,11 @@ public class FightScene : MonoBehaviour
         player2RoundWins = 0;
         RematchMenu.SetActive(false);
         startRound();
+    }
+
+    public void loadMainMenu(){
+        RematchMenu.SetActive(false);
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 
     //create a UI and tie in function
@@ -199,7 +206,8 @@ public class FightScene : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         sceneFPSOver60 = Application.targetFrameRate / 60;
-        startRound();
+        reset();
+        print("started");
     }
 
     // Update is called once per frame
