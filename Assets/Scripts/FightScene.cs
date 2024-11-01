@@ -29,6 +29,7 @@ public class FightScene : MonoBehaviour
     private const int PLAYER_2 = 2;
     private const int roundWinLimit = 3; // How many round wins necessary to win the game
     private const int roundIntermissionTime = 300; // Number of frames paused in between rounds 
+    private const int gameStartIntermissionTime = 180;
 
     private int roundIntermissionCounter = 0;
 
@@ -45,6 +46,7 @@ public class FightScene : MonoBehaviour
     private bool gameInProgress = false; // Used to track whether or not to perform round checks
     private bool callRoundStartOrEnd = false; // Used to check for a round end. Probably could be merged with
                                        // above but I'm lazy and tired. 
+    private bool callGameStartCountdown = false;
     private string gamePauseReason = "None";
     private int player1RoundWins = 0;
     private int player2RoundWins = 0;
@@ -59,7 +61,7 @@ public class FightScene : MonoBehaviour
         timerText.text = roundTimer.ToString();
         sceneFrameCounter = 0;
         logicFrameCounter = 0;
-        roundInProgress = true;
+        //roundInProgress = true; testing out if we can get the counter at the beginning
         gameInProgress = true;
         callRoundStartOrEnd = false;
         player1HealthUI = player1MaxHealth;
@@ -71,7 +73,21 @@ public class FightScene : MonoBehaviour
         winCounterScript.updateWinCounters(player1RoundWins, player2RoundWins);
         HealthBarScript.setHealthBar(PLAYER_1, player1HealthUI); //is set to max
         HealthBarScript.setHealthBar(PLAYER_2, player2HealthUI); //is set to max
+
+        if (player1RoundWins == 0 && player2RoundWins == 0 && callGameStartCountdown == true){
+            roundInProgress = false;
+            gameStartCountdown();
+        }
+        else{
+            roundInProgress = true;
+        }
     }
+
+    void gameStartCountdown() {
+        roundIntermissionCounter = gameStartIntermissionTime;
+        gamePauseReason = "Game Start";
+    }
+
     void endRound() {
         roundInProgress = false;
         switch (player1HealthUI) {
@@ -135,6 +151,7 @@ public class FightScene : MonoBehaviour
     public void reset(){
         player1RoundWins = 0;
         player2RoundWins = 0;
+        callGameStartCountdown = true;
         RematchMenu.SetActive(false);
         startRound();
     }
@@ -258,6 +275,30 @@ public class FightScene : MonoBehaviour
             // Only run these on logical frames (60 fps)
             if (sceneFrameCounter % sceneFPSOver60 == 0) {
                 switch (gamePauseReason) {
+                    case "Game Start":
+                        roundIntermissionCounter--;
+                        if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180) {
+                            fullscreenText.fontSize = 40;
+                            fullscreenText.text = "I"; 
+                        }
+                        if (60 < roundIntermissionCounter && roundIntermissionCounter <= 120) {
+                            fullscreenText.fontSize = 50;
+                            fullscreenText.text = "DECLARE"; 
+                        }
+                        if (0 < roundIntermissionCounter && roundIntermissionCounter <= 60) {
+                            fullscreenText.fontSize = 80;
+                            fullscreenText.text = "THUMB WAR"; 
+                        }
+                        if (roundIntermissionCounter <= 0) {
+                            callRoundStartOrEnd = true;
+                            callGameStartCountdown = false;
+                            fullscreenText.text = "";
+                            fullscreenText.fontSize = 40;
+                            roundInProgress = true;
+                        }
+
+                        break;
+
                     case "Round Intermission":
                         roundIntermissionCounter--;
 
