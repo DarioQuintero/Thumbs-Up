@@ -323,7 +323,11 @@ public class FightScene : MonoBehaviour
                         break;
                     case "Game Over":
                         // Put code here for the rematch menu after the game has ended
-                        // Remember to reset round win scores and remove the fullscreen text
+                        // Remember to reset round win scores and remove the fullscreen text\
+                        if (player1Script.pressingAnyAttacks()&&player2Script.pressingAnyAttacks()) {
+                            print("resetting");
+                            reset();
+                        }
                         break;
                     default:
                         print("ERROR: GAME PAUSED FOR UNKNOWN REASON");

@@ -509,6 +509,17 @@ public class Player2 : MonoBehaviour
         }
     }
 
+    public bool pressingAnyAttacks() {
+        updateInputs();
+        if (currentInput["high"] || currentInput["mid"]) {
+            print("p2 pressing any attacks");
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction() {
         //print("IN DO ACTION_________________");
