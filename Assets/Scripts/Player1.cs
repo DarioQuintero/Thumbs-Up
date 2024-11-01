@@ -452,22 +452,40 @@ public class Player1 : MonoBehaviour
                            + boolToInt(currentInput["backward"]) * 2 + boolToInt(currentInput["forward"]) * 1;
         switch (inputsAsBinary) {
             case 4:
+                setPlayerPosition("neutral");
+                anim.SetInteger("Position",0); //Dario
                 return "Neutral Mid";
             case 5:
+                setPlayerPosition("forward");
+                anim.SetInteger("Position",1); //Dario
                 return "Forward Mid";
             case 7:
+                setPlayerPosition("neutral");
+                anim.SetInteger("Position",0); //Dario
                 return "Neutral Mid";
             case 8:
+                setPlayerPosition("neutral");
+                anim.SetInteger("Position",0); //Dario
                 return "Neutral High";
             case 9:
+                setPlayerPosition("forward");
+                anim.SetInteger("Position",1); //Dario
                 return "Forward High";
             case 11:
+                setPlayerPosition("neutral");
+                anim.SetInteger("Position",0); //Dario
                 return "Neutral High";
             case 12:
+                setPlayerPosition("neutral");
+                anim.SetInteger("Position",0); //Dario
                 return "Neutral Throw";
             case 13:
+                setPlayerPosition("forward");
+                anim.SetInteger("Position",1); //Dario
                 return "Forward Throw";
             case 15:
+                setPlayerPosition("neutral");
+                anim.SetInteger("Position",0); //Dario
                 return "Neutral Throw";
             default:
                 return "Actionable";

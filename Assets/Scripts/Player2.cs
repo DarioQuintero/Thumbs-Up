@@ -26,6 +26,7 @@ public class Player2 : MonoBehaviour
     };
     public string currentAction = "Actionable"; 
     public int currentFrameCount = 0;
+    const int BUFFERLENGTH = 3;
 
     public Animator anim;
 
@@ -443,22 +444,40 @@ public class Player2 : MonoBehaviour
                            + boolToInt(currentInput["backward"]) * 2 + boolToInt(currentInput["forward"]) * 1;
         switch (inputsAsBinary) {
             case 4:
+                anim.SetInteger("Position",0); //Dario
+                setPlayerPosition("neutral");
                 return "Neutral Mid";
             case 5:
+                anim.SetInteger("Position",1); //Dario
+                setPlayerPosition("forward");
                 return "Forward Mid";
             case 7:
+                anim.SetInteger("Position",0); //Dario
+                setPlayerPosition("neutral");
                 return "Neutral Mid";
             case 8:
+                anim.SetInteger("Position",0); //Dario
+                setPlayerPosition("neutral");
                 return "Neutral High";
             case 9:
+                anim.SetInteger("Position",1); //Dario
+                setPlayerPosition("forward");
                 return "Forward High";
             case 11:
+                anim.SetInteger("Position",0); //Dario
+                setPlayerPosition("neutral");
                 return "Neutral High";
             case 12:
+                anim.SetInteger("Position",0); //Dario
+                setPlayerPosition("neutral");
                 return "Neutral Throw";
             case 13:
+                anim.SetInteger("Position",1); //Dario
+                setPlayerPosition("forward");
                 return "Forward Throw";
             case 15:
+                anim.SetInteger("Position",0); //Dario
+                setPlayerPosition("neutral");
                 return "Neutral Throw";
             default:
                 return "Actionable";
@@ -471,6 +490,22 @@ public class Player2 : MonoBehaviour
         if (currentAction == "Actionable") {
             //print("WE ARE ACTIONABLE------AAAAAAA-------");
             currentAction = inputsToActions();
+        }
+        else if ((currentAction == "Neutral High" ||
+              currentAction == "Neutral Mid") && 
+              currentFrameCount <= BUFFERLENGTH) {
+            if (inputsToActions() == "Neutral Throw") {
+                currentAction = "Neutral Throw";
+                currentFrameCount = 0;
+            }
+        }
+        else if ((currentAction == "Forward High" ||
+              currentAction == "Forward Mid") &&
+              currentFrameCount <= BUFFERLENGTH) {
+            if (inputsToActions() == "Forward Throw") {
+                currentAction = "Forward Throw";
+                currentFrameCount = 0;
+            }
         }
     }
 
