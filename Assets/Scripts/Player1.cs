@@ -615,6 +615,17 @@ public class Player1 : MonoBehaviour
                 break;
         }
     }
+
+    public bool pressingAnyAttacks() {
+        updateInputs();
+        if (currentInput["high"] || currentInput["mid"]) {
+            print("p1 pressing any attacks");
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     public void reset(int maxHealth) {
         // Reset properties of player
 
