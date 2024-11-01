@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1bc40ee9ed349f4e90e1c0ddbc7362f, type: 3}
   m_Name: Keybindings
   m_EditorClassIdentifier: 
-  p1High: 117
-  p1Mid: 105
-  p1Forward: 100
+  p1High: 102
+  p1Mid: 100
+  p1Forward: 115
   p1Backward: 97
   p2High: 107
   p2Mid: 108
