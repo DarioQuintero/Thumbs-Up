@@ -45,8 +45,11 @@ public class Player2 : MonoBehaviour
 
     private int blockFreezeFrames = 5;
 
+    public AudioSource blockSound;
+
+
     void Start(){
-        anim = GetComponent<Animator>();
+
     }
 
     
@@ -108,6 +111,9 @@ public class Player2 : MonoBehaviour
         
         // Action was blocked -> blockstun
         if (wasBlocked){
+            blockSound.Stop();
+            blockSound.time = 1.2f;
+            blockSound.Play();
             fightSceneScript.frozenFrames = blockFreezeFrames;
             setActionAndFrame("Blockstun", stunFrames);
             anim.SetBool("Block",true);

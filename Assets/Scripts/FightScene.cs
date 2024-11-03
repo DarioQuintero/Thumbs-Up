@@ -63,6 +63,9 @@ public class FightScene : MonoBehaviour
     private int player2OldHealthUI = player2MaxHealth;
 
     public int frozenFrames = 0;
+
+    public AudioSource fightMusic;
+    public AudioSource countDownSound;
     void startRound() {
         roundTimer = 99;
         fullscreenText.text = "";
@@ -161,6 +164,7 @@ public class FightScene : MonoBehaviour
         player2RoundWins = 0;
         callGameStartCountdown = true;
         RematchMenu.SetActive(false);
+        countDownSound.Play();
         startRound();
     }
 
@@ -329,8 +333,12 @@ public class FightScene : MonoBehaviour
                         else {
                             roundSign.SetActive(false);
                         }
+                           if(roundIntermissionCounter == 190) {
+                                countDownSound.Play();
+                            }
                         if (0 < roundIntermissionCounter && roundIntermissionCounter <= 180) {    
                             countdownSign.SetActive(true);
+ 
                             if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180) {
                                 countdownText.text = "3"; 
                             }
