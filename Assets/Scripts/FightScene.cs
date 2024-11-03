@@ -62,6 +62,7 @@ public class FightScene : MonoBehaviour
     private int player2HealthUI = player2MaxHealth;
     private int player2OldHealthUI = player2MaxHealth;
 
+    public int frozenFrames = 0;
     void startRound() {
         roundTimer = 99;
         fullscreenText.text = "";
@@ -241,8 +242,20 @@ public class FightScene : MonoBehaviour
             // Only run these on logical frames (60 fps)
             if (sceneFrameCounter % sceneFPSOver60 == 0) {
                 // Call p1 and p2 to take their actions that frame
-                player1Script.doAction();
-                player2Script.doAction();
+                if (frozenFrames > 0) {
+                    player1Script.doAction(true);
+                    player2Script.doAction(true);
+                    player1Script.anim.speed = 0;
+                    player2Script.anim.speed = 0;
+                    frozenFrames--;
+                    print("frozen");
+                }
+                else {
+                    player1Script.anim.speed = 1;
+                    player2Script.anim.speed = 1;
+                    player1Script.doAction(false);
+                    player2Script.doAction(false);
+                }
 
                 // If player died, set the flag to end the current round at end of frame
 
