@@ -42,6 +42,10 @@ public class Player1 : MonoBehaviour
 
     public Animator anim;
 
+    private int hitFreezeFrames = 5;
+
+    private int blockFreezeFrames = 5;
+
     void Start(){
         anim = GetComponent<Animator>();
     }
@@ -103,7 +107,8 @@ public class Player1 : MonoBehaviour
     public void getHit(int damage, bool wasBlocked, int stunFrames){
         
         // Action was blocked -> blockstun
-        if (wasBlocked){
+        if (wasBlocked) {
+            fightSceneScript.frozenFrames = blockFreezeFrames;
             setActionAndFrame("Blockstun", stunFrames);
             anim.SetBool("Block",true);
         }
@@ -113,6 +118,7 @@ public class Player1 : MonoBehaviour
             oldHealth = currentHealth;
             currentHealth -= damage;
             currentHealth = Mathf.Max(currentHealth, 0); // forces current health between 0 and maxHealth
+            fightSceneScript.frozenFrames = hitFreezeFrames;
 
             //run animation for health change (oldHealth to currentHealth)
             // query fightScene
@@ -551,68 +557,70 @@ public class Player1 : MonoBehaviour
     }
 
     // Do action for that frame. Called by FightScene every frame during a round.
-    public void doAction() {
+    public void doAction(bool frozen) {
         //print("IN DO ACTION_________________");
         //print("-----------P1-"+p1Stance+"--------------");
         updateInputs();
         queueAction();
-        switch (currentAction){
-            case "Forward Throw":
-                forwardThrowAttack();
-                break;
-            case "Neutral Throw":
-                neutralThrowAttack();
-                break;
-            case "Forward High":
-                forwardHighAttack();
-                break;
-            case "Neutral High":
-                neutralHighAttack();
-                break;
-            case "Forward Mid":
-                forwardMidAttack();
-                break;
-            case "Neutral Mid":
-                neutralMidAttack();
-                break;
-            case "Hitstun":
-                p1Stance = "neutral"; // Subject to change
-                currentFrameCount -= 1;
-                if (currentFrameCount <= 0) {
-                    currentAction = "Actionable";
-                    currentFrameCount = 0;
-                    anim.SetBool("Hit",false); //Dario
-                }
-                break;
-            case "Blockstun":
-                p1Stance = "neutral"; // Subject to change
-                currentFrameCount -= 1;
-                if (currentFrameCount <= 0) {
-                    currentAction = "Actionable";
-                    currentFrameCount = 0;
-                    anim.SetBool("Block",false);
-                }
-                break;
-            default:
-                //print("Actionable");
-                // TODO: Implement a movement cooldown with adjustable frames relative to a const
-                // Use setPlayerPosition to also update stance? 
-                if (currentInput["backward"] && !currentInput["forward"]) {
-                    // p1Stance = "backward";
-                    setPlayerPosition("backward");
-                    anim.SetInteger("Position",-1); //Dario
-                }
-                else if (currentInput["forward"] && !currentInput["backward"]) {
-                    // p1Stance = "forward";
-                    setPlayerPosition("forward");
-                    anim.SetInteger("Position",1); //Dario
-                }
-                else {
-                    setPlayerPosition("neutral");
-                    anim.SetInteger("Position",0); //Dario
-                    // p1Stance = "neutral";
-                }
-                break;
+        if (!frozen) {
+            switch (currentAction){
+                case "Forward Throw":
+                    forwardThrowAttack();
+                    break;
+                case "Neutral Throw":
+                    neutralThrowAttack();
+                    break;
+                case "Forward High":
+                    forwardHighAttack();
+                    break;
+                case "Neutral High":
+                    neutralHighAttack();
+                    break;
+                case "Forward Mid":
+                    forwardMidAttack();
+                    break;
+                case "Neutral Mid":
+                    neutralMidAttack();
+                    break;
+                case "Hitstun":
+                    p1Stance = "neutral"; // Subject to change
+                    currentFrameCount -= 1;
+                    if (currentFrameCount <= 0) {
+                        currentAction = "Actionable";
+                        currentFrameCount = 0;
+                        anim.SetBool("Hit",false); //Dario
+                    }
+                    break;
+                case "Blockstun":
+                    p1Stance = "neutral"; // Subject to change
+                    currentFrameCount -= 1;
+                    if (currentFrameCount <= 0) {
+                        currentAction = "Actionable";
+                        currentFrameCount = 0;
+                        anim.SetBool("Block",false);
+                    }
+                    break;
+                default:
+                    //print("Actionable");
+                    // TODO: Implement a movement cooldown with adjustable frames relative to a const
+                    // Use setPlayerPosition to also update stance? 
+                    if (currentInput["backward"] && !currentInput["forward"]) {
+                        // p1Stance = "backward";
+                        setPlayerPosition("backward");
+                        anim.SetInteger("Position",-1); //Dario
+                    }
+                    else if (currentInput["forward"] && !currentInput["backward"]) {
+                        // p1Stance = "forward";
+                        setPlayerPosition("forward");
+                        anim.SetInteger("Position",1); //Dario
+                    }
+                    else {
+                        setPlayerPosition("neutral");
+                        anim.SetInteger("Position",0); //Dario
+                        // p1Stance = "neutral";
+                    }
+                    break;
+            }
         }
     }
 
