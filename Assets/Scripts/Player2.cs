@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class Player2 : MonoBehaviour
 {
     // Methods and variables need to be in class   
@@ -46,6 +47,10 @@ public class Player2 : MonoBehaviour
     private int blockFreezeFrames = 5;
 
     public AudioSource blockSound;
+    public AudioSource hitSound;
+    public AudioSource missSound;
+    public List<AudioSource> hurtSounds = new List<AudioSource>();
+
 
 
     void Start(){
@@ -106,20 +111,47 @@ public class Player2 : MonoBehaviour
         currentFrameCount = inFrame;
         
     }
+
+    public void playBlockSound() {
+        blockSound.Stop();
+        blockSound.time = 1.4f;
+        blockSound.Play();
+    }
+
+    public void playHitSound() {
+        hitSound.Stop();
+        hitSound.time = 0.2f;
+        hitSound.Play();
+        playHurtSound();
+    }
+
+    public void playmissSound() {
+        missSound.Stop();
+        missSound.time = 0.1f;
+        missSound.Play();
+    }
+
+    public void playHurtSound() {
+        // Random rnd = new Random();
+
+        int x = 0; //rnd.Next(1, 6);
+        hurtSounds[x].Stop();
+        hurtSounds[x].time = 0.1f;
+        hurtSounds[x].Play();
+    }
     
     public void getHit(int damage, bool wasBlocked, int stunFrames){
         
         // Action was blocked -> blockstun
         if (wasBlocked){
-            blockSound.Stop();
-            blockSound.time = 1.2f;
-            blockSound.Play();
+            playBlockSound();
             fightSceneScript.frozenFrames = blockFreezeFrames;
             setActionAndFrame("Blockstun", stunFrames);
             anim.SetBool("Block",true);
         }
         //Action was not blocked -> hitstun
         else{
+            playHitSound();
             // Take damage
             oldHealth = currentHealth;
             currentHealth -= damage;
@@ -144,8 +176,11 @@ public class Player2 : MonoBehaviour
                 return true;
             }
         }
+        print("miss");
+        playmissSound(); // janky but works
         return false;
     }
+    
     
     private void forwardThrowAttack() {
         print("P2 IN FORWARD THROW");
@@ -275,6 +310,9 @@ public class Player2 : MonoBehaviour
                     }
                     p2Hurtbox = extendedHurtbox;
                     print("player 1 hit with neutral high attack");
+                }
+                if (player1Script.p1Stance == "forward") {
+                    playmissSound();
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
