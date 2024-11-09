@@ -27,7 +27,7 @@ public class Player2 : MonoBehaviour
     };
     public string currentAction = "Actionable"; 
     public int currentFrameCount = 0;
-    const int BUFFERLENGTH = 3;
+    const int BUFFERLENGTH = 5;
     const int INPUTLENIENCY = 3;
 
     struct ActionInput {
@@ -185,7 +185,7 @@ public class Player2 : MonoBehaviour
     private void forwardThrowAttack() {
         print("P2 IN FORWARD THROW");
         const int attackStartup = 15;
-        const int damage = 50;
+        const int damage = 40;
         const int hitstun = 45+1; //since it is a +0 move on hit, then this would be same as recovery + 1
         // int anim //TODO: would need to change the type of this
         const int attackRecovery = 45;
@@ -198,6 +198,7 @@ public class Player2 : MonoBehaviour
         switch (currentFrameCount){
             //state[1] should be how many frames into the action the player is
             case 0:
+                setPlayerPosition("forward");
                 anim.SetTrigger("Throw"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 p2Hurtbox = invincibleHurtbox;
@@ -216,7 +217,7 @@ public class Player2 : MonoBehaviour
             //Attacking player hurtbox extended during recovery frames
                 p2Hurtbox = extendedHurtbox;
                 break;
-            case (attackStartup + attackRecovery):
+            case (attackStartup + attackRecovery - 1):
             //Attacking player hurtbox resets to previous hurtbox
                 p2Hurtbox = revertHurtbox();
                 currentAction = "Actionable";
@@ -247,6 +248,7 @@ public class Player2 : MonoBehaviour
         switch (currentFrameCount){
             //state[1] should be how many frames into the action the player is
             case 0:
+                setPlayerPosition("neutral");
                 anim.SetTrigger("Throw"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 break;
@@ -287,12 +289,13 @@ public class Player2 : MonoBehaviour
         const int hitstun = 16; // Frames opponent would be stunned on a direct hit for +3 diff
         const int attackRecovery = 12; // You need to recover from attack
 
-        List<int> hitbox = new List<int> {2, 3, 4}; // places where opponent can take damage
-        List<int> extendedHurtbox = new List<int> {3, 4, 5}; // places where you can take damage after launching attack
+        List<int> hitbox = new List<int> {1, 2, 3, 4}; // places where opponent can take damage
+        List<int> extendedHurtbox = new List<int> {2, 3, 4, 5}; // places where you can take damage after launching attack
 
 
         switch (currentFrameCount){
             case 0:
+                setPlayerPosition("neutral");
                 anim.SetTrigger("High"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 print("start attack");
@@ -350,6 +353,7 @@ public class Player2 : MonoBehaviour
 
         switch (currentFrameCount){
             case 0:
+                setPlayerPosition("forward");
                 anim.SetTrigger("High"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 print("start attack");
@@ -402,6 +406,7 @@ public class Player2 : MonoBehaviour
         switch (currentFrameCount){
             case 0:
                 print("CASE 0");
+                setPlayerPosition("neutral");
                 anim.SetTrigger("Mid"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 //print("start attack");
@@ -452,6 +457,7 @@ public class Player2 : MonoBehaviour
 
         switch (currentFrameCount){
             case 0:
+                setPlayerPosition("forward");
                 anim.SetTrigger("Mid"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 //print("start attack");
@@ -505,39 +511,30 @@ public class Player2 : MonoBehaviour
         switch (inputsAsBinary) {
             case 4:
                 anim.SetInteger("Position",0); //Dario
-                setPlayerPosition("neutral");
                 return "Neutral Mid";
             case 5:
                 anim.SetInteger("Position",1); //Dario
-                setPlayerPosition("forward");
                 return "Forward Mid";
             case 7:
                 anim.SetInteger("Position",0); //Dario
-                setPlayerPosition("neutral");
                 return "Neutral Mid";
             case 8:
                 anim.SetInteger("Position",0); //Dario
-                setPlayerPosition("neutral");
                 return "Neutral High";
             case 9:
                 anim.SetInteger("Position",1); //Dario
-                setPlayerPosition("forward");
                 return "Forward High";
             case 11:
                 anim.SetInteger("Position",0); //Dario
-                setPlayerPosition("neutral");
                 return "Neutral High";
             case 12:
                 anim.SetInteger("Position",0); //Dario
-                setPlayerPosition("neutral");
                 return "Neutral Throw";
             case 13:
                 anim.SetInteger("Position",1); //Dario
-                setPlayerPosition("forward");
                 return "Forward Throw";
             case 15:
                 anim.SetInteger("Position",0); //Dario
-                setPlayerPosition("neutral");
                 return "Neutral Throw";
             default:
                 return "Actionable";
