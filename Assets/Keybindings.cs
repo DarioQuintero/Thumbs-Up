@@ -6,7 +6,7 @@ using UnityEngine;
 public class Keybindings : ScriptableObject
 {
     // Keycodes for moves
-    public KeyCode p1High, p1Mid, p1Forward, p1Backward, p2High, p2Mid, p2Forward, p2Backward;
+    public KeyCode p1High, p1Mid, p1Block, p1Right, p1Left, p2High, p2Mid, p2Block, p2Left, p2Right;
 
     public KeyCode checkKey(string key) {
         switch (key) {
@@ -14,18 +14,22 @@ public class Keybindings : ScriptableObject
                 return p1High;
             case "p1Mid":
                 return p1Mid;
-            case "p1Forward":
-                return p1Forward;
-            case "p1Backward":
-                return p1Backward;
+            case "p1Block":
+                return p1Block;
+            case "p1Left":
+                return p1Left;
+            case "p1Right":
+                return p1Right;
             case "p2High":
                 return p2High;
             case "p2Mid":
                 return p2Mid;
-            case "p2Forward":
-                return p2Forward;
-            case "p2Backward":
-                return p2Backward;
+            case "p2Block":
+                return p2Block;
+            case "p2Left":
+                return p2Left;
+            case "p2Right":
+                return p2Right;
             default:
                 return KeyCode.None;
         }

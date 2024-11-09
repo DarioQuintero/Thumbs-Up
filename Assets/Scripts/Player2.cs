@@ -495,8 +495,9 @@ public class Player2 : MonoBehaviour
         currentInput = new Dictionary<string, bool>() {
             {"high", inputManager.KeyDown("p2High")},
             {"mid", inputManager.KeyDown("p2Mid")},
-            {"forward", inputManager.KeyDown("p2Forward")},
-            {"backward", inputManager.KeyDown("p2Backward")}
+            {"block", inputManager.KeyDown("p2Block")},
+            {"forward", inputManager.KeyDown("p2Left")},
+            {"backward", inputManager.KeyDown("p2Right")}
         };
     }
 
@@ -648,12 +649,12 @@ public class Player2 : MonoBehaviour
                     //print("Actionable");
                     // TODO: Implement a movement cooldown with adjustable frames relative to a const
                     // Use setPlayerPosition to also update stance? 
-                    if (currentInput["forward"] && !currentInput["backward"]) {
+                    if (currentInput["forward"] && !currentInput["backward"] && !currentInput["block"]) {
                         // p2Stance = "forward";
                         anim.SetInteger("Position",1); //Dario
                         setPlayerPosition("forward");
                     }
-                    else if (currentInput["backward"] && !currentInput["forward"]) {
+                    else if (currentInput["backward"] && !currentInput["forward"] && !currentInput["block"]) {
                         // p2Stance = "backward";
                         anim.SetInteger("Position",-1); //Dario
                         setPlayerPosition("backward");
@@ -679,7 +680,7 @@ public class Player2 : MonoBehaviour
         // p1State = "Actionable"; // Deprecate ("blocking", "hittable", "hitstun", "blockstun", "Actionable")
         currentAction = "Actionable";
         currentFrameCount = 0;
-        
+        actionBuffer = new ActionInput("Actionable", 0);
     }
     
 
