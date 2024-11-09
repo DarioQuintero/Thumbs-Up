@@ -374,6 +374,7 @@ public class Player1 : MonoBehaviour
                     }
                     else {
                         player2Script.getHit(damage, true, blockstun);
+                        //anim.SetBool("Hit",true); // Placeholder for recoil animation
                     }
                     p1Hurtbox = extendedHurtbox;
                     print("player 2 hit with forward high attack");
@@ -383,6 +384,7 @@ public class Player1 : MonoBehaviour
                 break; 
             case (attackStartup + attackRecovery - 1):
                 currentAction = "Actionable";
+                //anim.SetBool("Hit",false); // Placeholder for recoil animation
                 currentFrameCount = 0;
                 p1Hurtbox = revertHurtbox();
                 print("end recovery");
