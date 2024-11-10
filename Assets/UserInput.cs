@@ -7,7 +7,9 @@ public class UserInput : MonoBehaviour
 {
     // public static UserInput instance;
     public bool highJustPressed { get; private set; }
+    public bool highBeingHeld { get; private set; }
     public bool midJustPressed { get; private set; }
+    public bool midBeingHeld { get; private set; }
     public bool blockBeingHeld { get; private set; }
     public bool leftBeingHeld { get; private set; }
     public bool rightBeingHeld { get; private set; }
@@ -49,7 +51,9 @@ public class UserInput : MonoBehaviour
     private void UpdateInputs()
     {
         highJustPressed = _highAction.WasPressedThisFrame();
+        highBeingHeld = _highAction.IsPressed();
         midJustPressed = _midAction.WasPressedThisFrame();
+        midBeingHeld = _midAction.IsPressed();
         blockBeingHeld = _blockAction.IsPressed();
         leftBeingHeld = _leftAction.IsPressed();
         rightBeingHeld = _rightAction.IsPressed();
