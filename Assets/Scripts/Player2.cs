@@ -504,19 +504,13 @@ public class Player2 : MonoBehaviour
             {"backward", inputManager.KeyDown("p2Right")}
         };
         */
-        if (controller.controllerIndex == playerIndex) {
-            currentInput = new Dictionary<string, bool>() {
-                {"high", controller.highJustPressed},
-                {"mid", controller.midJustPressed},
-                {"block", controller.blockBeingHeld},
-                {"forward", controller.leftBeingHeld},
-                {"backward", controller.rightBeingHeld}
-            };
-        }
-        else {
-            print("player 2 is receiving bad inputs");
-            print(controller.controllerIndex);
-        }
+        currentInput = new Dictionary<string, bool>() {
+            {"high", controller.highJustPressed},
+            {"mid", controller.midJustPressed},
+            {"block", controller.blockBeingHeld},
+            {"forward", controller.leftBeingHeld},
+            {"backward", controller.rightBeingHeld}
+        };
     }
 
     int boolToInt(bool myBool) {

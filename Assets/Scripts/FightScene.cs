@@ -354,8 +354,6 @@ public class FightScene : MonoBehaviour
                             }
                         
                         if (0 < roundIntermissionCounter && roundIntermissionCounter <= 180) {    
-                            player1Script.reset(player1MaxHealth);
-                            player2Script.reset(player2MaxHealth);
                             countdownSign.SetActive(true);
  
                             if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180) {
