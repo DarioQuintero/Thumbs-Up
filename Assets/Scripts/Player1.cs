@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Player1 : MonoBehaviour
 {
-    // Methods and variables need to be in class   
+    // Methods and variables need to be in class  
+    public int playerIndex = 0;
     public Player2 player2Script;
 
     public InputManager inputManager;
+    public UserInput controller;
 
     // Get FightScene's Script
     public FightScene fightSceneScript;
@@ -55,6 +57,10 @@ public class Player1 : MonoBehaviour
     public List<AudioSource> hurtSounds = new List<AudioSource>();
     void Start(){
 
+    }
+
+    public int getPlayerIndex() {
+        return playerIndex;
     }
 
     public void setPlayerPosition(string position) { // postion: ("backward", "neutral", "forward")
@@ -166,7 +172,7 @@ public class Player1 : MonoBehaviour
             setActionAndFrame("Hitstun", stunFrames);
             if (currentHealth <= 0) {
                 // fightSceneScript.gameOver(); // TODO
-                anim.SetBool("Hit", false);
+                //anim.SetBool("Hit", false);
             }
 
         }
@@ -505,6 +511,7 @@ public class Player1 : MonoBehaviour
     void updateInputs() {
         //print("IN UPDATE INPUTS--------------");
         // TODO: Save old input dict in input history to be read later
+        /*
         currentInput = new Dictionary<string, bool>() {
             {"high", inputManager.KeyDown("p1High")},
             {"mid", inputManager.KeyDown("p1Mid")},
@@ -512,6 +519,20 @@ public class Player1 : MonoBehaviour
             {"forward", inputManager.KeyDown("p1Right")},
             {"backward", inputManager.KeyDown("p1Left")}
         };
+        */
+        if (controller.controllerIndex == playerIndex) {
+            currentInput = new Dictionary<string, bool>() {
+                {"high", controller.highJustPressed},
+                {"mid", controller.midJustPressed},
+                {"block", controller.blockBeingHeld},
+                {"forward", controller.rightBeingHeld},
+                {"backward", controller.leftBeingHeld}
+            };
+        }
+        else {
+            print("Player 1 is receiving bad inputs");
+            print(controller.controllerIndex);
+        }
     }
 
     int boolToInt(bool myBool) {
@@ -606,6 +627,10 @@ public class Player1 : MonoBehaviour
     public void doAction(bool frozen) {
         //print("IN DO ACTION_________________");
         //print("-----------P1-"+p1Stance+"--------------");
+        if (controller.highJustPressed == true) {
+            print("P1 CONTROLLER INPUT DETECTED");
+            print("Input from controller index " + controller.controllerIndex);
+        }
         updateInputs();
         queueAction();
         if (!frozen) {
@@ -693,6 +718,7 @@ public class Player1 : MonoBehaviour
         currentAction = "Actionable";
         currentFrameCount = 0;
         ActionInput actionBuffer = new ActionInput("Actionable", 0);
+        anim.SetBool("Hit", false);
     }
     // Resets player to the start of round position. Called at the start of every round.
 

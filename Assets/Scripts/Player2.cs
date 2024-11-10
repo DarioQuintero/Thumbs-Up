@@ -5,9 +5,12 @@ using UnityEngine;
 public class Player2 : MonoBehaviour
 {
     // Methods and variables need to be in class   
+
+    public int playerIndex = 1;
     public Player1 player1Script;
 
     public InputManager inputManager;
+    public UserInput controller;
 
 
     public FightScene fightSceneScript;
@@ -165,7 +168,7 @@ public class Player2 : MonoBehaviour
             setActionAndFrame("Hitstun", stunFrames);
             if (currentHealth <= 0) {
                 // fightSceneScript.gameOver(); // TODO
-                anim.SetBool("Hit", false);
+                //anim.SetBool("Hit", false);
             }
         }
     }
@@ -492,6 +495,7 @@ public class Player2 : MonoBehaviour
    void updateInputs() {
         //print("IN UPDATE INPUTS--------------");
         // TODO: Save old input dict in input history to be read later
+        /*
         currentInput = new Dictionary<string, bool>() {
             {"high", inputManager.KeyDown("p2High")},
             {"mid", inputManager.KeyDown("p2Mid")},
@@ -499,6 +503,20 @@ public class Player2 : MonoBehaviour
             {"forward", inputManager.KeyDown("p2Left")},
             {"backward", inputManager.KeyDown("p2Right")}
         };
+        */
+        if (controller.controllerIndex == playerIndex) {
+            currentInput = new Dictionary<string, bool>() {
+                {"high", controller.highJustPressed},
+                {"mid", controller.midJustPressed},
+                {"block", controller.blockBeingHeld},
+                {"forward", controller.leftBeingHeld},
+                {"backward", controller.rightBeingHeld}
+            };
+        }
+        else {
+            print("player 2 is receiving bad inputs");
+            print(controller.controllerIndex);
+        }
     }
 
     int boolToInt(bool myBool) {
@@ -604,7 +622,10 @@ public class Player2 : MonoBehaviour
     // Do action for that frame. Called by FightScene every frame during a round.
     public void doAction(bool frozen) {
         //print("IN DO ACTION_________________");
-        //print("-----------P2-"+p2Stance+"--------------");
+        //print("-----------P2-"+p2Stance+"--------------"); 
+        if (controller.highJustPressed == true) {
+            print("P2 CONTROLLER INPUT DETECTED");
+        }
         updateInputs();
         queueAction();
         if (!frozen) {
@@ -681,6 +702,7 @@ public class Player2 : MonoBehaviour
         currentAction = "Actionable";
         currentFrameCount = 0;
         actionBuffer = new ActionInput("Actionable", 0);
+        anim.SetBool("Hit", false);
     }
     
 

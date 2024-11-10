@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
@@ -242,6 +244,20 @@ public class FightScene : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        // Find and connect controllers to players
+        /*
+        if (player1Script.controller == null || player2Script.controller == null) {
+            var controllers = FindObjectsByType<UserInput>;
+            for (int i = 0; i < controllers.Length; i++) {
+                if (controllers[i].controllerIndex == player1Script.playerIndex) {
+                    player1Script.controller = controllers[i];
+                }
+                else if (controllers[i].controllerIndex == player2Script.playerIndex) {
+                    player2Script.controller = controllers[i];
+                }
+            }
+        }
+        */
         if (roundInProgress) {
             // Only run these on logical frames (60 fps)
             if (sceneFrameCounter % sceneFPSOver60 == 0) {
@@ -328,7 +344,7 @@ public class FightScene : MonoBehaviour
 
                         if (180 < roundIntermissionCounter && roundIntermissionCounter <= 270) {
                             roundSign.SetActive(true);
-                            roundText.text = lastWinner + " Wins Round";
+                            roundText.text = lastWinner + " Wins";
                         }
                         else {
                             roundSign.SetActive(false);
@@ -336,7 +352,10 @@ public class FightScene : MonoBehaviour
                            if(roundIntermissionCounter == 190) {
                                 countDownSound.Play();
                             }
+                        
                         if (0 < roundIntermissionCounter && roundIntermissionCounter <= 180) {    
+                            player1Script.reset(player1MaxHealth);
+                            player2Script.reset(player2MaxHealth);
                             countdownSign.SetActive(true);
  
                             if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180) {

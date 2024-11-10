@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p1High: 102
   p1Mid: 100
-  p1Forward: 115
-  p1Backward: 97
+  p1Block: 103
+  p1Right: 115
+  p1Left: 97
   p2High: 107
   p2Mid: 108
-  p2Forward: 276
-  p2Backward: 275
+  p2Block: 0
+  p2Left: 276
+  p2Right: 275
+  horizontalInput: 0
