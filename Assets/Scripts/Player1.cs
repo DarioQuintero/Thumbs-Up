@@ -602,7 +602,7 @@ public class Player1 : MonoBehaviour
         else if ((currentAction == "Neutral High" ||
               currentAction == "Neutral Mid") && 
               currentFrameCount <= INPUTLENIENCY) {
-            if (inputsToActions() == "Neutral Throw") {
+            if (controller.highBeingHeld && controller.midBeingHeld) {
                 currentAction = "Neutral Throw";
                 currentFrameCount = 0;
             }
@@ -610,7 +610,7 @@ public class Player1 : MonoBehaviour
         else if ((currentAction == "Forward High" ||
               currentAction == "Forward Mid") &&
               currentFrameCount <= INPUTLENIENCY) {
-            if (inputsToActions() == "Forward Throw") {
+            if (controller.highBeingHeld && controller.midBeingHeld) {
                 currentAction = "Forward Throw";
                 currentFrameCount = 0;
             }
