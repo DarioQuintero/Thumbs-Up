@@ -14,6 +14,10 @@ public class UserInput : MonoBehaviour
     public bool leftBeingHeld { get; private set; }
     public bool rightBeingHeld { get; private set; }
 
+    public bool upJustPressed { get; private set; }
+    public bool downJustPressed { get; private set; }
+
+
     private PlayerInput _playerInput;
     public int controllerIndex;
     private InputAction _highAction;
@@ -21,6 +25,9 @@ public class UserInput : MonoBehaviour
     private InputAction _blockAction;
     private InputAction _leftAction;
     private InputAction _rightAction;
+
+    private InputAction _upInput;
+    private InputAction _downInput;
     private void Awake()
     {
         /*
@@ -31,6 +38,8 @@ public class UserInput : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
         controllerIndex = _playerInput.playerIndex;
         SetupInputActions();
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
@@ -46,6 +55,10 @@ public class UserInput : MonoBehaviour
         _blockAction = _playerInput.actions["Block"];
         _leftAction = _playerInput.actions["Left"];
         _rightAction = _playerInput.actions["Right"];
+
+        _upInput = _playerInput.actions["Up"];
+        _downInput = _playerInput.actions["Down"];
+
     }
 
     private void UpdateInputs()
@@ -57,5 +70,18 @@ public class UserInput : MonoBehaviour
         blockBeingHeld = _blockAction.IsPressed();
         leftBeingHeld = _leftAction.IsPressed();
         rightBeingHeld = _rightAction.IsPressed();
+
+        upJustPressed = _upInput.WasPressedThisFrame();
+        downJustPressed = _downInput.WasPressedThisFrame();
+
+        if (rightBeingHeld) {
+            print("right");
+        }
+        if (upJustPressed) {
+            print("up");
+        }
+        if (downJustPressed) {
+            print("down");
+        }
     }
 }

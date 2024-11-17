@@ -30,7 +30,6 @@ public class FightScene : MonoBehaviour
 
     public GameObject RematchMenu;
 
-
     // Constants
     private const int player1MaxHealth = 100;
     private const int player2MaxHealth = 100; 
@@ -239,6 +238,7 @@ public class FightScene : MonoBehaviour
         sceneFPSOver60 = Application.targetFrameRate / 60;
         reset();
         print("started");
+
     }
 
     // Update is called once per frame
@@ -258,6 +258,7 @@ public class FightScene : MonoBehaviour
             }
         }
         */
+
         if (roundInProgress) {
             // Only run these on logical frames (60 fps)
             if (sceneFrameCounter % sceneFPSOver60 == 0) {
