@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIArray : MonoBehaviour
 {
@@ -25,18 +26,13 @@ public class UIArray : MonoBehaviour
 
     void FixedUpdate() {
         if (userInputScript.upJustPressed) {
-            currentUIElement--;
-            if (currentUIElement < 0) {
-                currentUIElement = UIElements.Count - 1;
-            }
-            setSelectedElement(currentUIElement);
+            previousUI();
         }
         if (userInputScript.downJustPressed) {
-            currentUIElement++;
-            if (currentUIElement >= UIElements.Count) {
-                currentUIElement = 0;
-            }
-            setSelectedElement(currentUIElement);
+            nextUI();
+        }
+        if (userInputScript.confirmJustPressed) {
+            UIElements[currentUIElement].GetComponent<Button>().onClick.Invoke(); 
         }
     }
 
@@ -46,5 +42,21 @@ public class UIArray : MonoBehaviour
             UIElements[j].transform.Find("Pointer").gameObject.SetActive(false);
         }
         UIElements[i].transform.Find("Pointer").gameObject.SetActive(true);
+    }
+
+    public void previousUI() {
+        currentUIElement--;
+        if (currentUIElement < 0) {
+            currentUIElement = UIElements.Count - 1;
+        }
+        setSelectedElement(currentUIElement);
+    }
+
+    public void nextUI() {
+        currentUIElement++;
+        if (currentUIElement >= UIElements.Count) {
+            currentUIElement = 0;
+        }
+        setSelectedElement(currentUIElement);
     }
 }

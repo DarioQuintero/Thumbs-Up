@@ -16,6 +16,7 @@ public class UserInput : MonoBehaviour
 
     public bool upJustPressed { get; private set; }
     public bool downJustPressed { get; private set; }
+    public bool confirmJustPressed { get; private set; }
 
 
     private PlayerInput _playerInput;
@@ -26,8 +27,7 @@ public class UserInput : MonoBehaviour
     private InputAction _leftAction;
     private InputAction _rightAction;
 
-    private InputAction _upInput;
-    private InputAction _downInput;
+    private InputAction _upInput, _downInput, _confirmInput;
     private void Awake()
     {
         /*
@@ -58,6 +58,7 @@ public class UserInput : MonoBehaviour
 
         _upInput = _playerInput.actions["Up"];
         _downInput = _playerInput.actions["Down"];
+        _confirmInput = _playerInput.actions["Confirm"];
 
     }
 
@@ -73,6 +74,7 @@ public class UserInput : MonoBehaviour
 
         upJustPressed = _upInput.WasPressedThisFrame();
         downJustPressed = _downInput.WasPressedThisFrame();
+        confirmJustPressed = _confirmInput.WasPressedThisFrame();
 
         if (rightBeingHeld) {
             print("right");
