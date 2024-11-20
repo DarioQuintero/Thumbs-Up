@@ -92,6 +92,28 @@
                 },
                 {
                     "name": "",
+                    "id": "607ef1ba-fc0a-4ec8-ab27-0ef0fc82b4c0",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "High",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e1ed1e8-7a6f-448c-93fc-05b3bae1f00d",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "High",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3fe32ac2-ed63-4433-b6aa-36cad0238dbd",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -103,8 +125,52 @@
                 },
                 {
                     "name": "",
+                    "id": "de7dbded-8fda-404f-9534-04288116401d",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mid",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44a2923c-87b8-47f2-8b77-7dfd21afd1dd",
+                    "path": "<HID::Core (Plus) Wired Controller>/button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mid",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ab53eca7-22b8-474a-84f5-125d9e79eb9c",
                     "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e013eab-4e90-4947-b780-e9b4a9c40219",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ff25a235-a8a3-4e8b-96dd-70b9378422df",
+                    "path": "<HID::Core (Plus) Wired Controller>/button2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -147,6 +213,17 @@
                 },
                 {
                     "name": "",
+                    "id": "d3142c10-24b1-4dc0-b0f9-c3d923b76290",
+                    "path": "<Joystick>/stick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ac09d1b9-afc7-4f77-aa3b-007a44f1bffb",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
@@ -180,8 +257,30 @@
                 },
                 {
                     "name": "",
+                    "id": "1b881856-7450-4e0c-8741-8589e0650f41",
+                    "path": "<Joystick>/stick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e256819f-b197-4fc0-b71d-7d8e42b421ba",
                     "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05efa589-6cd3-4b24-a84a-26da26992db9",
+                    "path": "<Joystick>/stick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -202,8 +301,30 @@
                 },
                 {
                     "name": "",
+                    "id": "efe15fb9-a51a-4523-b954-04d103958ff2",
+                    "path": "<Joystick>/stick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "509d017e-502e-4d58-815e-83b66eb0ee7c",
                     "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8ef86a7-a58f-41bb-bc87-633f8b9384c6",
+                    "path": "<HID::Core (Plus) Wired Controller>/button3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

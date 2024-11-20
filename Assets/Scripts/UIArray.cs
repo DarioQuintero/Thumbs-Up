@@ -7,9 +7,7 @@ public class UIArray : MonoBehaviour
 {
 
     public UserInput userInputScript;
-
     public List<GameObject> UIElements = new List<GameObject>();
-
     public int currentUIElement = 0;
 
     // Start is called before the first frame update
@@ -18,11 +16,6 @@ public class UIArray : MonoBehaviour
         setSelectedElement(0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void FixedUpdate() {
         if (userInputScript.upJustPressed) {
@@ -40,8 +33,14 @@ public class UIArray : MonoBehaviour
         currentUIElement = i;
         for (int j = 0; j < UIElements.Count; j++) {
             UIElements[j].transform.Find("Pointer").gameObject.SetActive(false);
+            UIElements[j].GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            
         }
         UIElements[i].transform.Find("Pointer").gameObject.SetActive(true);
+        UIElements[i].GetComponent<Image>().color = new Color(0.95f, 0.95f, 0.6f);
+        // ColorBlock cb = UIElements[i].GetComponent<Button>().colors;
+        // cb.highlightedColor = Color.red;
+        // UIElements[i].GetComponent<Button>().colors = cb;
     }
 
     public void previousUI() {

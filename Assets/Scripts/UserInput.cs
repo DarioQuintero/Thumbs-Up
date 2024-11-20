@@ -13,10 +13,13 @@ public class UserInput : MonoBehaviour
     public bool blockBeingHeld { get; private set; }
     public bool leftBeingHeld { get; private set; }
     public bool rightBeingHeld { get; private set; }
+    public bool rightBeingPressed { get; private set; }
 
     public bool upJustPressed { get; private set; }
     public bool downJustPressed { get; private set; }
     public bool confirmJustPressed { get; private set; }
+
+    private int testingInt = 0;
 
 
     private PlayerInput _playerInput;
@@ -64,6 +67,7 @@ public class UserInput : MonoBehaviour
 
     private void UpdateInputs()
     {
+        testingInt++;
         highJustPressed = _highAction.WasPressedThisFrame();
         highBeingHeld = _highAction.IsPressed();
         midJustPressed = _midAction.WasPressedThisFrame();
@@ -71,19 +75,23 @@ public class UserInput : MonoBehaviour
         blockBeingHeld = _blockAction.IsPressed();
         leftBeingHeld = _leftAction.IsPressed();
         rightBeingHeld = _rightAction.IsPressed();
+        rightBeingPressed = _rightAction.WasPressedThisFrame();
 
         upJustPressed = _upInput.WasPressedThisFrame();
         downJustPressed = _downInput.WasPressedThisFrame();
         confirmJustPressed = _confirmInput.WasPressedThisFrame();
 
         if (rightBeingHeld) {
-            print("right");
+            print("right held " + testingInt);
+        }
+        if (rightBeingPressed) {
+            print("right pressed " + testingInt);
         }
         if (upJustPressed) {
             print("up");
         }
         if (downJustPressed) {
-            print("down");
+            print("down" + testingInt);
         }
     }
 }
