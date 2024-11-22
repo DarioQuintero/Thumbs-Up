@@ -36,8 +36,8 @@ ModelImporter:
       name: Forward High
       takeName: Scene
       internalID: -623603649343465320
-      firstFrame: 42
-      lastFrame: 62
+      firstFrame: 101
+      lastFrame: 123
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -65,8 +65,8 @@ ModelImporter:
       name: Forward Mid
       takeName: Scene
       internalID: -1609281748187839663
-      firstFrame: 2
-      lastFrame: 41
+      firstFrame: 61
+      lastFrame: 101
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -94,8 +94,8 @@ ModelImporter:
       name: Forward Grab
       takeName: Scene
       internalID: 4492889366653965390
-      firstFrame: 63
-      lastFrame: 122
+      firstFrame: 122
+      lastFrame: 183
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -123,8 +123,8 @@ ModelImporter:
       name: Neutral
       takeName: Scene
       internalID: 6763395943919261652
-      firstFrame: 123
-      lastFrame: 124
+      firstFrame: 208
+      lastFrame: 268
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -132,7 +132,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -152,8 +152,8 @@ ModelImporter:
       name: Block
       takeName: Scene
       internalID: -626948583029366203
-      firstFrame: 125
-      lastFrame: 126
+      firstFrame: 272
+      lastFrame: 273
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -181,8 +181,8 @@ ModelImporter:
       name: Neutral High
       takeName: Scene
       internalID: -8206857311389296499
-      firstFrame: 126
-      lastFrame: 148
+      firstFrame: 339
+      lastFrame: 361
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -210,8 +210,8 @@ ModelImporter:
       name: Neutral Mid
       takeName: Scene
       internalID: -4885119122951247324
-      firstFrame: 149
-      lastFrame: 171
+      firstFrame: 299
+      lastFrame: 339
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -239,8 +239,8 @@ ModelImporter:
       name: Neutral Throw
       takeName: Scene
       internalID: -4807389317913785953
-      firstFrame: 172
-      lastFrame: 206
+      firstFrame: 361
+      lastFrame: 396
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -268,8 +268,8 @@ ModelImporter:
       name: Backward
       takeName: Scene
       internalID: -3206263651483497662
-      firstFrame: 208
-      lastFrame: 209
+      firstFrame: 398
+      lastFrame: 456
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -297,8 +297,8 @@ ModelImporter:
       name: Forward
       takeName: Scene
       internalID: 7896679309779607623
-      firstFrame: 1
-      lastFrame: 2
+      firstFrame: 0
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -323,11 +323,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: Hit
+      name: Neutral Hit
       takeName: Scene
       internalID: -3545652582204683642
-      firstFrame: 211
-      lastFrame: 212
+      firstFrame: 278
+      lastFrame: 298
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -335,6 +335,64 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Forward Hit
+      takeName: Scene
+      internalID: -7653847362332097697
+      firstFrame: 183
+      lastFrame: 207
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Backward Hit
+      takeName: Scene
+      internalID: 8195394017938382407
+      firstFrame: 457
+      lastFrame: 477
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
