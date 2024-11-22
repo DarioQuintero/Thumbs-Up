@@ -83,11 +83,33 @@
                 },
                 {
                     "name": "",
+                    "id": "16563889-d750-4dfe-abc8-47f7c0a96f2d",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "High",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3fe32ac2-ed63-4433-b6aa-36cad0238dbd",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Xbox Control Scheme",
+                    "action": "Mid",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e775312d-5d4d-4462-b631-ffcd51636bf8",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Mid",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -127,6 +149,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c4941c79-c1f7-4677-9b2c-ead04cf4e63d",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "39009d59-7c7e-40b4-ac4e-102a718f18d6",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
@@ -140,6 +173,17 @@
                     "name": "",
                     "id": "ac09d1b9-afc7-4f77-aa3b-007a44f1bffb",
                     "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ab3d2a6-360e-402c-a7ee-3b3d9b6a1414",
+                    "path": "<Keyboard>/semicolon",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
