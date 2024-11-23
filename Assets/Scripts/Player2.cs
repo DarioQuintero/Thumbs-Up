@@ -10,8 +10,8 @@ public class Player2 : MonoBehaviour
     public Player1 player1Script;
 
     public InputManager inputManager;
-    public UserInput controller;
 
+    public UserInput controller;
 
     public FightScene fightSceneScript;
 
@@ -57,7 +57,7 @@ public class Player2 : MonoBehaviour
 
 
     void Start(){
-
+        controller.enabled = true;
     }
 
     
