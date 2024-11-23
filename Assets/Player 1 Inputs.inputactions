@@ -85,7 +85,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "High",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -96,7 +96,7 @@
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "High",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -107,7 +107,7 @@
                     "path": "<Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "High",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -129,7 +129,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Mid",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -140,7 +140,7 @@
                     "path": "<HID::Core (Plus) Wired Controller>/button4",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Mid",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -151,7 +151,7 @@
                     "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -162,7 +162,7 @@
                     "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -173,7 +173,7 @@
                     "path": "<HID::Core (Plus) Wired Controller>/button2",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -184,7 +184,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -195,7 +195,7 @@
                     "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -206,7 +206,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -217,7 +217,7 @@
                     "path": "<Joystick>/stick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -228,7 +228,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -239,7 +239,7 @@
                     "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -250,7 +250,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -261,7 +261,7 @@
                     "path": "<Joystick>/stick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -272,7 +272,7 @@
                     "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -283,7 +283,7 @@
                     "path": "<Joystick>/stick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -294,7 +294,7 @@
                     "path": "<Keyboard>/b",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -305,7 +305,7 @@
                     "path": "<Joystick>/stick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -316,7 +316,7 @@
                     "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Confirm",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -327,7 +327,7 @@
                     "path": "<HID::Core (Plus) Wired Controller>/button3",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Confirm",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -485,6 +485,11 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": []
         }
     ]
 }
