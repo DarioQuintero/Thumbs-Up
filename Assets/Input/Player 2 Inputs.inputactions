@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Confirm",
+                    "type": "Button",
+                    "id": "780a0cea-1482-4436-b58a-3c37bedbba30",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -76,7 +85,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "High",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -87,7 +96,7 @@
                     "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardP2",
                     "action": "High",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -109,7 +118,7 @@
                     "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardP2",
                     "action": "Mid",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -120,7 +129,18 @@
                     "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "872ee02e-a596-4aef-8579-07757dd9dbb8",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardP2",
                     "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -131,7 +151,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -153,7 +173,7 @@
                     "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardP2",
                     "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -164,7 +184,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Control Scheme",
                     "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -186,7 +206,7 @@
                     "path": "<Keyboard>/semicolon",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardP2",
                     "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -197,7 +217,7 @@
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardP2",
                     "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -208,8 +228,41 @@
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardP2",
                     "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "01107ecc-9dad-4995-92b3-bc4a27d96c3d",
+                    "path": "<Joystick>/stick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox Control Scheme",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e94efec7-05fe-4f43-a1aa-4059ce482b32",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardP2",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05d0c230-77f9-4843-a44c-385d466e672c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox Control Scheme",
+                    "action": "Confirm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -227,6 +280,11 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "KeyboardP2",
+            "bindingGroup": "KeyboardP2",
+            "devices": []
         }
     ]
 }
