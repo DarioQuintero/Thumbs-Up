@@ -18,15 +18,15 @@ public class UIArray : MonoBehaviour
 
 
     void FixedUpdate() {
-        if (userInputScript.upJustPressed) {
-            previousUI();
-        }
-        if (userInputScript.downJustPressed) {
-            nextUI();
-        }
-        if (userInputScript.confirmJustPressed) {
-            UIElements[currentUIElement].GetComponent<Button>().onClick.Invoke(); 
-        }
+        // if (userInputScript.upJustPressed) {
+        //     previousUI();
+        // }
+        // if (userInputScript.downJustPressed) {
+        //     nextUI();
+        // }
+        // if (userInputScript.confirmJustPressed) {
+        //     UIElements[currentUIElement].GetComponent<Button>().onClick.Invoke(); 
+        // }
     }
 
     public void setSelectedElement(int i) {
@@ -57,5 +57,9 @@ public class UIArray : MonoBehaviour
             currentUIElement = 0;
         }
         setSelectedElement(currentUIElement);
+    }
+
+    public void confirm() {
+        UIElements[currentUIElement].GetComponent<Button>().onClick.Invoke(); 
     }
 }

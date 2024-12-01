@@ -31,6 +31,8 @@ public class UserInput : MonoBehaviour
     private InputAction _rightAction;
 
     private InputAction _upInput, _downInput, _confirmInput;
+
+    public List<GameObject> UIArrays = new List<GameObject>();
     private void Awake()
     {
         /*
@@ -41,12 +43,12 @@ public class UserInput : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
         controllerIndex = _playerInput.playerIndex;
         SetupInputActions();
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
+    //     QualitySettings.vSyncCount = 0;
+    //     Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
         UpdateInputs();
     }
@@ -79,6 +81,7 @@ public class UserInput : MonoBehaviour
 
         upJustPressed = _upInput.WasPressedThisFrame();
         downJustPressed = _downInput.WasPressedThisFrame();
+        if (downJustPressed) {print("down was pressed");}
         confirmJustPressed = _confirmInput.WasPressedThisFrame();
 
         if (rightBeingHeld) {
@@ -88,10 +91,30 @@ public class UserInput : MonoBehaviour
             print("right pressed " + testingInt);
         }
         if (upJustPressed) {
-            print("up");
+            for (int i = 0; i < UIArrays.Count; i++) {
+                if (UIArrays[i].activeSelf) {
+                    print("up");
+                    UIArrays[i].GetComponent<UIArray>().previousUI();
+                }
+            }
         }
         if (downJustPressed) {
-            print("down" + testingInt);
+            print("downpressed");
+            for (int i = 0; i < UIArrays.Count; i++) {
+                if (UIArrays[i].activeSelf) {
+                    print("down");
+                    UIArrays[i].GetComponent<UIArray>().nextUI();
+                }
+            }
+        }
+        if (confirmJustPressed) {
+            for (int i = 0; i < UIArrays.Count; i++) {
+                if (UIArrays[i].activeSelf) {
+                    print("confirm");
+                    UIArrays[i].GetComponent<UIArray>().confirm();
+                    break;
+                }
+            }
         }
     }
 }
