@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
 
     public void PlayGame() {
-        SceneManager.LoadSceneAsync("BensTestScene"); // Change later
+        SceneManager.LoadSceneAsync("FightScene"); 
     }
     // Start is called before the first frame update
     void Start()
