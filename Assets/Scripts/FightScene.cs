@@ -13,6 +13,8 @@ public class FightScene : MonoBehaviour
     // Defining player 1 and player2 scripts
     public Player1 player1Script;
     public Player2 player2Script;
+    public GameObject P1Input;
+    public GameObject p2Input;
 
     public TMP_Text timerText;
     public TMP_Text fullscreenText;
@@ -236,6 +238,8 @@ public class FightScene : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         sceneFPSOver60 = Application.targetFrameRate / 60;
+        //P1Input.SetActive(true);
+        //P2Input.SetActive(true);
         reset();
         print("started");
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class UserInput : MonoBehaviour
+public class UserInputP2 : MonoBehaviour
 {
     // public UserInput instance;
     public bool highJustPressed { get; private set; }
@@ -31,7 +31,7 @@ public class UserInput : MonoBehaviour
     private InputAction _rightAction;
 
     private InputAction _upInput, _downInput, _confirmInput;
-    private void OnEnable()
+    private void Awake()
     {
         /*
         if (instance == null) {
@@ -68,6 +68,7 @@ public class UserInput : MonoBehaviour
 
     private void UpdateInputs()
     {
+        testingInt++;
         highJustPressed = _highAction.WasPressedThisFrame();
         highBeingHeld = _highAction.IsPressed();
         midJustPressed = _midAction.WasPressedThisFrame();
@@ -81,8 +82,7 @@ public class UserInput : MonoBehaviour
         downJustPressed = _downInput.WasPressedThisFrame();
         confirmJustPressed = _confirmInput.WasPressedThisFrame();
 
-        testingInt++;
-                if (rightBeingHeld) {
+        if (rightBeingHeld) {
             print("right held " + testingInt);
         }
         if (rightBeingPressed) {
