@@ -54,6 +54,8 @@ public class Player1 : MonoBehaviour
     public AudioSource hitSound;
     public AudioSource missSound;
 
+    public SoundGroupScript highSounds;
+
     public List<AudioSource> hurtSounds = new List<AudioSource>();
     void Start(){
 
@@ -150,14 +152,14 @@ public class Player1 : MonoBehaviour
         // Action was blocked -> blockstun
         if (wasBlocked) {
             
-            playBlockSound();
+            // playBlockSound();
             fightSceneScript.frozenFrames = blockFreezeFrames;
             setActionAndFrame("Blockstun", stunFrames);
             anim.SetBool("Block",true);
         }
         //Action was not blocked -> hitstun
         else{
-            playHitSound();
+            // playHitSound();
             // Take damage
             oldHealth = currentHealth;
             currentHealth -= damage;
@@ -184,8 +186,8 @@ public class Player1 : MonoBehaviour
                 return true;
             }
         }
-        print("miss");
-        playmissSound(); // janky but works
+        // print("miss");
+        // playmissSound(); // janky but works
         return false;
     }
     
@@ -326,6 +328,7 @@ public class Player1 : MonoBehaviour
                         player2Script.getHit(damage, true, blockstun);
                     }
                     p1Hurtbox = extendedHurtbox;
+                    highSounds.playRandomSound();
                     print("player 2 hit with neutral high attack");
                 }
                 if (player2Script.p2Stance == "forward") {
@@ -383,6 +386,7 @@ public class Player1 : MonoBehaviour
                         //anim.SetBool("Hit",true); // Placeholder for recoil animation
                     }
                     p1Hurtbox = extendedHurtbox;
+                    highSounds.playRandomSound();
                     print("player 2 hit with forward high attack");
                 }
                 break;
