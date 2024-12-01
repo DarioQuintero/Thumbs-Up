@@ -4157,6 +4157,7 @@ MonoBehaviour:
   blockSound: {fileID: 1563511200}
   hitSound: {fileID: 1563511202}
   missSound: {fileID: 1563511201}
+  highSounds: {fileID: 1675423045}
   hurtSounds:
   - {fileID: 442643673}
   - {fileID: 1617774670}
@@ -4781,6 +4782,18 @@ AudioSource:
     type: 3}
   m_PrefabInstance: {fileID: 1563511196}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1675423045 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8076029892582150286, guid: 64140aa6c9a01444bb1b75086891b606,
+    type: 3}
+  m_PrefabInstance: {fileID: 1563511196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229e18dc1c279004fb7cf0d717256b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1706519842
 GameObject:
   m_ObjectHideFlags: 0

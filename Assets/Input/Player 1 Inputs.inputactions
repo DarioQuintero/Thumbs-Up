@@ -313,7 +313,7 @@
                 {
                     "name": "",
                     "id": "509d017e-502e-4d58-815e-83b66eb0ee7c",
-                    "path": "<Keyboard>/m",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -325,6 +325,17 @@
                     "name": "",
                     "id": "c8ef86a7-a58f-41bb-bc87-633f8b9384c6",
                     "path": "<HID::Core (Plus) Wired Controller>/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "acfa9fcf-5945-4c3d-8bc0-f3deaf5f7c52",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
