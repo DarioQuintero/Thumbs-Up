@@ -31,6 +31,8 @@ public class UserInput : MonoBehaviour
     private InputAction _rightAction;
 
     private InputAction _upInput, _downInput, _confirmInput;
+
+    public List<GameObject> UIArrays = new List<GameObject>();
     private void Awake()
     {
         /*
@@ -88,7 +90,7 @@ public class UserInput : MonoBehaviour
         if (rightBeingPressed) {
             print("right pressed " + testingInt);
         }
-        /*
+        
         if (upJustPressed) {
             for (int i = 0; i < UIArrays.Count; i++) {
                 if (UIArrays[i].activeSelf) {
@@ -115,6 +117,6 @@ public class UserInput : MonoBehaviour
                 }
             }
         }
-        */
+        
     }
 }
