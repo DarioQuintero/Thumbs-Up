@@ -5013,8 +5013,58 @@ PrefabInstance:
     - target: {fileID: 1640825373409052734, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
+        type: 3}
+      propertyPath: UIArrays.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
+        type: 3}
+      propertyPath: UIArrays.Array.data[0]
+      value: 
+      objectReference: {fileID: 419093591}
+    - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
+        type: 3}
+      propertyPath: UIArrays.Array.data[1]
+      value: 
+      objectReference: {fileID: 477071797}
+    - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
+        type: 3}
+      propertyPath: UIArrays.Array.data[2]
+      value: 
+      objectReference: {fileID: 232763580}
+    - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
+        type: 3}
+      propertyPath: UIArrays.Array.data[3]
+      value: 
+      objectReference: {fileID: 1502630728}
+    - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
+        type: 3}
+      propertyPath: UIArrays.Array.data[4]
+      value: 
+      objectReference: {fileID: 839020866}
+    - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
+        type: 3}
+      propertyPath: UIArrays.Array.data[5]
+      value: 
+      objectReference: {fileID: 493030976}
+    - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
+        type: 3}
+      propertyPath: UIArrays.Array.data[6]
+      value: 
+      objectReference: {fileID: 1936715884}
+    - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
+        type: 3}
+      propertyPath: UIArrays.Array.data[7]
+      value: 
+      objectReference: {fileID: 1627472429}
+    - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
+        type: 3}
+      propertyPath: UIArrays.Array.data[8]
+      value: 
+      objectReference: {fileID: 1337634555}
     - target: {fileID: 3972274289418898377, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
       propertyPath: m_Actions
@@ -5462,7 +5512,7 @@ PrefabInstance:
     - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
       propertyPath: UIArrays.Array.size
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
@@ -5493,22 +5543,22 @@ PrefabInstance:
         type: 3}
       propertyPath: UIArrays.Array.data[5]
       value: 
-      objectReference: {fileID: 1627472429}
+      objectReference: {fileID: 493030976}
     - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
       propertyPath: UIArrays.Array.data[6]
       value: 
-      objectReference: {fileID: 1337634555}
+      objectReference: {fileID: 1936715884}
     - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
       propertyPath: UIArrays.Array.data[7]
       value: 
-      objectReference: {fileID: 493030976}
+      objectReference: {fileID: 1627472429}
     - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
       propertyPath: UIArrays.Array.data[8]
       value: 
-      objectReference: {fileID: 1936715884}
+      objectReference: {fileID: 1337634555}
     - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
       propertyPath: UIArrays.Array.data[9]
@@ -7849,21 +7899,21 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Credits
 
-    Dario - Lead
+    Dario - Lead, Art
 
     Ben - Gameplay, Programming
 
     Jeffery
     - UI
 
-    Kevin - Programming
+    Kevin Luo - Programming
 
     Shri - Art
 
-    Juan - Programming
+    Juan Cortes- Programming
 
     Ryan
-    - Programming
+    Lee - Programming
 
     Johnny - Music'
   m_isRightToLeft: 0
