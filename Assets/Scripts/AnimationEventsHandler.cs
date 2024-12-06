@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class AnimationEventsHandler : MonoBehaviour
 {
+    public GameObject instance;
+    public bool triggererd;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        triggererd = false;
     }
 
     // Update is called once per frame
@@ -16,9 +19,23 @@ public class AnimationEventsHandler : MonoBehaviour
         
     }
 
-    void TestEvent()
+    void InstanceVFX()
     {
-        Debug.Log("Dario");
+        if(!triggererd)
+        {
+            instance.SetActive(true);
+            triggererd = true;
+        }
         
     }
+    void SetSelfInactive()
+    {
+        gameObject.SetActive(false);
+    }
+    void ResetTrigger()
+    {
+        Debug.Log("Reset Trigger");
+        triggererd = false;
+    }
+
 }
