@@ -49,9 +49,11 @@ public class Player2 : MonoBehaviour
 
     private int blockFreezeFrames = 5;
 
-    public AudioSource blockSound;
-    public AudioSource hitSound;
-    public AudioSource missSound;
+    // public AudioSource blockSound;
+    // public AudioSource hitSound;
+    // public AudioSource missSound;
+    public SoundGroupScript highSounds, highAttempt, midSounds, midAttempt, grabHitSounds, blockSound;
+
     public List<AudioSource> hurtSounds = new List<AudioSource>();
 
 
@@ -115,46 +117,46 @@ public class Player2 : MonoBehaviour
         
     }
 
-    public void playBlockSound() {
-        blockSound.Stop();
-        blockSound.time = 1.4f;
-        blockSound.Play();
-    }
+    // public void playBlockSound() {
+    //     blockSound.Stop();
+    //     blockSound.time = 1.4f;
+    //     blockSound.Play();
+    // }
 
-    public void playHitSound() {
-        hitSound.Stop();
-        hitSound.time = 0.2f;
-        hitSound.Play();
-        playHurtSound();
-    }
+    // public void playHitSound() {
+    //     hitSound.Stop();
+    //     hitSound.time = 0.2f;
+    //     hitSound.Play();
+    //     playHurtSound();
+    // }
 
-    public void playmissSound() {
-        missSound.Stop();
-        missSound.time = 0.1f;
-        missSound.Play();
-    }
+    // public void playmissSound() {
+    //     missSound.Stop();
+    //     missSound.time = 0.1f;
+    //     missSound.Play();
+    // }
 
-    public void playHurtSound() {
-        // Random rnd = new Random();
+    // public void playHurtSound() {
+    //     // Random rnd = new Random();
 
-        int x = 0; //rnd.Next(1, 6);
-        hurtSounds[x].Stop();
-        hurtSounds[x].time = 0.1f;
-        hurtSounds[x].Play();
-    }
+    //     int x = 0; //rnd.Next(1, 6);
+    //     hurtSounds[x].Stop();
+    //     hurtSounds[x].time = 0.1f;
+    //     hurtSounds[x].Play();
+    // }
     
     public void getHit(int damage, bool wasBlocked, int stunFrames){
         
         // Action was blocked -> blockstun
         if (wasBlocked){
-            playBlockSound();
+            // playBlockSound();
             fightSceneScript.frozenFrames = blockFreezeFrames;
             setActionAndFrame("Blockstun", stunFrames);
             anim.SetBool("Block",true);
         }
         //Action was not blocked -> hitstun
         else{
-            playHitSound();
+            // playHitSound();
             // Take damage
             oldHealth = currentHealth;
             currentHealth -= damage;
@@ -180,7 +182,7 @@ public class Player2 : MonoBehaviour
             }
         }
         print("miss");
-        playmissSound(); // janky but works
+        // playmissSound(); // janky but works
         return false;
     }
     
@@ -214,6 +216,7 @@ public class Player2 : MonoBehaviour
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
                     fightSceneScript.damageBroadcast(2, damage, false, hitstun);
+                    grabHitSounds.playRandomSound();
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
@@ -263,6 +266,7 @@ public class Player2 : MonoBehaviour
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
                     fightSceneScript.damageBroadcast(2, damage, false, hitstun);
+                    grabHitSounds.playRandomSound();
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
@@ -302,6 +306,7 @@ public class Player2 : MonoBehaviour
                 anim.SetTrigger("High"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 print("start attack");
+                highAttempt.playRandomSound();
                 break;
             case < (attackStartup - 1):
                 break; 
@@ -310,16 +315,16 @@ public class Player2 : MonoBehaviour
                 {   //Values are at the beginning of the function
                     if (player1Script.isBlocking() == false){
                         fightSceneScript.damageBroadcast(2, damage, false, hitstun);
+                        highSounds.playRandomSound();
                     }
                     else {
                         fightSceneScript.damageBroadcast(2, damage, true, blockstun);
+                        blockSound.playRandomSound();
                     }
                     p2Hurtbox = extendedHurtbox;
                     print("player 1 hit with neutral high attack");
                 }
-                if (player1Script.p1Stance == "forward") {
-                    playmissSound();
-                }
+                
                 break;
             case < (attackStartup + attackRecovery - 1):
                 break; 
@@ -360,6 +365,7 @@ public class Player2 : MonoBehaviour
                 anim.SetTrigger("High"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 print("start attack");
+                highAttempt.playRandomSound();
                 break;
             case < (attackStartup - 1):
                 break; 
@@ -368,9 +374,11 @@ public class Player2 : MonoBehaviour
                 {   //Values are at the beginning of the function
                     if (player1Script.isBlocking() == false){
                         fightSceneScript.damageBroadcast(2, damage, false, hitstun);
+                        highSounds.playRandomSound();
                     }
                     else {
                         fightSceneScript.damageBroadcast(2, damage, true, blockstun);
+                        blockSound.playRandomSound();
                     }
                     p2Hurtbox = extendedHurtbox;
                     print("player 1 hit with forward high attack");
@@ -413,6 +421,7 @@ public class Player2 : MonoBehaviour
                 anim.SetTrigger("Mid"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 //print("start attack");
+                midAttempt.playRandomSound();
                 break;
             case < attackStartup - 1:
                 print("CASE 1");
@@ -424,6 +433,12 @@ public class Player2 : MonoBehaviour
                     fightSceneScript.damageBroadcast(2, damage, player1Script.isBlocking(), hitstun);
                     //print("player 2 hit");
                     p2Hurtbox = extendedHurtbox;
+                    if (player1Script.isBlocking() == false){
+                        midSounds.playRandomSound();
+                    }
+                    else {
+                        blockSound.playRandomSound();
+                    }
                 }
                 break;
             case < attackStartup + attackRecovery - 1:
@@ -464,6 +479,7 @@ public class Player2 : MonoBehaviour
                 anim.SetTrigger("Mid"); //Dario
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 //print("start attack");
+                midAttempt.playRandomSound();
                 break;
             case < attackStartup - 1:
                 break;
@@ -473,6 +489,12 @@ public class Player2 : MonoBehaviour
                     fightSceneScript.damageBroadcast(2, damage, player1Script.isBlocking(), hitstun);
                     //print("player 1 hit");
                     p2Hurtbox = extendedHurtbox;
+                    if (player1Script.isBlocking() == false){
+                        midSounds.playRandomSound();
+                    }
+                    else {
+                        blockSound.playRandomSound();
+                    }
                 }
                 break;
             case < attackStartup + attackRecovery - 1:
