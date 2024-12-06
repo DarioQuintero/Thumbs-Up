@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Thumb Diffusion Profile
   m_EditorClassIdentifier: 
   profile:
-    scatteringDistance: {r: 1, g: 0.0032907927, b: 0.0032907927, a: 1}
-    scatteringDistanceMultiplier: 1
+    scatteringDistance: {r: 0.6025287, g: 0.12743768, b: 1, a: 1}
+    scatteringDistanceMultiplier: 2.53
     transmissionTint: {r: 1, g: 1, b: 1, a: 1}
     texturingMode: 0
     transmissionMode: 1
-    thicknessRemap: {x: 0, y: 5}
+    thicknessRemap: {x: 0, y: 4.6609592}
     worldScale: 1
-    ior: 1.224
+    ior: 1.029
     hash: 1080693622
   m_Version: 2
