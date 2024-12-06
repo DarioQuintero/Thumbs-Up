@@ -64,18 +64,27 @@ public class FightScene : MonoBehaviour
     private int player1OldHealthUI = player1MaxHealth;
     private int player2HealthUI = player2MaxHealth;
     private int player2OldHealthUI = player2MaxHealth;
+    private bool p1WasHitThisFrame = false;
+    private int p1Damage = 0;
+    private bool p1WasBlocked = false;
+    private int p1StunFrames = 0;
+    private bool p2WasHitThisFrame = false;
+    private int p2Damage = 0;
+    private bool p2WasBlocked = false;
+    private int p2StunFrames = 0;
 
     public int frozenFrames = 0;
 
     public AudioSource fightMusic;
     public AudioSource countDownSound;
     void startRound() {
+        print("round started");
         roundTimer = 99;
         fullscreenText.text = "";
         timerText.text = roundTimer.ToString();
         sceneFrameCounter = 0;
         logicFrameCounter = 0;
-        //roundInProgress = true; testing out if we can get the counter at the beginning
+        roundInProgress = true; //testing out if we can get the counter at the beginning
         gameInProgress = true;
         callRoundStartOrEnd = false;
         player1HealthUI = player1MaxHealth;
@@ -174,6 +183,38 @@ public class FightScene : MonoBehaviour
     public void loadMainMenu(){
         RematchMenu.SetActive(false);
         SceneManager.LoadSceneAsync("MainMenu");
+    }
+
+    public void damageBroadcast(int playerNum, int damage, bool wasBlocked, int stunFrames) {
+        if (playerNum == 1) {
+            p2WasHitThisFrame = true;
+            p2Damage = damage;
+            p2WasBlocked = wasBlocked;
+            p2StunFrames = stunFrames;
+        }
+        else {
+            p1WasHitThisFrame = true;
+            p1Damage = damage;
+            p1WasBlocked = wasBlocked;
+            p1StunFrames = stunFrames;
+        }
+    }
+
+    private void calculateDamage() {
+        if (p1WasHitThisFrame) {
+            player1Script.getHit(p1Damage, p1WasBlocked, p1StunFrames);
+            p1WasHitThisFrame = false;
+            p1Damage = 0;
+            p1WasBlocked = false;
+            p1StunFrames = 0;
+        }
+        if (p2WasHitThisFrame) {
+            player2Script.getHit(p2Damage, p2WasBlocked, p2StunFrames);
+            p2WasHitThisFrame = false;
+            p2Damage = 0;
+            p2WasBlocked = false;
+            p2StunFrames = 0;
+        }
     }
 
     //create a UI and tie in function
@@ -280,6 +321,7 @@ public class FightScene : MonoBehaviour
                     player2Script.anim.speed = 1;
                     player1Script.doAction(false);
                     player2Script.doAction(false);
+                    calculateDamage();
                 }
 
                 // If player died, set the flag to end the current round at end of frame
@@ -391,7 +433,7 @@ public class FightScene : MonoBehaviour
                         }
                         break;
                     default:
-                        print("ERROR: GAME PAUSED FOR UNKNOWN REASON");
+                        print("ERROR: GAME PAUSED FOR UNKNOWN REASON: " + gamePauseReason);
                         break;
                 }
             }

@@ -213,7 +213,7 @@ public class Player2 : MonoBehaviour
                if(hasOverlap(player1Script.p1Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
-                    player1Script.getHit(damage, false, hitstun);
+                    fightSceneScript.damageBroadcast(2, damage, false, hitstun);
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
@@ -262,7 +262,7 @@ public class Player2 : MonoBehaviour
                 if(hasOverlap(player1Script.p1Hurtbox, hitbox))
                 {   //Values are at the beginning of the function
                     //Player2.getHit(damage, hitstun, anim); TODO: uncomment when anim type implemented
-                    player1Script.getHit(damage, false, hitstun);
+                    fightSceneScript.damageBroadcast(2, damage, false, hitstun);
                 }
                 break;
             case < (attackStartup + attackRecovery - 1):
@@ -309,10 +309,10 @@ public class Player2 : MonoBehaviour
                 if(hasOverlap(hitbox, player1Script.p1Hurtbox) && player1Script.p1Stance != "forward")
                 {   //Values are at the beginning of the function
                     if (player1Script.isBlocking() == false){
-                        player1Script.getHit(damage, false, hitstun);
+                        fightSceneScript.damageBroadcast(2, damage, false, hitstun);
                     }
                     else {
-                        player1Script.getHit(damage, true, blockstun);
+                        fightSceneScript.damageBroadcast(2, damage, true, blockstun);
                     }
                     p2Hurtbox = extendedHurtbox;
                     print("player 1 hit with neutral high attack");
@@ -367,10 +367,10 @@ public class Player2 : MonoBehaviour
                 if(hasOverlap(hitbox, player1Script.p1Hurtbox))
                 {   //Values are at the beginning of the function
                     if (player1Script.isBlocking() == false){
-                        player1Script.getHit(damage, false, hitstun);
+                        fightSceneScript.damageBroadcast(2, damage, false, hitstun);
                     }
                     else {
-                        player1Script.getHit(damage, true, blockstun);
+                        fightSceneScript.damageBroadcast(2, damage, true, blockstun);
                     }
                     p2Hurtbox = extendedHurtbox;
                     print("player 1 hit with forward high attack");
@@ -421,7 +421,7 @@ public class Player2 : MonoBehaviour
                 print("CASE 2");
                 if(hasOverlap(hitbox, player1Script.p1Hurtbox))
                 {   
-                    player1Script.getHit(damage, player1Script.isBlocking(), hitstun);
+                    fightSceneScript.damageBroadcast(2, damage, player1Script.isBlocking(), hitstun);
                     //print("player 2 hit");
                     p2Hurtbox = extendedHurtbox;
                 }
@@ -470,7 +470,7 @@ public class Player2 : MonoBehaviour
             case attackStartup - 1:
                 if(hasOverlap(hitbox, player1Script.p1Hurtbox))
                 {   
-                    player1Script.getHit(damage, player1Script.isBlocking(), hitstun);
+                    fightSceneScript.damageBroadcast(2, damage, player1Script.isBlocking(), hitstun);
                     //print("player 1 hit");
                     p2Hurtbox = extendedHurtbox;
                 }

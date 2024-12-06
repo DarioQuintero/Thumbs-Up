@@ -122,6 +122,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!95 &8997252 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7356083674714877090, guid: 64140aa6c9a01444bb1b75086891b606,
+    type: 3}
+  m_PrefabInstance: {fileID: 436517205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &23116740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,6 +1338,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 7356083674714877090, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1372,7 +1383,7 @@ MonoBehaviour:
   inputHistory: 
   currentAction: Actionable
   currentFrameCount: 0
-  anim: {fileID: 0}
+  anim: {fileID: 8997252}
   blockSound: {fileID: 436517209}
   hitSound: {fileID: 436517211}
   missSound: {fileID: 436517210}
@@ -2996,6 +3007,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Script: {fileID: 1563511199}
   player2Script: {fileID: 436517208}
+  P1Input: {fileID: 0}
+  p2Input: {fileID: 0}
   timerText: {fileID: 1592810435}
   fullscreenText: {fileID: 996547249}
   roundSign: {fileID: 422741406}
@@ -3586,7 +3599,7 @@ PrefabInstance:
     - target: {fileID: 1640825373409052734, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3946158729805996286, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
@@ -3985,6 +3998,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1496649468}
   m_CullTransparentMesh: 1
+--- !u!114 &1507144843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8076029892582150286, guid: 64140aa6c9a01444bb1b75086891b606,
+    type: 3}
+  m_PrefabInstance: {fileID: 1563511196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229e18dc1c279004fb7cf0d717256b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1563511196
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4103,6 +4128,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 8076029892582150286, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: soundObjects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -4157,6 +4187,7 @@ MonoBehaviour:
   blockSound: {fileID: 1563511200}
   hitSound: {fileID: 1563511202}
   missSound: {fileID: 1563511201}
+  highSounds: {fileID: 1507144843}
   hurtSounds:
   - {fileID: 442643673}
   - {fileID: 1617774670}
@@ -6062,7 +6093,7 @@ PrefabInstance:
     - target: {fileID: 1640825373409052734, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1640825373409052734, guid: 494a4556bad9a864bbb686a0e8469da4,
         type: 3}

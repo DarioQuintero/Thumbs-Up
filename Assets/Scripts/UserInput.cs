@@ -31,7 +31,7 @@ public class UserInput : MonoBehaviour
     private InputAction _rightAction;
 
     private InputAction _upInput, _downInput, _confirmInput;
-    private void OnEnable()
+    private void Awake()
     {
         /*
         if (instance == null) {
@@ -48,7 +48,6 @@ public class UserInput : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        print("CURRENT USER:" + _playerInput.playerIndex);
         UpdateInputs();
     }
 
@@ -89,6 +88,7 @@ public class UserInput : MonoBehaviour
         if (rightBeingPressed) {
             print("right pressed " + testingInt);
         }
+        /*
         if (upJustPressed) {
             for (int i = 0; i < UIArrays.Count; i++) {
                 if (UIArrays[i].activeSelf) {
@@ -115,5 +115,6 @@ public class UserInput : MonoBehaviour
                 }
             }
         }
+        */
     }
 }
