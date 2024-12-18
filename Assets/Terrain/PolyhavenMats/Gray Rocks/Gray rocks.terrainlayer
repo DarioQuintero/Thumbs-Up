@@ -9,7 +9,7 @@ TerrainLayer:
   m_Name: Gray rocks
   m_DiffuseTexture: {fileID: 2800000, guid: 3a3810a1d1aac004783b865bec7d8604, type: 3}
   m_NormalMapTexture: {fileID: 2800000, guid: 5c358198945a9264c898eef1adb3676c, type: 3}
-  m_MaskMapTexture: {fileID: 0}
+  m_MaskMapTexture: {fileID: 2800000, guid: fb465f066b7e2d741b5e22e39c9ffc7d, type: 3}
   m_TileSize: {x: 5, y: 5}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
@@ -18,5 +18,5 @@ TerrainLayer:
   m_NormalScale: 1
   m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
   m_DiffuseRemapMax: {x: 1, y: 1, z: 1, w: 1}
-  m_MaskMapRemapMin: {x: 0, y: 0, z: 0, w: 0}
-  m_MaskMapRemapMax: {x: 1, y: 1, z: 1, w: 1}
+  m_MaskMapRemapMin: {x: 0, y: 0, z: -0.2271809, w: 0}
+  m_MaskMapRemapMax: {x: 1, y: 1, z: 1.6198192, w: 1}

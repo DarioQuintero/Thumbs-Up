@@ -9,14 +9,14 @@ TerrainLayer:
   m_Name: Brown mud
   m_DiffuseTexture: {fileID: 2800000, guid: 9029400939d61784f8022c0140ca2fe6, type: 3}
   m_NormalMapTexture: {fileID: 2800000, guid: 77a38af713f0cc74eacf16d41abf8496, type: 3}
-  m_MaskMapTexture: {fileID: 0}
+  m_MaskMapTexture: {fileID: 2800000, guid: 32eb14a72172ea94cb96c98cfe2c2d68, type: 3}
   m_TileSize: {x: 20, y: 20}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
   m_Metallic: 0
   m_Smoothness: 0
-  m_NormalScale: 1.61
+  m_NormalScale: 1
   m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
-  m_DiffuseRemapMax: {x: 0.16981131, y: 0.16981131, z: 0.16981131, w: 1}
+  m_DiffuseRemapMax: {x: 1, y: 1, z: 1, w: 1}
   m_MaskMapRemapMin: {x: 0, y: 0, z: 0, w: 0}
   m_MaskMapRemapMax: {x: 1, y: 1, z: 1, w: 1}
