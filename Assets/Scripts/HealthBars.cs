@@ -62,16 +62,31 @@ public class HealthBars : MonoBehaviour
 
         if (player == 1){
             //p1HealthAmount = currentHealth;
-            p1HealthBar.fillAmount = currentHealth / 100f;   
-            p1HealthAnim.SetTrigger("Hit");
-            triggerTrailingHealthBar(p1TrailingHealthBar, currentHealth, p1TrailAnim);
+            p1HealthBar.fillAmount = currentHealth / 100f;  
+
+            if(Mathf.Abs(100f - currentHealth)>0.01f)
+            {
+                p1HealthAnim.SetTrigger("Hit");
+                triggerTrailingHealthBar(p1TrailingHealthBar, currentHealth, p1TrailAnim);
+            } 
+            else{
+                p1TrailingHealthBar.fillAmount = currentHealth / 100f; 
+            }
         }
         //player == 2
         else if (player == 2){
             //p2HealthAmount = currentHealth;
-            p2HealthBar.fillAmount = currentHealth / 100f;  
-            p2HealthAnim.SetTrigger("Hit");
-            triggerTrailingHealthBar(p2TrailingHealthBar, currentHealth, p2TrailAnim);
+            p2HealthBar.fillAmount = currentHealth / 100f; 
+            if(Mathf.Abs(100f - currentHealth)>0.01f)
+            {
+                p2HealthAnim.SetTrigger("Hit");
+                triggerTrailingHealthBar(p2TrailingHealthBar, currentHealth, p2TrailAnim);
+            }
+            else{
+                p2TrailingHealthBar.fillAmount = currentHealth / 100f; 
+            }
+
+            
         }
         else{
             print("ERROR: PLAYER IS NOT 1 OR 2 IN HEALTHBAR SCRIPT");
@@ -88,16 +103,8 @@ public class HealthBars : MonoBehaviour
     }
 
     IEnumerator updateTrail(HealthBar healthBar)
-    {
-        
-
-        if(healthBar.image.fillAmount < healthBar.currentHealth/100f)
-        {
-            healthBar.image.fillAmount = healthBar.currentHealth/100f;
-        }
-        else{
-            healthBar.anim.SetTrigger("Hit");
-        }
+    {   
+        healthBar.anim.SetTrigger("Hit");
         while(healthBar.image.fillAmount > healthBar.currentHealth/100f)
         {
             healthBar.image.fillAmount = Mathf.Lerp(healthBar.image.fillAmount,

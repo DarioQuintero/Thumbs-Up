@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class FightScene : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class FightScene : MonoBehaviour
     private const int PLAYER_1 = 1;
     private const int PLAYER_2 = 2;
     private const int roundWinLimit = 3; // How many round wins necessary to win the game
-    private const int roundIntermissionTime = 300; // Number of frames paused in between rounds 
+    private const int roundIntermissionTime = 330; // Number of frames paused in between rounds 
     private const int gameStartIntermissionTime = 180;
 
     private int roundIntermissionCounter = 0;
@@ -171,7 +172,7 @@ public class FightScene : MonoBehaviour
         // startRound();
     }
 
-    public void reset(){
+    public void Reset(){
         player1RoundWins = 0;
         player2RoundWins = 0;
         callGameStartCountdown = true;
@@ -281,7 +282,7 @@ public class FightScene : MonoBehaviour
         sceneFPSOver60 = Application.targetFrameRate / 60;
         //P1Input.SetActive(true);
         //P2Input.SetActive(true);
-        reset();
+        Reset();
         print("started");
 
     }
@@ -330,6 +331,9 @@ public class FightScene : MonoBehaviour
                 if (logicFrameCounter % 60 == 0) {
                     if (roundTimer > 0) {
                         roundTimer -= 1;
+
+                        timerText.text = Mathf.Max(0, roundTimer).ToString();
+
                     }
                 }
 
@@ -349,7 +353,7 @@ public class FightScene : MonoBehaviour
             sceneFrameCounter++;
             
             timerText.text = Mathf.Max(0, roundTimer).ToString();
-
+            
             // End the round if necessary
             // if (callRoundStartOrEnd == true) {
             //     callRoundStartOrEnd = false;
@@ -363,18 +367,33 @@ public class FightScene : MonoBehaviour
             if (sceneFrameCounter % sceneFPSOver60 == 0) {
                 switch (gamePauseReason) {
                     case "Game Start":
+                        if(roundIntermissionCounter == 180)
+                        {
+                            countdownSign.SetActive(true);
+                        }
                         roundIntermissionCounter--;
-                        if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180) {
-                            fullscreenText.fontSize = 40;
-                            fullscreenText.text = "I"; 
+                        if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180 &&
+                            !String.Equals(countdownText.text,"I")) {
+
+                            //fullscreenText.fontSize = 40;
+                            //fullscreenText.text = "I"; 
+                            countdownText.text = "I";
+                            countdownSign.GetComponent<Animator>().SetTrigger("Countdown");
                         }
-                        if (60 < roundIntermissionCounter && roundIntermissionCounter <= 120) {
-                            fullscreenText.fontSize = 50;
-                            fullscreenText.text = "DECLARE"; 
+                        if (60 < roundIntermissionCounter && roundIntermissionCounter <= 120 &&
+                            !String.Equals(countdownText.text,"Declare A")) {
+                            //fullscreenText.fontSize = 50;
+                            //fullscreenText.text = "DECLARE"; 
+                            countdownText.text = "Declare A";
+                            countdownSign.GetComponent<Animator>().SetTrigger("Countdown");
                         }
-                        if (0 < roundIntermissionCounter && roundIntermissionCounter <= 60) {
-                            fullscreenText.fontSize = 80;
-                            fullscreenText.text = "THUMB WAR"; 
+                        if (0 < roundIntermissionCounter && roundIntermissionCounter <= 60 && 
+                            !String.Equals(countdownText.text,"Thumb War")) {
+
+                            //fullscreenText.fontSize = 80;
+                            //fullscreenText.text = "THUMB WAR"; 
+                            countdownText.text = "Thumb War";
+                            countdownSign.GetComponent<Animator>().SetTrigger("Countdown");
                         }
                         if (roundIntermissionCounter <= 0) {
                             callRoundStartOrEnd = true;
@@ -382,45 +401,60 @@ public class FightScene : MonoBehaviour
                             fullscreenText.text = "";
                             fullscreenText.fontSize = 40;
                             roundInProgress = true;
+                            countdownSign.SetActive(false);
                         }
 
                         break;
 
                     case "Round Intermission":
-                        roundIntermissionCounter--;
 
-                        if (180 < roundIntermissionCounter && roundIntermissionCounter <= 270) {
-                            roundSign.SetActive(true);
-                            roundText.text = lastWinner + " Wins";
-                        }
-                        else {
-                            roundSign.SetActive(false);
-                        }
-                           if(roundIntermissionCounter == 190) {
-                                countDownSound.Play();
-                            }
-                        
-                        if (0 < roundIntermissionCounter && roundIntermissionCounter <= 180) {    
+                        roundIntermissionCounter--;
+                        //countdownSign.SetActive(true);
+                        if (roundIntermissionCounter == 329) {
                             countdownSign.SetActive(true);
- 
-                            if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180) {
+                            countdownText.text = lastWinner + " Wins";
+                            countdownSign.GetComponent<Animator>().SetTrigger("Countdown");
+
+                            // roundSign.SetActive(true);
+                            // roundText.text = lastWinner + " Wins";
+                        }
+                        if(roundIntermissionCounter == 250) {
+                            countDownSound.Play();
+                        }
+                        
+                        else if (0 < roundIntermissionCounter && roundIntermissionCounter <= 240) {    
+                            countdownSign.SetActive(true);
+                            
+                            if (180 < roundIntermissionCounter && roundIntermissionCounter <= 240 &&
+                                !String.Equals(countdownText.text,"3")) {
+
                                 countdownText.text = "3"; 
+                                countdownSign.GetComponent<Animator>().SetTrigger("Countdown");
+                                
                             }
-                            if (60 < roundIntermissionCounter && roundIntermissionCounter <= 120) {
+                            else if (120 < roundIntermissionCounter && roundIntermissionCounter <= 180 &&
+                                !String.Equals(countdownText.text,"2")) {
                                 countdownText.text = "2"; 
+                                countdownSign.GetComponent<Animator>().SetTrigger("Countdown");
                             }
-                            if (0 < roundIntermissionCounter && roundIntermissionCounter <= 60) {
+                            else if (60 < roundIntermissionCounter && roundIntermissionCounter <= 120 &&
+                                !String.Equals(countdownText.text,"1")) {
                                 countdownText.text = "1"; 
+                                countdownSign.GetComponent<Animator>().SetTrigger("Countdown");
+                            }
+                            else if (0 < roundIntermissionCounter && roundIntermissionCounter <= 60 &&
+                                !String.Equals(countdownText.text,"Fight!")) {
+                                countdownText.text = "Fight!"; 
+                                countdownSign.GetComponent<Animator>().SetTrigger("Countdown");
                             }
                         }
-                        else {
-                            countdownSign.SetActive(false);
-                        }
+                        
 
                         if (roundIntermissionCounter <= 0) {
                             callRoundStartOrEnd = true;
                             roundNumber++;
                             fullscreenText.text = "";
+                            countdownSign.SetActive(false);
                         }
 
                         break;
@@ -429,7 +463,7 @@ public class FightScene : MonoBehaviour
                         // Remember to reset round win scores and remove the fullscreen text\
                         if (player1Script.pressingAnyAttacks()&&player2Script.pressingAnyAttacks()) {
                             print("resetting");
-                            reset();
+                            Reset();
                         }
                         break;
                     default:
@@ -445,53 +479,5 @@ public class FightScene : MonoBehaviour
             }
         }
         
-        
-        /*
-        // Testing functions
-        if (Input.GetKeyDown("n")){
-            player1Script.currentAction = "NHA";
-            player1Script.currentFrameCount = 0;
-        }
-        if (player1Script.currentAction == "NHA"){
-            player1Script.neutralHighAttack();
-            if (player1Script.currentAction == "NHA"){
-                player1Script.currentFrameCount++;
-            }
-        }
-        if (Input.GetKeyDown("f")){
-            player1Script.currentAction = "FHA";
-            player1Script.currentFrameCount = 0;
-        }
-        if (player1Script.currentAction == "FHA"){
-            player1Script.forwardHighAttack();
-            if (player1Script.currentAction == "FHA"){
-                player1Script.currentFrameCount++;
-            }
-        }
-
-        if (player1Script.currentAction == "actionable"){
-            if (Input.GetKey("a")) {
-                player1Script.setPlayerPosition("backward");
-            }
-            else if (Input.GetKey("d")) {
-                player1Script.setPlayerPosition("forward");
-            }
-            else {
-                player1Script.setPlayerPosition("neutral");
-            }
-        }
-
-        if (player2Script.currentAction == "actionable"){
-            if (Input.GetKey("right")) {
-                player2Script.setPlayerPosition("backward");
-            }
-            else if (Input.GetKey("left")) {
-                player2Script.setPlayerPosition("forward");
-            }
-            else {
-                player2Script.setPlayerPosition("neutral");
-            }
-        }
-        */
     }
 }
