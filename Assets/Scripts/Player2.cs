@@ -44,6 +44,7 @@ public class Player2 : MonoBehaviour
     ActionInput actionBuffer = new ActionInput("Actionable", 0);
 
     public Animator anim;
+    VFXHandler vfxHandler;
 
     private int hitFreezeFrames = 5;
 
@@ -60,6 +61,7 @@ public class Player2 : MonoBehaviour
 
     void Start(){
         controller.enabled = true;
+        vfxHandler = this.GetComponent<VFXHandler>();
     }
 
     
@@ -153,6 +155,7 @@ public class Player2 : MonoBehaviour
             fightSceneScript.frozenFrames = blockFreezeFrames;
             setActionAndFrame("Blockstun", stunFrames);
             anim.SetBool("Block",true);
+            vfxHandler.CallEffect("Block");
         }
         //Action was not blocked -> hitstun
         else{

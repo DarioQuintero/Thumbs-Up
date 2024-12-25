@@ -12,7 +12,7 @@ public class InstantiateVFXEffect : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       Instantiate(obj, origin.transform.position, Quaternion.identity);
+       //Instantiate(obj, origin.transform.position, Quaternion.identity);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -45,21 +45,19 @@ public class Player1 : MonoBehaviour
 
     public Animator anim;
 
+    VFXHandler vfxHandler;
+
     private int hitFreezeFrames = 5;
 
     private int blockFreezeFrames = 5;
-
-    // public AudioSource blockSound;
-
-    // public AudioSource hitSound;
-    // public AudioSource missSound;
 
     public SoundGroupScript highSounds, highAttempt, midSounds, midAttempt, grabHitSounds, blockSound;
 
 
     public List<AudioSource> hurtSounds = new List<AudioSource>();
-    void Start(){
 
+    void Start(){
+        vfxHandler = gameObject.GetComponent<VFXHandler>();
     }
 
     public int getPlayerIndex() {
@@ -157,6 +155,7 @@ public class Player1 : MonoBehaviour
             fightSceneScript.frozenFrames = blockFreezeFrames;
             setActionAndFrame("Blockstun", stunFrames);
             anim.SetBool("Block",true);
+            vfxHandler.CallEffect("Block");
         }
         //Action was not blocked -> hitstun
         else{
@@ -316,7 +315,7 @@ public class Player1 : MonoBehaviour
         switch (currentFrameCount){
             case 0:
                 setPlayerPosition("neutral");
-                anim.SetTrigger("High"); //Dario
+                anim.SetTrigger("High"); 
                 print("start attack");
                 currentFrameCount++; // Delete this after changing current frame count to index from 1
                 highAttempt.playRandomSound();
