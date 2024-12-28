@@ -385,6 +385,8 @@ public class Player1 : MonoBehaviour
                     if (player2Script.isBlocking() == false){
                         fightSceneScript.damageBroadcast(1, damage, false, hitstun);
                         highSounds.playRandomSound();
+                        vfxHandler.CallEffect("ForwardHigh",player2Script.p2Stance);
+                        
                     }
                     else {
                         fightSceneScript.damageBroadcast(1, damage, true, blockstun);
@@ -449,6 +451,7 @@ public class Player1 : MonoBehaviour
                     p1Hurtbox = extendedHurtbox;
                     if (player2Script.isBlocking() == false){
                         midSounds.playRandomSound();
+                        vfxHandler.CallEffect("NeutralMid",player2Script.p2Stance);
                     }
                     else {
                         blockSound.playRandomSound();
@@ -505,6 +508,7 @@ public class Player1 : MonoBehaviour
                     //print("player 2 hit");
                     p1Hurtbox = extendedHurtbox;
                     if (player2Script.isBlocking() == false){
+                        vfxHandler.CallEffect("ForwardMid",player2Script.p2Stance);
                         midSounds.playRandomSound();
                     }
                     else {
