@@ -70,7 +70,10 @@ VisualEffect:
     m_NamedObject:
       m_Array: []
     m_Bool:
-      m_Array: []
+      m_Array:
+      - m_Value: 0
+        m_Name: FlipSparkCard
+        m_Overridden: 1
 --- !u!73398921 &4631294440082136782
 VFXRenderer:
   serializedVersion: 1

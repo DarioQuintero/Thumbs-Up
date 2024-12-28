@@ -1679,16 +1679,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 106696395578058443, guid: 64140aa6c9a01444bb1b75086891b606,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.895
-      objectReference: {fileID: 0}
-    - target: {fileID: 106696395578058443, guid: 64140aa6c9a01444bb1b75086891b606,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.348
-      objectReference: {fileID: 0}
     - target: {fileID: 384804910286167637, guid: 64140aa6c9a01444bb1b75086891b606,
         type: 3}
       propertyPath: m_Controller
@@ -1814,11 +1804,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4745568853955022823, guid: 64140aa6c9a01444bb1b75086891b606,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.529
-      objectReference: {fileID: 0}
     - target: {fileID: 4750556655390540099, guid: 64140aa6c9a01444bb1b75086891b606,
         type: 3}
       propertyPath: m_Controller
@@ -1837,6 +1822,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 768022076040087331, guid: 64140aa6c9a01444bb1b75086891b606, type: 3}
+    - {fileID: 9045986523608971282, guid: 64140aa6c9a01444bb1b75086891b606, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6206145737714854841, guid: 64140aa6c9a01444bb1b75086891b606,
@@ -5802,16 +5788,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 106696395578058443, guid: 64140aa6c9a01444bb1b75086891b606,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.895
-      objectReference: {fileID: 0}
-    - target: {fileID: 106696395578058443, guid: 64140aa6c9a01444bb1b75086891b606,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.424
-      objectReference: {fileID: 0}
     - target: {fileID: 722790198917116732, guid: 64140aa6c9a01444bb1b75086891b606,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -5857,6 +5833,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 877765502925971951, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 877765502925971951, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Name
+      value: FlipSparkCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 877765502925971951, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 877765502925971951, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1493624204761654864, guid: 64140aa6c9a01444bb1b75086891b606,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -5870,6 +5866,76 @@ PrefabInstance:
     - target: {fileID: 1493624204761654864, guid: 64140aa6c9a01444bb1b75086891b606,
         type: 3}
       propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002792045688053292, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002792045688053292, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Name
+      value: FlipSparkCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002792045688053292, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002792045688053292, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572631147807911689, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572631147807911689, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Name
+      value: FlipSparkCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572631147807911689, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572631147807911689, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3379580690582612013, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3379580690582612013, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3549357342466018244, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3549357342466018244, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Name
+      value: FlipSparkCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 3549357342466018244, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3549357342466018244, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4184729636123633443, guid: 64140aa6c9a01444bb1b75086891b606,
@@ -5937,11 +6003,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4745568853955022823, guid: 64140aa6c9a01444bb1b75086891b606,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4750556655390540099, guid: 64140aa6c9a01444bb1b75086891b606,
         type: 3}
       propertyPath: m_Controller
@@ -5952,14 +6013,145 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 6423557150292556693, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509047882003437823, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509047882003437823, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Name
+      value: FlipSparkCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509047882003437823, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509047882003437823, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139181856090031653, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139181856090031653, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Name
+      value: FlipSparkCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139181856090031653, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139181856090031653, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473479954940910895, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473479954940910895, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Name
+      value: FlipSparkCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473479954940910895, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473479954940910895, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627294246151640500, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627294246151640500, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Name
+      value: FlipSparkCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627294246151640500, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627294246151640500, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8076029892582150286, guid: 64140aa6c9a01444bb1b75086891b606,
         type: 3}
       propertyPath: soundObjects.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8450139091398405820, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450139091398405820, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450139091398405820, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450139091398405820, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450139091398405820, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450139091398405820, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450139091398405820, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450139091398405820, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613790168189833715, guid: 64140aa6c9a01444bb1b75086891b606,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 768022076040087331, guid: 64140aa6c9a01444bb1b75086891b606, type: 3}
+    - {fileID: 9045986523608971282, guid: 64140aa6c9a01444bb1b75086891b606, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6206145737714854841, guid: 64140aa6c9a01444bb1b75086891b606,

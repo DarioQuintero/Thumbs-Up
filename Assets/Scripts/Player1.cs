@@ -328,6 +328,7 @@ public class Player1 : MonoBehaviour
                     if (player2Script.isBlocking() == false){
                         fightSceneScript.damageBroadcast(1, damage, false, hitstun);
                         highSounds.playRandomSound();
+                        vfxHandler.CallEffect("NeutralHigh",player2Script.p2Stance);
 
                     }
                     else {
